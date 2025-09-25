@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti Mi Amor</title>
+    
+    <style>
+        /* Variables para colores */
+        :root {
+            --primary-color: #900C3F; /* Rojo oscuro/vino (corazones y cursor) */
+            --secondary-color: #FFC0CB; /* Rosa claro (títulos) */
+            --text-color: #F0F0F0; /* Color claro para el texto principal */
+            --background-dark: #120015; /* Fondo muy oscuro, casi negro con tono violeta */
+            --card-bg-dark: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para la tarjeta */
+            --accent-glow: #ff0073; /* Resplandor neón/brillo */
+        }
+
+        /* ------------------ ANIMACIONES GLOBALES ------------------ */
+
+        /* Animación de Brillo para Títulos/Botones */
+        @keyframes glowing {
+            0% { text-shadow: 0 0 5px var(--accent-glow), 0 0 10px var(--accent-glow); }
+            50% { text-shadow: 0 0 15px var(--accent-glow), 0 0 25px var(--accent-glow); }
+            100% { text-shadow: 0 0 5px var(--accent-glow), 0 0 10px var(--accent-glow); }
+        }
+
+        /* Animación para el Cursor (el palito que parpadea) */
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: var(--primary-color); }
+        }
+        
+        /* Animación de caída (base) */
+        @keyframes fall {
+            to { transform: translateY(100vh) rotateZ(360deg); }
+        }
+
+        /* Animación de rotación (base) */
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ------------------ ESTILOS BASE ------------------ */
+
+        body {
+            font-family: 'Georgia', serif; 
+            background-color: var(--background-dark);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle, rgba(255, 192, 203, 0.1) 1px, transparent 1px),
+                              radial-gradient(circle, rgba(255, 192, 203, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+        }
+
+        .card-container {
+            max-width: 450px;
+            width: 100%;
+            background-color: var(--card-bg-dark); 
+            border-radius: 15px;
+            padding: 30px 20px;
+            box-shadow: 0 0 40px rgba(255, 0, 115, 0.5), 0 0 20px rgba(255, 0, 115, 0.2); 
+            position: relative;
+            z-index: 10; 
+            text-align: center;
+        }
+        
+        /* ------------------ ELEMENTOS DE LA TARJETA ------------------ */
+
+        .card-header h1 {
+            font-family: 'Script MT Bold', cursive; 
+            font-size: 2.5em;
+            color: var(--secondary-color); 
+            margin-bottom: 5px;
+            animation: glowing 3s ease-in-out infinite;
+        }
+
+        /* Contenedor del Ramo (para la imagen que aparece) */
+        .bouquet-image {
+            margin: 20px 0;
+            opacity: 0; /* Oculto inicialmente */
+            transition: opacity 1s;
+        }
+
+        .bouquet-image img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 115, 0.8)); 
+        }
+
+        /* Párrafo para el texto de escritura */
+        .card-content p, .card-footer p {
+            text-align: left;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            white-space: pre-wrap; /* Mantiene saltos de línea y espacios */
+            overflow: hidden; /* Oculta el texto hasta que se escribe */
+            /* La animación de escritura se maneja por JS */
+        }
+        
+        /* Cursor de escritura (El palito | ) */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em; /* Altura de la línea */
+            background-color: var(--primary-color);
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: blink 0.7s step-end infinite;
+        }
+
+        .signature {
+            text-align: right !important; /* Forzar alineación a la derecha */
+        }
+
+        /* Botón "Descubre Mi Corazón" */
+        .discover-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 0 10px var(--accent-glow);
+            animation: glowing 3s ease-in-out infinite; 
+            opacity: 0; /* Oculto hasta que el JS lo muestre */
+        }
+
+        /* ------------------ BOTÓN DE MÚSICA (NOTA MUSICAL) ------------------ */
+
+        .music-toggle-container {
+            position: absolute;
+            top: 25px; 
+            right: 25px; 
+            z-index: 20;
+        }
+        
+        .music-toggle-icon {
+            color: var(--secondary-color); 
+            font-size: 2em; 
+            cursor: pointer;
+            transition: transform 0.3s, text-shadow 0.3s;
+            animation: glowing 3s ease-in-out infinite;
+        }
+
+        .music-toggle-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* ------------------ CORAZONES CAYENDO ------------------ */
+
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; 
+            overflow: hidden;
+            z-index: 5; 
+        }
+
+        /* Corazón creado con CSS */
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--primary-color);
+            transform: rotate(-45deg); 
+            opacity: 0.8;
+            box-shadow: 0 0 5px rgba(255, 0, 115, 0.5); 
+            pointer-events: none;
+            animation: fall linear infinite, rotate linear infinite;
+        }
+        
+        .petal::before,
+        .petal::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .petal::before {
+            top: -7.5px;
+            left: 0;
+        }
+
+        .petal::after {
+            left: 7.5px;
+            top: 0;
+        }
+
+        /* Estilos del mensaje secreto (con el efecto de escritura también) */
+        .secret-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            background-color: rgba(20, 0, 25, 0.95); 
+            border: 2px solid var(--accent-glow);
+            border-radius: 10px;
+            box-shadow: 0 0 50px var(--accent-glow); 
+            text-align: center;
+            z-index: 100; 
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .secret-box h2 {
+            font-family: 'Script MT Bold', cursive;
+            font-size: 2em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .secret-box.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+        
+        .secret-box .secret-content p {
+            text-align: center;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            /* Se usan las mismas clases para el efecto de escritura en el secreto */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="petals-container" id="petals-container"></div>
+
+    <div class="card-container">
+        <div class="music-toggle-container">
+            <span id="music-button" class="music-toggle-icon" title="Iniciar/Detener Música">🎵</span>
+        </div>
+
+        <header class="card-header">
+            <audio id="background-music" loop>
+                <source src="para april.mp3" type="audio/mp3">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+
+            <h1>Para Ti Mi April</h1>
+            <p id="date-text">jueves, 25 de septiembre de 2025</p>
+            
+            <div id="bouquet-image" class="bouquet-image">
+                <img src="Flores.png" alt="Ramo de Flores Rojas">
+            </div>
+        </header>
+
+        <main class="card-content">
+            <p id="p1" class="typing-text"></p>
+            <p id="p2" class="typing-text"></p>
+            <p id="p3" class="typing-text"></p>
+            <p id="p4" class="typing-text"></p>
+        </main>
+
+        <footer class="card-footer">
+            <p id="p5" class="typing-text"></p>
+            <p id="p6" class="typing-text signature"></p>
+
+            <button id="open-secret" class="discover-button">
+                <span>❤️ ❤️ ❤️</span> Descubre Mi Corazón <span>❤️ ❤️ ❤️</span>
+            </button>
+            <p class="small-text">Hecho con todo mi amor 💖 para la mujer que ilumina mi existencia.</p>
+        </footer>
+    </div>
+
+    <div id="secret-message-box" class="secret-box hidden">
+        <button class="close-btn" onclick="closeSecretMessage()">×</button>
+        <h2>Mi Universo Eres Tú</h2>
+        <div class="secret-content">
+            <p id="sp1" class="secret-typing-text"></p>
+            <p id="sp2" class="secret-typing-text"></p>
+            <p id="sp3" class="secret-typing-text"></p>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('background-music');
+        const musicButton = document.getElementById('music-button');
+        const secretBox = document.getElementById('secret-message-box');
+        const openSecretButton = document.getElementById('open-secret');
+        const petalsContainer = document.getElementById('petals-container');
+        const bouquetImage = document.getElementById('bouquet-image');
+        
+        let isPlaying = false; 
+        const NUM_PETALS = 40; 
+        const TYPING_SPEED = 25; // Velocidad en milisegundos (25ms = rápido)
+
+        // --- Contenido de Texto a Escribir ---
+        const mainTextContent = [
+            "Mi amor infinito,",
+            "Hoy quiero regalarte este ramo, donde cada pétalo guarda un momento nuestro. cada aroma recuerda tu esencia y cada color refleja la intensidad de lo que siento por ti.",
+            "Eres la melodía que calma mi silencio, la luz que guía mi camino y el latido que da sentido a mis días. Contigo he descubierto que el amor verdadero no es un destino, sino un viaje maravilloso que construimos juntos cada día.",
+            "Que este ramo virtual sea testigo de mi promesa: amarte en cada estación, celebrarte en cada logro y abrazarte en cada desafío. Porque contigo, hasta el momento más simple se convierte en un recuerdo invaluable.",
+            "Te kiero más que ayer, menos que mañana.",
+            "Con todo mi ser,\nTu eterno admirador"
+        ];
+        
+        const secretTextContent = [
+            "Cada día a tu lado es un capítulo nuevo en nuestra historia de amor. Eres mi complicidad en las mañanas, mi nostalgia en las tardes y mi paz en las noches.",
+            "Quiero ser el refugio donde encuentres calma, la mano que siempre te sostenga y el corazón que late solo por ti. Eres mi sueño hecho realidad, mi inspiración constante y el amor que transformó mi mundo.",
+            "Hoy y siempre, elijo amarte, respetarte y admirarte. Porque en tu mirada encontré mi hogar, en tu sonrisa mi alegría y en tu amor mi razón de ser."
+        ];
+
+
+        // ------------------ FUNCIÓN DE ESCRITURA (Typing Effect) ------------------
+
+        /**
+         * Escribe un texto en un elemento HTML letra por letra con efecto de cursor.
+         * @param {HTMLElement} element - El elemento donde escribir.
+         * @param {string} text - El texto completo a escribir.
+         * @returns {Promise<void>} - Resuelve cuando la escritura termina.
+         */
+        function typeWriter(element, text) {
+            return new Promise(resolve => {
+                let i = 0;
+                let cursor = document.createElement('span');
+                cursor.classList.add('cursor');
+                element.appendChild(cursor); // Añade el cursor al inicio
+
+                function type() {
+                    if (i < text.length) {
+                        if (text.charAt(i) === '\n') {
+                            element.insertBefore(document.createElement('br'), cursor);
+                        } else {
+                            element.insertBefore(document.createTextNode(text.charAt(i)), cursor);
+                        }
+                        i++;
+                        setTimeout(type, TYPING_SPEED);
+                    } else {
+                        cursor.remove(); // Quita el cursor al finalizar
+                        resolve();
+                    }
+                }
+                type();
+            });
+        }
+
+        // ------------------ INICIO DE LA SECUENCIA DE APARICIÓN ------------------
+
+        async function startCardSequence() {
+            // 1. Mostrar Ramo de Flores
+            await new Promise(r => setTimeout(r, 500)); // Pequeña pausa
+            bouquetImage.style.opacity = 1;
+            
+            await new Promise(r => setTimeout(r, 800)); // Pausa tras aparecer el ramo
+
+            // 2. Escribir el texto principal
+            for (let i = 0; i < mainTextContent.length; i++) {
+                const elementId = `p${i + 1}`;
+                const element = document.getElementById(elementId);
+                await typeWriter(element, mainTextContent[i]);
+            }
+            
+            // 3. Mostrar el botón "Descubre Mi Corazón"
+            openSecretButton.style.opacity = 1;
+        }
+
+        // ------------------ LÓGICA DEL MENSAJE SECRETO ------------------
+
+        async function openSecretMessage() {
+            secretBox.classList.remove('hidden');
+            
+            // Pausa antes de empezar a escribir el secreto
+            await new Promise(r => setTimeout(r, 500)); 
+
+            // Escribir el mensaje secreto
+            for (let i = 0; i < secretTextContent.length; i++) {
+                const elementId = `sp${i + 1}`;
+                const element = document.getElementById(elementId);
+                // Si el mensaje secreto ya fue abierto, limpiar antes de escribir
+                element.innerHTML = '';
+                await typeWriter(element, secretTextContent[i]);
+            }
+        }
+
+        function closeSecretMessage() {
+            secretBox.classList.add('hidden');
+        }
+        
+        openSecretButton.addEventListener('click', openSecretMessage);
+        window.closeSecretMessage = closeSecretMessage; // Hace que el botón de cerrar funcione
+
+        // ------------------ LÓGICA DE MÚSICA (NOTA MUSICAL) ------------------
+        
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().then(() => {
+                    isPlaying = true;
+                    musicButton.textContent = '🎶'; // Notas musicales (sonando)
+                }).catch(error => {
+                    console.error("Fallo al intentar reproducir la música:", error);
+                    alert("Por favor, haz clic una vez más para iniciar la música.");
+                });
+            } else {
+                music.pause();
+                isPlaying = false;
+                musicButton.textContent = '🎵'; // Una nota musical (pausa/play)
+            }
+        }
+
+        musicButton.addEventListener('click', toggleMusic);
+
+        // ------------------ LÓGICA DE CORAZONES CAYENDO ------------------
+        
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+
+            petal.style.left = Math.random() * 100 + 'vw'; 
+            petal.style.top = -50 + 'px'; 
+
+            const size = Math.random() * 8 + 10; 
+            petal.style.width = size + 'px';
+            petal.style.height = size + 'px';
+            
+            // Ajuste dinámico de los pseudo-elementos para que el corazón se vea bien
+            petal.style.setProperty('width', `${size}px`);
+            petal.style.setProperty('height', `${size}px`);
+            
+            // Ajustar los pseudo-elementos para el tamaño
+            const styleSheet = document.styleSheets[0];
+            const ruleIndex = styleSheet.cssRules.length;
+
+            styleSheet.insertRule(`
+                .petal::before, .petal::after {
+                    content: "";
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background-color: var(--primary-color);
+                    border-radius: 50%;
+                }
+            `, ruleIndex);
+
+            styleSheet.insertRule(`
+                .petal::before {
+                    top: -${size / 2}px;
+                    left: 0;
+                }
+            `, ruleIndex + 1);
+
+            styleSheet.insertRule(`
+                .petal::after {
+                    left: ${size / 2}px;
+                    top: 0;
+                }
+            `, ruleIndex + 2);
+            
+
+            const fallDuration = Math.random() * 8 + 12; 
+            const rotateDuration = Math.random() * 8 + 5; 
+            
+            petal.style.animationDuration = fallDuration + 's, ' + rotateDuration + 's';
+            petal.style.animationDelay = Math.random() * 10 + 's';
+
+            petalsContainer.appendChild(petal);
+
+            petal.addEventListener('animationiteration', (e) => {
+                if (e.animationName === 'fall') {
+                    petal.style.left = Math.random() * 100 + 'vw';
+                    petal.style.top = -50 + 'px';
+                }
+            });
+        }
+
+        // Crea todos los corazones
+        for (let i = 0; i < NUM_PETALS; i++) {
+            createPetal();
+        }
+
+        // Iniciar la secuencia al cargar la página
+        document.addEventListener('DOMContentLoaded', startCardSequence);
+
+    </script>
+</body>
+</html>
