@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxia de Amor con Saturno</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FontLoader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TextGeometry.min.js"></script>
+   <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="cielo" id="cielo-estrellas">
+        <div class="luna"></div>
+    </div>
+
+    <div id="cargando">
+        <div class="contenido-cargando">
+           <h2> Preparando todo para ti, mi amor</h2><span id="puntos-cargando">...</span>
+            <div class="cargador-reloj" id="cargador-reloj">
+                <div class="manecilla-reloj"></div>
+                <div class="centro-reloj"></div>
+            </div>
+            <div class="texto-progreso" id="texto-progreso">0%</div>
+        </div>
+    </div>
+    
+    <div id="contenedor-escena"></div>
+    
+    <div id="superposicion-ui">
+        <button id="alternar-audio">OFF</button>
+        <div id="indicador-toque"></div>
+        <div id="instrucciones">Toca la pantalla mi amor ❤️ </div>
+        <div class="galeria">
+            <div class="elemento-galeria" data-indice="0"><img src="https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/GIF/gatito.gif" alt="Amor 1"></div>
+            <div class="elemento-galeria" data-indice="1"><img src="https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/GIF/img.gif" alt="Amor 2"></div>
+            <div class="elemento-galeria" data-indice="2"><img src="https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/GIF/Gatitosi.gif" alt="Amor 3"></div>
+            <div class="elemento-galeria" data-indice="3"><img src="https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/GIF/Gatito1.gif" alt="Amor 4"></div>
+        </div>
+    </div>
+
+    <div id="modal-imagen" class="modal">
+        <span class="boton-cerrar">&times;</span>
+        <img class="contenido-modal" id="imagen-modal">
+        <div class="mensaje-modal" id="mensaje-modal"></div>
+    </div>
+
+    <audio id="audio-fondo" loop>
+        <source src="https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/AUDIO/en%20saturno.mp3" type="audio/mpeg">
+    </audio>
+</body>
+<script src="js/script.js"></script>
+</html>
