@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz 1 de Octubre, Mi Amor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 25%, #DC143C 50%, #FF69B4 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            cursor: default;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-shadow: 4px 4px 0 #8B0000, 8px 8px 0 rgba(0,0,0,0.3);
+            animation: bounce 3s infinite alternate;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            font-style: italic;
+        }
+
+        .date {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 3rem;
+            font-weight: bold;
+            text-shadow: 3px 3px 0 #8B0000;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .message-container {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message {
+            font-size: 1.6rem;
+            line-height: 1.8;
+            text-align: center;
+            color: #fff;
+            font-weight: 500;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .message-highlight {
+            color: #FFD700;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 1.8rem;
+        }
+
+        .interactive-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+            justify-content: center;
+        }
+
+        .memory-box {
+            flex: 1;
+            min-width: 220px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s ease;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .memory-box:hover {
+            transform: translateY(-12px) scale(1.05);
+            box-shadow: 0 25px 40px rgba(255, 215, 0, 0.4);
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .memory-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .memory-content {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+
+        .promise {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 3px dashed rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .promise-text {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem;
+            margin-top: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart-emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            animation: floatHeart 6s ease-in forwards;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0) rotate(-2deg);
+            }
+            100% {
+                transform: translateY(-25px) rotate(2deg);
+            }
+        }
+
+        @keyframes floatHeart {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0.3);
+            }
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .message-container, .memory-box, .promise {
+            animation: gentlePulse 4s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.8rem;
+            }
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            .message {
+                font-size: 1.3rem;
+            }
+            .promise-text {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title">¡FELIZ 1 DE OCTUBRE! ❤️</h1>
+            <h2 class="subtitle">Para la mujer más increíble de mi vida</h2>
+            <div class="date">01 · 10 · 2025</div>
+        </header>
+        
+        <div class="message-container">
+            <p class="message">
+                Mi amor, cada día a tu lado es un regalo del destino. 
+                <span class="message-highlight">Eres la melodía que alegra mi corazón</span> 
+                y la luz que ilumina mi camino. Tu amor transforma lo ordinario en extraordinario.
+            </p>
+        </div>
+        
+        <div class="interactive-section">
+            <div class="memory-box">
+                <h3 class="memory-title">💖 AMOR ETERNO</h3>
+                <p class="memory-content">
+                    Por cada risa compartida, cada mirada cómplice y cada sueño que construimos juntos
+                </p>
+            </div>
+            
+            <div class="memory-box">
+                <h3 class="memory-title">🌟 MI INSPIRACIÓN</h3>
+                <p class="memory-content">
+                    Eres la fuerza que impulsa mis días y la calma que serena mis noches
+                </p>
+            </div>
+            
+            <div class="memory-box">
+                <h3 class="memory-title">🌹 ROMANCE</h3>
+                <p class="memory-content">
+                    Contigo cada momento es mágico, cada instante es poesía
+                </p>
+            </div>
+        </div>
+        
+        <div class="promise">
+            <p class="promise-text">
+                "Prometo amarte en cada amanecer, cuidarte en cada atardecer y soñar contigo en cada anochecer. Eres y serás siempre el amor de mi vida" ❤️
+            </p>
+        </div>
+        
+        <footer class="footer">
+            <p>Con todo el amor de mi corazón para ti, hoy y siempre 💕</p>
+        </footer>
+    </div>
+
+    <audio id="romanticMusic" loop>
+        <source src="https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/AUDIO/those%20eyes%20.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const music = document.getElementById('romanticMusic');
+        let musicStarted = false;
+
+        function startMusic() {
+            if (!musicStarted) {
+                music.play().catch(e => {
+                    console.log('La reproducción automática fue prevenida:', e);
+                });
+                musicStarted = true;
+            }
+        }
+
+        f function createHearts(x, y) {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heartCount = 15;
+            const emojis = ['❤️', '💕', '💖', '💗', '💓', '💞', '💘'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-emoji');
+                heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                
+                const size = Math.random() * 2 + 1.5;
+                heart.style.fontSize = `${size}rem`;
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 200 + 100;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                heart.style.setProperty('--tx', `${tx}px`);
+                heart.style.setProperty('--ty', `${ty}px`);
+                heart.style.animation = `floatHeart ${Math.random() * 3 + 2}s ease-out forwards`;
+                
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 6000);
+            }
+        }
+
+        function createBackgroundHearts() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const emojis = ['❤️', '💕', '💖'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-emoji');
+                heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                const startX = Math.random() * window.innerWidth;
+                const startY = window.innerHeight + 50;
+                heart.style.left = `${startX}px`;
+                heart.style.top = `${startY}px`;
+                
+                const size = Math.random() * 1.5 + 1;
+                heart.style.fontSize = `${size}rem`;
+                
+                const tx = (Math.random() - 0.5) * 100;
+                const ty = -Math.random() * 300 - 200;
+                
+                heart.style.setProperty('--tx', `${tx}px`);
+                heart.style.setProperty('--ty', `${ty}px`);
+                heart.style.animation = `floatHeart ${Math.random() * 8 + 6}s ease-in forwards`;
+                
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 15000);
+            }, 2000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createBackgroundHearts();
+            
+            document.addEventListener('click', function(e) {
+                startMusic();
+                createHearts(e.clientX, e.clientY);
+            });
+
+            document.addEventListener('scroll', function() {
+                startMusic();
+            });
+
+            document.addEventListener('touchstart', function() {
+                startMusic();
+            });
+        });
+    </script>
+</body>
+</html>
