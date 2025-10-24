@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+h1 {
+  font-size: 4rem;
+  color: #ff6b6b;
+  text-shadow: 0 0 20px #ff0000;
+  animation: beat 1s infinite;
+}
+img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 3px solid #ff6b6b;
+  box-shadow: 0 0 30px #ff0000;
+}
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
