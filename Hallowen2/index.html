@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halloween </title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', serif;
+            overflow: hidden;
+        }
+
+        .halloween-scene {
+            width: 100%;
+            max-width: 800px;
+            height: 100vh;
+            position: relative;
+            background-color: #1a1a1a;
+            overflow: hidden;
+            border: 5px solid #222;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+        }
+
+        .svg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .silueta-negra {
+            fill: black;
+            stroke: black;
+            stroke-width: 0.1;
+            filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.5));
+        }
+
+        .realismo-path {
+            stroke: black;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+        }
+
+        #happy-text,
+        #halloween-text {
+            fill: #444;
+            stroke: #222;
+            font-size: 80px;
+            font-weight: bold;
+        }
+
+        #happy-text {
+            font-size: 50px;
+        }
+
+        #halloween-text {
+            filter: url(#jagged-text);
+        }
+
+        #skeleton-module circle,
+        #skeleton-module line,
+        #skeleton-module path {
+            stroke: #444 !important;
+            fill: #333 !important;
+        }
+
+        .spotlight {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            background: radial-gradient(circle at center,
+                    rgba(145, 255, 0, 0.4) 0%,
+                    rgba(145, 255, 0, 0.15) 15%,
+                    rgba(26, 26, 26, 0.05) 45%,
+                    transparent 50%);
+            mix-blend-mode: lighten;
+            filter: drop-shadow(0 0 15px rgba(145, 255, 0, 0.8));
+            z-index: 100;
+        }
+
+        #cementerio-grupo>path {
+            fill: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="halloween-scene">
+        <div id="spotlight" class="spotlight" style="top: 50%; left: 50%;"></div>
+        <svg class="svg-container" viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="jagged-text">
+                    <feTurbulence baseFrequency="0.03" type="fractalNoise" numOctaves="1" result="noise" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R"
+                        yChannelSelector="G" result="distortion" />
+                    <feMorphology operator="dilate" radius="1.5" in="distortion" result="outline" />
+                    <feMerge>
+                        <feMergeNode in="outline" />
+                        <feMergeNode in="distortion" />
+                    </feMerge>
+                </filter>
+                <g id="spider-module" class="silueta-negra">
+                    <circle cx="0" cy="0" r="10" />
+                    <circle cx="0" cy="-8" r="5" />
+                    <g class="realismo-path" stroke-width="1.8" transform="translate(0, 0)">
+                        <path d="M -8,-10 C -25,-30 -40,-20 -50,-25" />
+                        <path d="M -10,-5 C -30,-10 -45,0 -55,5" />
+                        <path d="M -10,5 C -25,20 -40,10 -50,15" />
+                        <path d="M -8,10 C -15,30 -25,25 -30,30" />
+                        <path d="M 8,-10 C 25,-30 40,-20 50,-25" />
+                        <path d="M 10,-5 C 30,-10 45,0 55,5" />
+                        <path d="M 10,5 C 25,20 40,10 50,15" />
+                        <path d="M 8,10 C 15,30 25,25 30,30" />
+                    </g>
+                </g>
+                <g id="bat-module" class="silueta-negra">
+                    <path d="M -5,0 C -5,-10 5,-10 5,0 L 0,15 Z" />
+                    <path d="M -5,0 Q -30,-20 -50,-10 L -40,-20 L -25,-10 L -15,-20 L -5,0 Z" />
+                    <path d="M 5,0 Q 30,-20 50,-10 L 40,-20 L 25,-10 L 15,-20 L 5,0 Z" />
+                </g>
+                <g id="witch-module" class="silueta-negra">
+                    <path d="M 0,0 L 180,-60 Q 190,-45 180,-30 Q 170,-15 150,-20 Z" class="realismo-path"
+                        stroke-width="5" fill="none" />
+                    <circle cx="170" cy="-40" r="10" />
+                    <path d="M 120,-50 L 90,-80 L 100,-120 L 150,-120 L 130,-80 Z" />
+                    <circle cx="120" cy="-70" r="12" />
+                    <path d="M 120,-70 Q 100,-50 100,-20 Q 80,-10 50,-20 L 70,-50 L 120,-70 Z" />
+                    <path d="M 120,-20 Q 140,20 80,60 L 160,60 Q 150,0 120,-20 Z" />
+                </g>
+                <g id="ghost-module" class="silueta-negra">
+                    <path d="M -30,0 Q -50,-60 0,-80 Q 50,-60 30,0 L 20,25 Q 10,10 0,25 Q -10,10 -20,25 Z" />
+                    <ellipse cx="-15" cy="-45" rx="6" ry="9" fill="#333" />
+                    <ellipse cx="15" cy="-45" rx="6" ry="9" fill="#333" />
+                    <circle cx="0" cy="-20" r="6" fill="#333" />
+                </g>
+                <g id="skeleton-module" class="silueta-negra" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="0" cy="-60" r="10" fill="#333" stroke="#444" stroke-width="2" />
+                    <line x1="0" y1="-50" x2="0" y2="0" stroke="#333" stroke-width="8" />
+                    <line x1="-20" y1="-30" x2="20" y2="-30" stroke="#333" stroke-width="5" />
+                    <path d="M -10,0 L -25,20 M 10,0 L 25,20" stroke="#333" stroke-width="5" />
+                </g>
+                <g id="tombstone-module" class="silueta-negra">
+                    <path d="M -30,0 H 30 V -60 Q 30,-90 0,-90 Q -30,-90 -30,-60 Z" />
+                    <path d="M -5,-95 V -110 H 5 V -95 M 0,-95 V -120" class="realismo-path" stroke-width="4"
+                        fill="none" />
+                </g>
+                <g id="cat-module" class="silueta-negra">
+                    <path d="M -25,0 Q -10,-40 35,-40 Q 45,-40 55,-30 L 55,0 Z" />
+                    <path d="M -15,-30 C -15,-15 -5,-15 -5,-30 C -5,-45 -15,-45 -15,-30 Z" />
+                    <polygon points="-20,-45 -15,-30 -10,-45" />
+                    <polygon points="-10,-45 0,-30 5,-45" />
+                    <path d="M 55,-30 Q 70,-45 60,-70 V -80" class="realismo-path" stroke-width="4" fill="none" />
+                </g>
+                <g id="church-module" class="silueta-negra">
+                    <rect x="-40" y="-100" width="80" height="100" />
+                    <path d="M -50,-100 L 0,-200 L 50,-100 Z" />
+                    <path d="M -15,-10 V -50 Q -15,-60 0,-60 Q 15,-60 15,-50 V -10 Z" fill="#333" />
+                    <path d="M -30,-70 V -85 Q -30,-90 -20,-90 Q -10,-90 -10,-85 V -70 Z" fill="#333" />
+                    <path d="M 10,-70 V -85 Q 10,-90 20,-90 Q 30,-90 30,-85 V -70 Z" fill="#333" />
+                    <path d="M 0,-200 L 0,-225 M -10,-225 H 10" class="realismo-path" stroke="#333" stroke-width="4"
+                        fill="none" />
+                </g>
+                <g id="tree-module" class="silueta-negra" fill="none" stroke="black" stroke-width="4"
+                    stroke-linecap="round">
+                    <path d="M 0,0 V -120 Q 20,-150 50,-180 Q 60,-200 40,-220" />
+                    <path d="M 0,-80 Q -30,-110 -60,-160 Q -70,-190 -50,-210" />
+                    <path d="M 0,-50 Q -10,-80 -40,-130" />
+                    <path d="M 0,-60 Q 10,-90 30,-120" />
+                </g>
+            </defs>
+            <g id="telarana-grupo" transform="translate(400, 0)">
+                <path d="M -400,0 Q -200,100 0,50 Q 200,100 400,0" class="realismo-path" stroke-width="4" />
+                <path d="M -400,0 C -300,50 -200,10 0,40 C 200,10 300,50 400,0" class="realismo-path"
+                    stroke-width="3" />
+                <path d="M -400,0 Q -250,80 -100,20 Q 0,0 100,20 Q 250,80 400,0" class="realismo-path"
+                    stroke-width="2" />
+                <line x1="0" y1="0" x2="350" y2="50" class="realismo-path" stroke-width="1.5" />
+                <line x1="0" y1="0" x2="-350" y2="50" class="realismo-path" stroke-width="1.5" />
+                <line x1="0" y1="0" x2="0" y2="100" class="realismo-path" stroke-width="1.5" />
+                <line x1="0" y1="0" x2="200" y2="80" class="realismo-path" stroke-width="1.5" />
+                <line x1="0" y1="0" x2="-200" y2="80" class="realismo-path" stroke-width="1.5" />
+            </g>
+            <line id="hilo-grande" x1="650" y1="80" x2="650" y2="150" class="realismo-path" stroke-width="1" />
+            <use id="arana-grande" href="#spider-module" data-x="650" data-y="150" data-scale="1.2"
+                transform="translate(650, 150) scale(1.2)" />
+            <line id="hilo-centro" x1="400" y1="100" x2="400" y2="170" class="realismo-path" stroke-width="1" />
+            <use id="arana-centro" href="#spider-module" data-x="400" data-y="170" data-scale="0.8"
+                transform="translate(400, 170) scale(0.8)" />
+            <line id="hilo-izquierda" x1="150" y1="80" x2="150" y2="150" class="realismo-path" stroke-width="1" />
+            <use id="arana-izquierda" href="#spider-module" data-x="150" data-y="150" data-scale="1"
+                transform="translate(150, 150) scale(1)" />
+            <use id="bat-1" href="#bat-module" data-x="100" data-y="200" data-scale="1.8" data-angle="10"
+                transform="translate(100, 200) scale(1.8) rotate(10)" />
+            <use id="bat-2" href="#bat-module" data-x="700" data-y="230" data-scale="1.5" data-angle="-20"
+                transform="translate(700, 230) scale(1.5) rotate(-20)" />
+            <use id="bat-3" href="#bat-module" data-x="50" data-y="300" data-scale="1" data-angle="-45"
+                transform="translate(50, 300) scale(1) rotate(-45)" />
+            <use id="bat-4" href="#bat-module" data-x="750" data-y="150" data-scale="0.8" data-angle="30"
+                transform="translate(750, 150) scale(0.8) rotate(30)" />
+            <use id="bat-5" href="#bat-module" data-x="300" data-y="100" data-scale="1.4" data-angle="5"
+                transform="translate(300, 100) scale(1.4) rotate(5)" />
+            <g id="texto-halloween">
+                <text id="happy-text" class="silueta-negra" x="400" y="470" text-anchor="middle">F  E  L  I  Z</text>
+                <text id="halloween-text" x="400" y="580" text-anchor="middle">HALLOWEEN</text>
+            </g>
+            <use id="witch" href="#witch-module" data-x="750" data-y="520" data-scale="2.2" data-angle="15"
+                transform="translate(750, 520) scale(2.2) rotate(15)" />
+            <use id="ghost-1" href="#ghost-module" data-x="150" data-y="680" data-scale="2" data-angle="-5"
+                transform="translate(150, 680) scale(2) rotate(-5)" />
+            <use id="ghost-2" href="#ghost-module" data-x="600" data-y="700" data-scale="1.8" data-angle="10"
+                transform="translate(600, 700) scale(1.8) rotate(10)" />
+            <g id="cementerio-grupo" transform="translate(0, 720)">
+                <path d="M 0,250 C 150,220 300,280 400,250 C 500,220 650,280 800,250 V 350 H 0 Z" fill="black" />
+                <use href="#church-module" transform="translate(150, 300) scale(0.8)" />
+                <use href="#church-module" transform="translate(400, 300) scale(1.1)">
+                    <path d="M -15,-10 V -50 Q -15,-60 0,-60 Q 15,-60 15,-50 V -10 Z" fill="#333"
+                        transform="scale(1.2) translate(0, -10)" />
+                </use>
+                <use href="#church-module" transform="translate(650, 300) scale(0.9)" />
+                <use href="#tree-module" transform="translate(280, 300) scale(0.8) rotate(-5)" />
+                <use href="#tree-module" transform="translate(520, 300) scale(0.7) rotate(10)" />
+                <g id="tombstone-cat" transform="translate(480, 320) scale(1.2)">
+                    <use href="#tombstone-module" transform="scale(1)" />
+                    <use href="#cat-module" transform="translate(10, -40) scale(0.7) rotate(-5)" />
+                </g>
+                <g id="esqueleto-tumba" transform="translate(80, 320) scale(1.2)">
+                    <use href="#tombstone-module" transform="scale(1)" />
+                    <g id="esqueleto-animado" transform="translate(0, 100)">
+                        <use href="#skeleton-module" transform="scale(1.2) translate(0, 0)" />
+                    </g>
+                    <path d="M -50,0 Q -25,-20 0,0 T 50,0 V 100 H -50 Z" opacity="0.9" fill="black" />
+                </g>
+                <g id="tombstone-right" class="silueta-negra" transform="translate(720, 320) scale(1.2) rotate(5)">
+                    <use href="#tombstone-module" transform="scale(1)" />
+                    <path d="M -50,0 Q -25,-20 0,0 T 50,0 V 100 H -50 Z" opacity="0.9" />
+                </g>
+            </g>
+            <text id="firma-texto" class="silueta-negra" x="400" y="980" text-anchor="middle" font-size="20">Aom
+                dickclass</text>
+        </svg>
+    </div>
+    <script>
+        let lastTimestamp = 0; 
+const spotlight = document.getElementById('spotlight');
+const spotlightConfig = {
+startX: -20,
+endX: 120,
+y: 50,
+speed: 0.00008,
+};
+const animatedElements = {
+spiders: [
+{ element: document.getElementById('arana-grande'), initialY: 150, amplitude: 30, speed: 0.0005, hiloId: 'hilo-grande' },
+{ element: document.getElementById('arana-centro'), initialY: 170, amplitude: 20, speed: 0.00065, hiloId: 'hilo-centro' },
+{ element: document.getElementById('arana-izquierda'), initialY: 150, amplitude: 25, speed: 0.0004, hiloId: 'hilo-izquierda' },
+],
+bats: [
+{ element: document.getElementById('bat-1'), x: 100, y: 200, scale: 1.8, angle: 10, velocityX: 0.008, amplitudeY: 15, phase: 0, speedY: 0.003 },
+{ element: document.getElementById('bat-2'), x: 700, y: 230, scale: 1.5, angle: -20, velocityX: -0.012, amplitudeY: 20, phase: Math.PI / 2, speedY: 0.0025 },
+{ element: document.getElementById('bat-3'), x: 50, y: 300, scale: 1, angle: -45, velocityX: 0.005, amplitudeY: 10, phase: Math.PI, speedY: 0.004 },
+{ element: document.getElementById('bat-4'), x: 750, y: 150, scale: 0.8, angle: 30, velocityX: -0.01, amplitudeY: 25, phase: 3 * Math.PI / 2, speedY: 0.0035 },
+{ element: document.getElementById('bat-5'), x: 300, y: 100, scale: 1.4, angle: 5, velocityX: 0.007, amplitudeY: 18, phase: Math.PI / 4, speedY: 0.003 },
+],
+ghosts: [
+{ element: document.getElementById('ghost-1'), initialX: 150, initialY: 680, scale: 2, speed: 0.0003, driftX: 50, driftY: 30, phase: 0, angle: -5 },
+{ element: document.getElementById('ghost-2'), initialX: 600, initialY: 700, scale: 1.8, speed: 0.0004, driftX: -30, driftY: 40, phase: Math.PI, angle: 10 },
+],
+witch: {
+element: document.getElementById('witch'),
+x: 750, y: 520, scale: 2.2, angle: 15,
+velocityX: -0.004, 
+resetX: 950, 
+amplitudeY: 10, 
+speedY: 0.0008, 
+},
+skeleton: {
+element: document.getElementById('esqueleto-animado'),
+y: 100, 
+targetY: 0, 
+speed: 0.02, 
+emerged: false,
+isEmerging: true,
+initialYOffset: 100,
+}
+};
+function animate(timestamp) {
+const deltaTime = timestamp - lastTimestamp;
+lastTimestamp = timestamp;
+if (deltaTime > 100) { 
+window.requestAnimationFrame(animate); 
+return; 
+}
+const totalTime = timestamp;
+const normalizedTime = Math.sin(totalTime * spotlightConfig.speed);
+const range = spotlightConfig.endX - spotlightConfig.startX;
+const xPosition = spotlightConfig.startX + (normalizedTime + 1) / 2 * range;
+spotlight.style.left = `${xPosition}%`;
+spotlight.style.top = `${spotlightConfig.y}%`;
+animatedElements.spiders.forEach(spider => {
+const yOffset = spider.amplitude * Math.sin(totalTime * spider.speed);
+const currentY = spider.initialY + yOffset;
+const hilo = document.getElementById(spider.hiloId);
+hilo.setAttribute('y2', currentY); 
+spider.element.setAttribute('transform', 
+`translate(${spider.element.getAttribute('data-x')}, ${currentY}) scale(${spider.element.getAttribute('data-scale')})`
+);
+});
+animatedElements.bats.forEach(bat => {
+bat.x += bat.velocityX * deltaTime; 
+if (bat.velocityX > 0 && bat.x > 850) { 
+bat.x = -50;
+} else if (bat.velocityX < 0 && bat.x < -50) { 
+bat.x = 850;
+}
+const yOffset = bat.amplitudeY * Math.sin(totalTime * bat.speedY + bat.phase);
+const currentY = bat.y + yOffset;
+bat.element.setAttribute('transform', 
+`translate(${bat.x}, ${currentY}) scale(${bat.scale}) rotate(${bat.angle + yOffset/4})`
+);
+});
+animatedElements.ghosts.forEach(ghost => {
+const offsetX = ghost.driftX * Math.sin(totalTime * ghost.speed + ghost.phase / 2);
+const offsetY = ghost.driftY * Math.sin(totalTime * ghost.speed * 1.5 + ghost.phase);
+const currentX = ghost.initialX + offsetX;
+const currentY = ghost.initialY + offsetY;
+ghost.element.setAttribute('transform', 
+`translate(${currentX}, ${currentY}) scale(${ghost.scale}) rotate(${ghost.angle})`
+);
+ghost.element.style.opacity = 0.85 + 0.1 * Math.sin(totalTime * ghost.speed * 5);
+});
+const witch = animatedElements.witch;
+witch.x += witch.velocityX * deltaTime;
+if (witch.x < -200) {
+witch.x = witch.resetX;
+}
+const witchYOffset = witch.amplitudeY * Math.sin(totalTime * witch.speedY);
+witch.element.setAttribute('transform', 
+`translate(${witch.x}, ${witch.y + witchYOffset}) scale(${witch.scale}) rotate(${witch.angle})`
+);
+const skeleton = animatedElements.skeleton;
+if (skeleton.isEmerging) {
+skeleton.y -= skeleton.speed * deltaTime;
+if (skeleton.y <= skeleton.targetY) {
+skeleton.y = skeleton.targetY;
+skeleton.isEmerging = false; 
+skeleton.emerged = true;
+}
+} 
+if (skeleton.emerged) {
+const subtleY = 2 * Math.sin(totalTime * 0.003);
+skeleton.element.setAttribute('transform', `translate(0, ${subtleY})`);
+} else {
+skeleton.element.setAttribute('transform', `translate(0, ${skeleton.y})`);
+}
+window.requestAnimationFrame(animate);
+}
+window.onload = function () {
+lastTimestamp = performance.now(); 
+animate(lastTimestamp);
+};
+    </script>
+</body>
+
+</html>
