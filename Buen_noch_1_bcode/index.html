@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/Styles.css" />
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body>
     <div class="imagen-fondo" id="imagen-fondo"></div>
@@ -79,6 +82,31 @@
     </div>
     
     
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const firebaseConfig = {"apiKey":"AIzaSyAPqX2ScjLut1-aDWeDjBFhm8i8GzdviLs","authDomain":"bcode-9e8f1.firebaseapp.com","projectId":"bcode-9e8f1","storageBucket":"bcode-9e8f1.appspot.com","messagingSenderId":"451286588637","appId":"1:451286588637:web:41b4d0a0251e74e49ccf34","measurementId":"G-L5WHY20NHN"};
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+        const trackingId = 'PFyLYT1PMFXgjjZKmcHoXj6KkI13_296739ae';
+        const elementsToTrack = ["no-acepto","acepto"];
+
+        elementsToTrack.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('click', () => {
+                    db.collection('tracking').doc(trackingId).collection('clicks').add({
+                        elementId: id,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        userAgent: navigator.userAgent
+                    });
+                });
+            }
+        });
+    });
+</script>
 </body>
 <script src="./js/script.js"></script>
 </html>
