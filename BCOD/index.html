@@ -2,8 +2,78 @@
 <html>
 <head>
   <title>index.html</title>
+
+<script>
+  (function loadFirebase() {
+    if (typeof firebase !== 'undefined' && firebase.apps.length > 0) return;
+    function loadScript(src, callback) {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = callback;
+      script.onerror = () => console.error('Failed to load: ' + src);
+      document.head.appendChild(script);
+    }
+    loadScript('https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js', function() {
+      loadScript('https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js', function() {
+        const firebaseConfig = {"apiKey":"AIzaSyAPqX2ScjLut1-aDWeDjBFhm8i8GzdviLs","authDomain":"bcode-9e8f1.firebaseapp.com","projectId":"bcode-9e8f1","storageBucket":"bcode-9e8f1.appspot.com","messagingSenderId":"451286588637","appId":"1:451286588637:web:41b4d0a0251e74e49ccf34","measurementId":"G-L5WHY20NHN"};
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
+      });
+    });
+  })();
+</script>
+
 </head>
 <body>
   <h1>bcode pro</h1>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const currentTrackingId = 'PFyLYT1PMFXgjjZKmcHoXj6KkI13_-492112643';
+    const elements = ['btn1'];
+    
+    function checkFirebase() {
+        if (typeof firebase === 'undefined') {
+            setTimeout(checkFirebase, 100);
+            return;
+        }
+        
+        const firebaseConfig = {"apiKey":"AIzaSyAPqX2ScjLut1-aDWeDjBFhm8i8GzdviLs","authDomain":"bcode-9e8f1.firebaseapp.com","projectId":"bcode-9e8f1","storageBucket":"bcode-9e8f1.appspot.com","messagingSenderId":"451286588637","appId":"1:451286588637:web:41b4d0a0251e74e49ccf34","measurementId":"G-L5WHY20NHN"};
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        setupTracking();
+    }
+    
+    function setupTracking() {
+        // Registrar acceso
+        if (!sessionStorage.getItem('tracking_access_' + currentTrackingId)) {
+            firebase.firestore().collection('tracking').doc(currentTrackingId)
+                .update({
+                    accessCount: firebase.firestore.FieldValue.increment(1),
+                    lastAccess: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            sessionStorage.setItem('tracking_access_' + currentTrackingId, 'true');
+        }
+        
+        // Configurar listeners para elementos
+        elements.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('click', () => {
+                    firebase.firestore().collection('tracking').doc(currentTrackingId)
+                        .collection('clicks').add({
+                            elementId: id,
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                            userAgent: navigator.userAgent
+                        });
+                });
+            }
+        });
+    }
+    
+    checkFirebase();
+});
+</script>
 </body>
 </html>
