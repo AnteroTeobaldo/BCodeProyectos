@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tree of Love</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff0f6;
+      margin: 0;
+      padding: 20px;
+      color: #5C4033;
+      text-align: center;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: inline-block;
+      max-width: 600px;
+      width: 100%;
+    }
+    .heart-tree {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 20px auto 10px;
+      transform: translateY(10px);
+    }
+    .heart {
+      position: absolute;
+      font-size: 16px;
+      animation: floatUp 4s ease-in-out infinite;
+      opacity: 0.8;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      50% { transform: translateY(-20px) scale(1.1); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 0.8; }
+    }
+    .counter {
+      font-size: 1.1rem;
+      color: #f54291;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Para el amor de mi vida:</h2>
+    <p>Si pudiera elegir un lugar seguro, sería a tu lado. Cuanto más tiempo estoy contigo, más me enamoro.</p>
+    <p>Este texto solo es un ejemplo, pero refleja lo que siento 💖</p>
+    <div class="counter">Llevamos juntos <span id="days">…</span> días</div>
+    <div class="heart-tree" id="tree"></div>
+  </div>
+
+  <footer>Con todo mi amor, — I Love You</footer>
+
+  <script>
+    // Contador automático
+    const start = new Date('2024-09-05');
+    const now = new Date();
+    const days = Math.floor((now - start) / 8.64e7);
+    document.getElementById('days').textContent = days;
+
+    // Crear corazones dentro del "árbol"
+    const tree = document.getElementById('tree');
+    const colors = ['#f54291','#f5a742','#f58bdc','#42dff5','#42f593','#f54242','#d242f5'];
+    for (let i = 0; i < 150; i++) {
+      const span = document.createElement('span');
+      span.textContent = '❤️';
+      const size = Math.random() * 12 + 16;
+      span.style.fontSize = size + 'px';
+      span.style.color = colors[Math.floor(Math.random()*colors.length)];
+      span.style.left = Math.random() * 100 + '%';
+      span.style.top = Math.random() * 100 + '%';
+      span.style.animationDelay = (Math.random()*3)+'s';
+      span.style.animationDuration = (3 + Math.random()*2)+'s';
+      tree.appendChild(span);
+    }
+  </script>
+
+</body>
+</html>
