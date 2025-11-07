@@ -1,0 +1,29 @@
+/* Estilos para la escena 3D */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000000;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+canvas {
+    display: block;
+}
+
+#info {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+    display: block;
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 0 5px #ffffff;
+}
+
+#info p {
+    margin: 0;
+    padding: 5px;
+}
