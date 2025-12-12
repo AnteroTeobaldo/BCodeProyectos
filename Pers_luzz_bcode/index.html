@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Mishell | Te Amo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="decoration-container" id="decoration-container"></div>
+
+    <div class="scroll-down" id="scrollDown">
+        <i class="fas fa-chevron-down"></i>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Feliz Cumpleaños Mi Amor <br> Luz </h1>
+            <div class="subtitle">Cada día a tu lado es un regalo maravilloso</div>
+            
+            <button class="btn-surprise" id="btnSurprise">
+                <i class="fas fa-birthday-cake"></i>
+                Descubre tu Sorpresa
+            </button>
+        </header>
+        
+        <section class="counter-section">
+            <h2 class="counter-title">Tu Tiempo en este Mundo</h2>
+            <div class="counter-container">
+                <div class="counter-item">
+                    <div class="counter-value" id="years">0</div>
+                    <div class="counter-label">Años</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="months">0</div>
+                    <div class="counter-label">Meses</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="days">0</div>
+                    <div class="counter-label">Días</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="hours">00</div>
+                    <div class="counter-label">Horas</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="minutes">00</div>
+                    <div class="counter-label">Minutos</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="seconds">00</div>
+                    <div class="counter-label">Segundos</div>
+                </div>
+            </div>
+            
+            <div class="time-display">
+                <p>En este preciso instante:</p>
+                <div class="current-time">
+                    <i class="fas fa-calendar-day"></i>
+                    <span id="current-date">20 de junio de 2024</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-clock"></i>
+                    <span id="current-time">00:00:00</span>
+                </div>
+            </div>
+        </section>
+        
+        <div class="signature">Con todo mi amor, en tu día especial</div>
+    </div>
+
+    <div class="modal" id="surpriseModal">
+        <div class="modal-hearts" id="modalHearts"></div>
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="cake-icon">
+                <i class="fas fa-birthday-cake"></i>
+            </div>
+            <h2 class="modal-title">Para Ti, Mi Amor</h2>
+            <p class="modal-message">
+                 Eres la razón por la que mis días tienen más luz. Te amo, mi vida.
+            </p>
+            <div class="signature">Por siempre tuyo</div>
+        </div>
+    </div>
+
+    
+</body>
+<script src="./js/script.js"></script>
+</html>
