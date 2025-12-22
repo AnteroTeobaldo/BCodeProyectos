@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Restringido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            /* Evita que se pueda seleccionar texto */
+            user-select: none; 
+        }
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #error-msg {
+            color: red;
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Ingresa la Contraseña</h2>
+        <input type="password" id="passwordInput" placeholder="Contraseña" autocomplete="off">
+        <br>
+        <button onclick="verificarPassword()">Entrar</button>
+        <p id="error-msg">Contraseña incorrecta</p>
+    </div>
+
+    <script>
+        // --- 1. LÓGICA DE ACCESO ---
+        function verificarPassword() {
+            const entrada = document.getElementById('passwordInput').value;
+            
+            // IMPORTANTE: Cambia "12345" por tu clave y "contenido.html" por tu archivo real
+            if (entrada === "12") {
+                window.location.href = "contenido.html"; 
+            } else {
+                document.getElementById('error-msg').style.display = "block";
+            }
+        }
+
+        // Permitir entrar con la tecla Enter
+        document.getElementById("passwordInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                verificarPassword();
+            }
+        });
+
+        // --- 2. PROTECCIÓN CONTRA INSPECCIÓN ---
+
+        // Bloquear Clic Derecho
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        // Bloquear Teclas de Atajo (F12, Ctrl+U, Ctrl+Shift+I, etc.)
+        document.onkeydown = function(e) {
+            if (event.keyCode == 123) return false; // F12
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+        };
+
+        // --- 3. TRAMPA DEBUGGER (Congela la página si abren el inspector) ---
+        setInterval(function() {
+            debugger;
+        }, 100);
+    </script>
+
+</body>
+
+</html>
