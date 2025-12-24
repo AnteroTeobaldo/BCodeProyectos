@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💖 Carta Especial para mi Dr especial 💖</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      text-align: center;
+      color: #333;
+      transition: background-color 0.4s ease;
+    }
+    h2, h3, p {
+      margin: 10px 0;
+    }
+    .screen {
+      display: none;
+      width: 90%;
+      max-width: 420px;
+    }
+    .active {
+      display: block;
+    }
+    input {
+      padding: 10px;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+      outline: none;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      background-color: #ff4f81;
+      color: white;
+    }
+    button:hover {
+      background-color: #ff2a66;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease;
+      text-align: left; 
+    }
+    .main-img {
+      width: 280px;
+      height: auto;
+      margin-bottom: 15px;
+      object-fit: contain;
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.95);}
+      to {opacity: 1; transform: scale(1);}
+    }
+    #errorMessage {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 8px;
+    }
+    /* ✨ Texto tipo carta */
+    .card p {
+      text-align: justify;
+      line-height: 1.6;
+      font-size: 1em;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Pantalla de contraseña -->
+  <div class="screen active" id="passwordScreen">
+    <img src="https://n9.cl/cgg24" alt="Caja de regalo" class="main-img">
+    <h2>🔒 Ingresa la contraseña</h2>
+    <input type="password" id="passwordInput" placeholder="Escribe la clave...">
+    <br>
+    <button onclick="checkPassword()">Entrar</button>
+    <p id="errorMessage"></p>
+  </div>
+  <div class="screen" id="menuScreen">
+    <h2>💌 Para el cumpleañero mas bello💌</h2>
+    <p>Elige lo que quieres abrir:</p>
+    <div class="btn-container">
+      <button onclick="window.open('https://n9.cl/si29t')">🎶 Ver video</button>
+      <button onclick="showLetter()">💖 Leer carta</button>
+    </div>
+  </div>
+  <div class="screen" id="letterScreen">
+    <div class="card">
+      <h3>Feliz cumpleaños mi amor,</h3>
+      <p>Hoy el mundo se puso de fiesta porque cumple años el niño más lindo, el de la sonrisa que calma, el corazón noble y los sueños grandes. Hoy celebramos tus 21, pero yo celebro mucho más que un número: celebro tu existencia, tu forma tan bonita de sentir, de pensar, de amar y de seguir adelante incluso cuando el camino se pone pesado.</p>
+     <p>Deseo con todo mi corazón que este nuevo año esté lleno de luz, de paz y de momentos que abracen tu alma. Que Dios te cubra, te guíe y siga trabajando en ese corazoncito tan especial que tienes, moldeándote con amor, paciencia y propósito. Que nunca dudes de cuánto vales ni de lo grande que eres, incluso en los días en que no lo sientes así. Amor, eres inteligente, eres fuerte, eres valiente, eres capaz de cosas enormes aunque a veces no te des cuenta. Tienes una luz propia, una que no necesita permiso para brillar. Nunca olvides que mereces cosas bonitas, sueños cumplidos y un futuro lleno de sentido. Mereces amor del bueno, paz en el alma y alegría en el corazón.</p>
+     <p>Hoy que cumples 21, quiero decirte algo desde lo más profundo de mí: vive. Vive sin miedo, vive con ganas, vive intensamente. Hay tanta vida más allá de las responsabilidades, de los libros y del cansancio. No se trata de descuidar tus metas, sino de encontrar un balance que te permita disfrutar el proceso. Que cuando un día mires atrás, recuerdes risas, aventuras, abrazos, momentos simples y felices… y no solo sacrificios.</p>
+    <p>Gracias por existir, por ser tú, por dejarme amarte. Gracias por cada sonrisa, cada abrazo y cada momento compartido. Mi corazón es más bonito desde que tú estás en él.</p>
+    <p>Que este año te abrace tan fuerte como yo quisiera hacerlo hoy.</p>
+      </p>
+      <button onclick="goBack()">🔙 Volver</button>
+    </div>
+  </div>
+  <script>
+    const correctPassword = "MYM";
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value.trim();
+      const error = document.getElementById("errorMessage");
+      if (input === correctPassword) {
+        document.getElementById("passwordScreen").classList.remove("active");
+        document.getElementById("menuScreen").classList.add("active");
+        error.textContent = "";
+      } else {
+        error.textContent = "Contraseña incorrecta 💔";
+      }
+    }
+    function showLetter() {
+      document.getElementById("menuScreen").classList.remove("active");
+      document.getElementById("letterScreen").classList.add("active");
+    }
+    function goBack() {
+      document.getElementById("letterScreen").classList.remove("active");
+      document.getElementById("menuScreen").classList.add("active");
+    }
+  </script>
+</body>
+</html>
