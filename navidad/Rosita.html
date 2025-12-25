@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Amor Navideña</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+</head>
+<style>
+    *,
+    ::before,
+    ::after {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Quicksand", sans-serif;
+        background: linear-gradient(135deg, #0c2c4a, #1a472a, #0c2c4a);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 1rem;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        animation: twinkle var(--duration, 3s) infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+
+        0%,
+        100% {
+            opacity: 0.2;
+            transform: scale(0.5);
+        }
+
+        50% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .snowflake {
+        position: absolute;
+        color: white;
+        font-size: 1.5rem;
+        animation: fall linear infinite;
+        z-index: -1;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(100vh);
+        }
+    }
+
+    .envelope {
+        --duration: 1000ms;
+        --shadow-width: calc(var(--envelope-width) * 0.85);
+        --shadow-blur: 15px;
+        --envelope-width: 300px;
+        --envelope-height: 175px;
+        --envelope-clr-bg: #1a472a;
+        --envelope-clr-bg-side: #1e5635;
+        --envelope-clr-bg-bottom: #2d7a4a;
+        --envelope-clr-bg-top: #1a472a;
+        --envelope-clr-txt: #fff;
+        --envelope-transform-hover: rotateY(180deg);
+        --evelope-rotate-delay: calc(var(--duration) / 1);
+        --evelope-rotate-delay-hover: 0ms;
+        --letter-clr-bg: #fff;
+        --letter-clr-text: #1a472a;
+        --letter-font-size: 1rem;
+        --letter-delay: 0ms;
+        --letter-delay-hover: calc(var(--duration) * 1.25);
+        --letter-height: calc(var(--envelope-height) - 2rem);
+        --letter-height-hover: calc(var(--envelope-height) * 1.75);
+        --fold-rotate: rotateX(0deg);
+        --fold-zindex-hover: 0;
+        --fold-rotate-hover: rotateX(180deg);
+        --fold-delay: calc(var(--duration) / 2);
+        --fold-delay-hover: calc(var(--duration) * .75);
+        --front-font-size: 1rem;
+        --snowman-width: 50px;
+        --bells-width: 30px;
+
+        position: relative;
+        height: var(--envelope-height);
+        width: var(--envelope-width);
+        perspective: 1000px;
+        cursor: pointer;
+        z-index: 10;
+        transition: transform 0.3s ease;
+    }
+
+    .envelope:hover {
+        transform: translateY(-10px);
+    }
+
+    @media (min-width: 720px) {
+        .envelope {
+            --envelope-width: 600px;
+            --envelope-height: 350px;
+            --letter-font-size: 1.6rem;
+            --snowman-width: 130px;
+            --bells-width: 60px;
+            --front-font-size: 1.25rem;
+        }
+    }
+
+    .envelope::after {
+        content: "";
+        position: absolute;
+        top: 110%;
+        left: 50%;
+        width: var(--shadow-width);
+        height: 40px;
+        transition: var(--duration) ease-in-out;
+        transition-delay: var(--evelope-rotate-delay);
+        transform: var(--shadow-transform);
+        translate: -50% 0;
+        border-radius: 50%;
+        background: rgba(6, 36, 20, 0.4);
+        filter: blur(var(--shadow-blur));
+    }
+
+    .envelope:hover {
+        --envelope-transform: var(--envelope-transform-hover, 0deg);
+        --evelope-rotate-delay: var(--evelope-rotate-delay-hover);
+        --shadow-transform: rotateY(180deg);
+        --fold-rotate: var(--fold-rotate-hover);
+        --fold-delay: var(--fold-delay-hover);
+        --fold-zindex: var(--fold-zindex-hover);
+        --letter-height: var(--letter-height-hover);
+        --letter-delay: var(--letter-delay-hover);
+    }
+
+    .envelope-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: var(--duration) ease-in-out;
+        transition-delay: var(--evelope-rotate-delay);
+        transform-style: preserve-3d;
+        transform: var(--envelope-transform);
+        display: grid;
+    }
+
+    .envelope-front,
+    .envelope-back {
+        position: relative;
+        grid-area: 1/1;
+        width: 100%;
+        height: 100%;
+        background-color: var(--envelope-clr-bg);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        perspective: 1000px;
+        isolation: isolate;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .envelope-front {
+        color: var(--envelope-clr-txt);
+        display: grid;
+        place-content: center;
+        background: linear-gradient(145deg, #1a472a, #0c2c4a);
+    }
+
+    .envelope-front .postage-stamp {
+        position: absolute;
+        top: 1em;
+        right: 0.5em;
+        width: 15%;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    .envelope-front .address {
+        text-align: left;
+        font-size: var(--front-font-size);
+        padding: 1.5rem;
+        /* background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    }
+
+    .envelope-front .address>p>span:first-child {
+        font-family: "Quicksand", sans-serif;
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
+
+    .envelope-front .address>p>span:last-of-type {
+        font-weight: 800;
+        color: #ffd700;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .envelope-back {
+        transform: rotateY(180deg);
+        background: linear-gradient(145deg, #2d7a4a, #1e5635);
+    }
+
+    .envelope-back::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        background-image: conic-gradient(transparent 60deg,
+                var(--envelope-clr-bg-side) 60deg 120deg,
+                var(--envelope-clr-bg-bottom) 120deg 240deg,
+                var(--envelope-clr-bg-side) 240deg 300deg,
+                transparent 300deg);
+    }
+
+    .envelope-back .top-fold {
+        position: absolute;
+        inset: 0;
+        z-index: var(--fold-zindex, 10);
+        background-color: var(--envelope-clr-bg-top);
+        clip-path: polygon(0% 0%, 50% 55%, 100% 0%);
+        border-radius: 8px 8px 0 0;
+        transform: var(--fold-rotate);
+        transform-origin: top;
+        transition: var(--duration) ease-in-out;
+        transition-delay: var(--fold-delay);
+        background: linear-gradient(145deg, #2d7a4a, #1a472a);
+    }
+
+    .christmas-title {
+        font-family: 'Dancing Script', cursive;
+        left: 3em;
+        margin-top: -4rem;
+        font-size: 3.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #ffd700;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        position: absolute;
+        z-index: 5;
+        background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @media(max-width: 500px) {
+        .christmas-title {
+            font-size: 2rem;
+            margin-top: -8rem;
+            left: 2.2em !important;
+        }
+    }
+
+    @keyframes titleGlow {
+        0% {
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        100% {
+            text-shadow: 0 0 20px rgba(255, 215, 0, 1);
+        }
+    }
+
+    .letter {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        width: 90%;
+        height: var(--letter-height);
+        font-size: var(--letter-font-size);
+        transform: translateX(-50%);
+        background: var(--letter-clr-bg);
+        z-index: 2;
+        padding: 2em 3em;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+        transition: var(--duration) ease-in-out;
+        transition-delay: var(--letter-delay);
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(145deg, #ffffff, #f9f9f9);
+    }
+
+    .letter p {
+        margin-top: 6rem !important;
+        padding: 0 60px;
+        font-weight: bold;
+        width: 32ch;
+        color: var(--letter-clr-text);
+        line-height: 1.6;
+        font-family: 'Dancing Script', cursive;
+        font-size: 1.2em;
+    }
+
+    .custom-image {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+    }
+
+    .custom-image2 {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+    }
+
+    .highlight {
+        display: block;
+        margin-top: 10px;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #1a472a;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .button {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 12px 30px;
+        background: linear-gradient(to right, #1a472a, #0c2c4a);
+        border: none;
+        border-radius: 30px;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 4 !important;
+        overflow: hidden;
+    }
+
+    .envelope-back a {
+        text-decoration: none;
+    }
+
+    .button:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: 0.5s;
+        z-index: -1;
+    }
+
+    .button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .button:hover:before {
+        left: 100%;
+    }
+
+    .button:active {
+        transform: translateY(1px);
+    }
+
+    @media(max-width:658px) {
+        .button {
+            font-size: 10px;
+            z-index: 6;
+        }
+
+        .letter p {
+            margin-top: 0rem !important;
+            padding: 0 80px;
+
+        }
+    }
+
+    .heart {
+        position: absolute;
+        font-size: 40px;
+        top: -20px;
+        right: 20px;
+        color: #ff6b6b;
+        transform: rotate(15deg);
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+        z-index: 2;
+    }
+
+    .gift {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-size: 40px;
+        color: #ffd700;
+        transform: rotate(-10deg);
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+        z-index: 2;
+    }
+
+    .christmas-tree {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 40px;
+        color: #1a472a;
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+        z-index: 2;
+    }
+</style>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div id="snowflakes"></div>
+
+    <div class="envelope">
+        <div class="envelope-inner">
+            <div class="envelope-front">
+                <div class="postage-stamp">
+                    <svg fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300" xml:space="preserve">
+                        <path
+                            d="M253.98,257.652c0-8.568,8.568-17.748,17.136-18.361c-1.224-4.895-1.224-10.402-0.611-15.299 c-3.061,0.611-7.345,0-10.404-1.225c-6.12-3.061-9.792-9.18-9.792-15.912c0-9.18,7.956-20.807,17.136-21.42 c0-2.447,0.612-4.896,0.612-7.344s0.612-4.896,0.612-7.344c-7.956,3.061-17.137-4.283-18.973-12.24 c-1.836-9.792,4.284-17.748,12.853-21.42c-0.612-1.836-0.612-4.284-0.612-6.12c0-3.672,0-7.344,0.612-11.016 c-3.061,0-6.12-1.224-9.181-3.06c-4.283-3.06-6.731-7.344-7.344-12.24c0-0.612,0-1.836,0-2.448c0-9.792,8.568-15.3,17.136-16.524 c-0.611-3.672,0-7.956,0-11.628c0-3.06,0-6.12,0.612-9.18c-7.956,2.448-18.36-4.284-20.808-12.24 c-2.448-7.956,1.836-17.748,9.792-20.808c-1.225-3.06-1.225-6.732-1.225-10.404c0-3.06-0.611-6.732-0.611-9.792 c-9.792,12.24-39.168,4.284-40.393-9.18C205.632,3.672,200.124,1.836,195.84,0c0.611,9.18-7.956,17.748-17.137,17.748 c-9.18,0-16.523-6.732-18.359-15.3c-2.448,0-4.896,0-6.732-0.612c-2.448,0-4.896-0.612-7.956-1.224c0,4.284-2.448,9.18-5.508,12.24 c-3.672,3.672-9.18,6.12-14.076,6.12c-1.224,0-2.448,0-3.672-0.612c-5.508-1.224-12.24-4.896-14.076-11.016 c0-0.612,0-0.612,0-1.224c-4.896,0.612-11.016-0.612-15.912-2.448c-0.612,8.568-9.18,15.3-18.36,14.076 c-4.284-0.612-9.792-3.06-11.016-7.344c0-0.612,0-0.612,0-1.224c0,0,0,0.612-0.612,0.612c-3.672,3.06-8.568,2.448-12.852,1.836 c-1.224,0-2.448,0-3.672,0c1.224,0.612,1.836,1.836,2.448,2.448c3.672,4.896,5.508,11.016,3.06,17.136 c-3.06,8.568-14.076,12.24-22.032,9.18c0,1.224-0.612,1.836-0.612,3.06c-0.612,3.672-0.612,6.732-0.612,10.404 c9.792-1.224,22.644,1.224,23.868,12.852c0.612,5.508-3.06,11.016-8.568,12.852c-2.448,1.224-5.508,1.224-7.956,1.224 c-0.612,0-1.224,0-2.448-0.612c0,1.836,0,4.284,0,6.12c0,3.672,0.612,7.344-0.612,11.016l0,0c0.612,0,0.612-0.612,1.224-0.612 c11.628-3.672,23.256,7.344,19.584,18.972c-1.224,4.896-5.508,8.568-9.792,10.404c-3.672,1.224-6.732,1.836-10.404,1.836 c-0.612,1.836-0.612,3.06-1.224,4.896c-0.612,2.448-0.612,5.508-0.612,7.956c8.568-4.284,22.032-1.836,22.644,9.18 c0.612,9.179-10.404,24.48-21.42,23.869c0,1.223,0,3.059,0,4.283c0,2.447-0.612,4.896-0.612,7.957 c2.448-1.225,6.12-1.836,9.18-1.836c6.12,0.611,11.016,4.895,12.24,11.016c3.672,13.463-9.18,22.643-20.808,20.807 c-0.612,4.285-1.224,9.793-1.836,13.465c5.508-4.283,17.748-3.061,21.42,4.283c8.568,15.912-8.568,25.705-22.032,28.152 c0,4.896,0,10.404-1.224,15.301c7.344-4.285,18.36-4.285,25.704,0c7.956,4.896,11.628,13.463,11.628,22.031 c3.672-0.611,7.344-1.223,11.016-1.223c0-8.568,9.18-20.197,16.524-20.809c4.896-0.613,9.792,2.447,11.628,7.344 c1.836,4.283,1.224,9.791,3.06,14.076c0.612,0,1.224-0.611,1.836-0.611c3.06,0,4.896-0.613,7.344-1.838 c-0.612-1.836,0-3.672,0.612-6.119c1.224-4.896,5.508-9.18,10.404-10.404c11.016-3.061,19.584,4.896,22.645,14.688 c3.672-0.611,7.344-0.611,11.628-0.611c1.836,0,3.672,0,5.508,0.611c-2.448-8.566,4.284-18.971,13.464-19.584 c0.612,0,1.224,0,1.836,0c5.508,0,10.404,3.061,13.464,6.732c1.836,2.449,3.672,5.508,4.284,8.568c1.224,0,2.448,0,4.284,0 s3.672,0,5.508,0c1.224-7.955,9.792-14.076,17.748-14.688c7.956-0.613,15.912,3.672,19.584,11.016 c5.508-3.672,13.464-6.119,20.808-6.119c0-2.449,0-4.896,0-7.957C261.936,273.564,253.98,264.996,253.98,257.652z M243.576,266.221 c0,4.283-6.12,4.283-6.12,0l0,0c-3.672-77.725-4.896-155.449-9.792-233.173c-0.611,0.612-1.224,0.612-2.447,0.612 c-52.633,0-105.264,1.836-157.896,1.836c0,0,0,0-0.612,0c6.732,15.3,3.06,41.616,3.06,57.528c0,17.748,0,35.496,0,53.856 c0,39.78,0,79.56-1.224,119.341c0,1.836-1.224,3.059-2.448,3.672c50.796-12.854,115.668-14.076,167.688-6.732 c1.836,0.611,3.061,1.836,3.061,3.672s-1.225,4.283-3.672,4.896c-15.912,0.611-31.824,0.611-47.736,0.611 c-12.852,0-25.704,0-39.168,0.611c-26.316,1.225-53.856,4.285-79.56,0.613c-1.836,0-1.836-3.061,0-3.672 c-2.448,1.223-6.732,0-6.12-3.672c1.224-76.5-1.836-154.225,3.06-230.725c0-2.448,0-4.896,0.612-7.344c0-3.06,4.284-3.06,4.284,0 c0,0.612,0,1.224,0,1.224c19.584-2.448,39.168-3.672,59.364-4.896c33.048-1.224,66.097-1.224,98.532-0.612 c1.224,0,2.448,0.612,3.06,1.224c1.837-2.448,6.732-1.836,7.345,2.448c2.447,25.704,4.896,51.408,6.12,77.112 C244.8,158.508,246.024,212.977,243.576,266.221z M152.388,192.168c-3.06,1.836-6.732-0.611-7.344-3.061l0,0c0,0,0,0-0.612-0.611 c-30.6-7.957-63.036-45.9-55.692-77.112c3.06-12.852,15.3-26.316,29.988-22.032c12.852,3.672,22.032,19.584,28.152,32.436 c6.12-15.3,16.524-34.272,30.6-40.392c11.628-4.896,22.644,0,27.54,11.628C219.708,127.908,178.704,174.42,152.388,192.168z">
+                        </path>
+                    </svg>
+                </div>
+
+                <h1 class="christmas-title">Feliz Navidad</h1>
+                <div class="address">
+                    <p><span>Para ti:</span> Rosita <span>❤️</span></p>
+                </div>
+
+                <i class="heart fas fa-heart"></i>
+                <i class="gift fas fa-gift"></i>
+                <i class="christmas-tree fas fa-tree"></i>
+            </div>
+
+            <div class="envelope-back">
+                <div class="top-fold"></div>
+                <div class="letter">
+                   <p>En esta Navidad, aunque la distancia nos separe, guardo tu recuerdo como luz en la ventana. Sé que el tiempo guarda lo que el corazón no suelta. Y confío, sin prisa.</p>
+                    <p class="highlight">Feliz Navidad, Rosita</p>
+                </div>
+                <!-- <a  class="button" href="./pag2/Iindex2.html"> Abre tu Sorpresa!!</a> -->
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+     function iniciarMusica() {
+            let musicaReproducida = false;
+            let audio = null; 
+            
+            function crearControlMusica() {
+                const musicControl = document.createElement('div');
+                musicControl.innerHTML = '<i class="fas fa-tree"></i>';
+                musicControl.style.position = 'fixed';
+                musicControl.style.bottom = '20px';
+                musicControl.style.left = '20px';
+                musicControl.style.zIndex = '1000';
+                musicControl.style.background = 'linear-gradient(180deg, #000511 0%, #001a00 50%, #000000 100%)';
+                musicControl.style.borderRadius = '50%';
+                musicControl.style.width = '50px';
+                musicControl.style.height = '50px';
+                musicControl.style.display = 'flex';
+                musicControl.style.alignItems = 'center';
+                musicControl.style.justifyContent = 'center';
+                musicControl.style.cursor = 'pointer';
+                musicControl.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.3)';
+                musicControl.style.transition = 'all 0.3s ease';
+                musicControl.style.color = 'limegreen';
+                musicControl.style.fontSize = '22px';
+                audio = new Audio();
+                audio.src = 'https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/AUDIO/Navidad%20audio.mp3'; 
+                audio.loop = true;
+                audio.volume = 0.7;
+                audio.preload = 'auto';
+                audio.load();
+
+                musicControl.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1)';
+                    this.style.color = '#00ff99';
+                });
+                
+                musicControl.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.color = 'limegreen';
+                });
+
+                musicControl.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    if (!musicaReproducida) {
+                        audio.play().then(() => {
+                            musicaReproducida = true;
+                            console.log('Música iniciada por touch en móvil');
+                        }).catch(error => {
+                            console.log('Error al reproducir:', error);
+                            this.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                            this.style.color = 'red';
+                        });
+                    }
+                });
+
+                musicControl.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    if (!musicaReproducida) {
+                        audio.play().then(() => {
+                            musicaReproducida = true;
+                            console.log('Música iniciada por click');
+                        }).catch(error => {
+                            console.log('Error al reproducir:', error);
+                        });
+                    }
+                    
+                    if (musicaReproducida) {
+                        audio.muted = !audio.muted;
+                        if (audio.muted) {
+                            this.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                            this.style.color = 'red';
+                        } else {
+                            this.innerHTML = '<i class="fas fa-tree"></i>';
+                            this.style.color = 'limegreen';
+                        }
+                    }
+                });
+
+                document.body.appendChild(musicControl);
+                return musicControl;
+            }
+
+            crearControlMusica();
+            
+            function iniciarConInteraccionDesktop() {
+                if (!musicaReproducida && audio && /(Mac|iPhone|iPad|iPod|Android)/i.test(navigator.userAgent) === false) {
+                    audio.play().then(() => {
+                        musicaReproducida = true;
+                    }).catch(e => {
+                        console.log('Autoplay bloqueado en desktop, esperando interacción');
+                    });
+                }
+            }
+
+            const eventos = ['click', 'touchstart', 'keydown', 'mousedown'];
+            
+            eventos.forEach(evento => {
+                document.addEventListener(evento, function() {
+                    if (!musicaReproducida && audio) {
+                        audio.play().then(() => {
+                            musicaReproducida = true;
+                            console.log('Música iniciada después de interacción de página');
+                        }).catch(e => {
+                            console.log('Necesita interacción más directa');
+                        });
+                    }
+                }, { once: false }); 
+            });
+
+            
+        }
+         iniciarMusica();
+
+    iniciarMusica();
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 150; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.width = `${Math.random() * 3 + 1}px`;
+      star.style.height = star.style.width;
+      star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      starsContainer.appendChild(star);
+    }
+
+
+    const snowflakesContainer = document.getElementById('snowflakes');
+    const snowflakeSymbols = ['❄', '❅', '❆'];
+    
+    for (let i = 0; i < 50; i++) {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.innerHTML = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+      snowflake.style.left = `${Math.random() * 100}%`;
+      snowflake.style.top = `${Math.random() * -20}%`;
+      snowflake.style.fontSize = `${Math.random() * 10 + 10}px`;
+      snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+      snowflake.style.animationDuration = `${Math.random() * 10 + 5}s`;
+      snowflake.style.animationDelay = `${Math.random() * 5}s`;
+      snowflakesContainer.appendChild(snowflake);
+    }
+    </script>
+</body>
+
+</html>
