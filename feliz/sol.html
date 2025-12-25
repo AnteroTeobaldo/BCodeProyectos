@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Soledad</title>
+<style>
+html, body {
+  margin:0; padding:0; overflow:hidden; background:#000308;
+  font-family:'Segoe UI', Roboto, Arial, sans-serif;
+}
+canvas { display:block; }
+
+/* Contenedor para alinear ambos textos */
+.titulo-container {
+  position:absolute; top:20px; width:100%; text-align:center; z-index:5;
+}
+
+h1 {
+  margin: 0;
+  color: #ffeb3b; 
+  text-shadow: 0 0 10px #fbc02d, 0 0 20px #f9a825, 0 0 30px #f57f17;
+  letter-spacing:5px; font-weight:300;
+  animation: pulse 2s infinite alternate;
+  font-size: 2.5rem; /* Tamaño del título principal */
+}
+
+/* Estilo para el nombre SOLEDAD */
+.nombre-destacado {
+  margin-top: 5px;
+  display: block;
+  font-size: 2rem; /* Ligeramente más pequeño que el H1 */
+  color: #ff85a2; /* Tono Rosa */
+  font-weight: 700;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px #ff4081, 0 0 20px #f50057;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); text-shadow: 0 0 10px #fbc02d; }
+  to { transform: scale(1.05); text-shadow: 0 0 20px #fff176, 0 0 30px #fbc02d; }
+}
+
+@keyframes glow {
+  from { opacity: 0.8; text-shadow: 0 0 10px #ff4081; }
+  to { opacity: 1; text-shadow: 0 0 20px #ff85a2, 0 0 30px #f50057; }
+}
+
+#gift-btn {
+  position:absolute; bottom:40px; left:50%; transform:translateX(-50%);
+  padding:15px 35px; font-size:1.2rem; background:linear-gradient(45deg,#d42426,#ff5e62);
+  color:white; border:none; border-radius:50px; cursor:pointer;
+  box-shadow:0 4px 20px rgba(212,36,38,0.6); transition:all 0.3s; z-index:20;
+  text-transform:uppercase; letter-spacing:2px;
+}
+#gift-btn:hover { transform:translateX(-50%) scale(1.05); background:#ff3e3e; }
+
+#overlay {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.85); backdrop-filter:blur(12px);
+  display:none; justify-content:center; align-items:center; z-index:100;
+}
+#message-box {
+  background:#fff; padding:40px; border-radius:35px; text-align:center;
+  max-width:650px; width:90%; box-shadow:0 0 60px rgba(212,36,38,0.3);
+  animation:fadeIn 0.8s ease; max-height: 85vh; overflow-y: auto;
+}
+@keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+
+#message-box h2 { color:#d42426; margin:0 0 20px 0; font-size:2rem; font-style:italic; }
+#message-box p { line-height:1.6; color:#2c3e50; font-size:1.1rem; margin-bottom:15px; text-align: justify; }
+.nombre-rojo { color:#d42426; font-weight:bold; font-size:1.4rem; display:block; margin-top:10px; }
+#close-btn { margin-top:25px; cursor:pointer; color:#aaa; font-weight:500; font-size:0.9rem; transition:color 0.3s; }
+#close-btn:hover { color:#666; }
+</style>
+</head>
+<body>
+
+<div class="titulo-container">
+  <h1>¡FELIZ NAVIDAD!</h1>
+  <span class="nombre-destacado">SOLEDAD</span>
+</div>
+
+<button id="gift-btn">🎁 PARA: SOLEDAD </button>
+
+<div id="overlay">
+  <div id="message-box">
+    <h2>Querida Soledad... ✨</h2>
+    <p>Esta fecha todo el mundo se detiene para celebrar la Navidad, mi único deseo es que sientas lo especial que eres para mí. Mientras las luces de navidad brillan afuera, yo solo puedo pensar en el brillo que habita en tus ojos. Algo en ti me cautiva más que cualquier estrella navideña: tu mirada.</p>
+    <p>No puedo olvidar tus ojos; tienen esa luz propia que ilumina mis días más grises y me hacen sentir en paz cada vez que los veo. Podría perderme en ellos eternamente porque en tu mirada encuentro la paz y la felicidad que siempre busqué.</p>
+    <p>Que esta Navidad sea tan mágica como tú, que tu corazón se llene de risas y que nunca olvides lo importante y lo especial que eres para mí. Gracias por permitirme ser parte de tu vida; le agradezco a Dios por haberte puesto en mi camino en el momento justo. Eres la persona que más he querido y a quien amaré por el resto de mi vida.</p>
+    <p>Gracias por permitirme admirar la belleza de tu alma a través de tus ojos, los cuales guardo en mi memoria como el tesoro más preciado. Sé que hoy no puedo verlos de frente, pero me basta con cerrar los ojos e imaginarte para sentirte cerca de mí.</p>
+    <p>Gracias por ser esa chica única, exclusiva, humilde, hermosa y sobre todo diferente al resto. Que tengas una bonita Navidad y que lo pases de maravilla con tu familia.</p>
+    <p>Con todo mi cariño:</p>
+    <span class="nombre-rojo">Armando</span>
+    <div id="close-btn">Cerrar</div>
+  </div>
+</div>
+
+<canvas id="c"></canvas>
+
+<audio id="audio" src="multimedia/navidad.mp3" loop preload="auto"></audio>
+
+<script>
+// El script de animación se mantiene igual para conservar el árbol y las estrellas
+const audio = document.getElementById("audio");
+let started = false;
+
+function startAudio() {
+    if (!started) {
+        audio.play().then(() => { started = true; }).catch(() => {});
+    }
+}
+
+window.addEventListener('mouseover', startAudio, { once: true });
+window.addEventListener('touchstart', startAudio, { once: true });
+window.addEventListener('scroll', startAudio, { once: true });
+window.addEventListener('click', startAudio, { once: true });
+
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+let W, H, CX, CY;
+let stars=[], shootingStars=[], snowParticles=[], treeParticles=[];
+const particleCount = 6000;
+
+function resize(){
+  W=canvas.width=window.innerWidth;
+  H=canvas.height=window.innerHeight;
+  CX=W/2; CY=H*0.92;
+  stars=Array.from({length:300},()=>({x:Math.random()*W,y:Math.random()*H,s:Math.random()*1.2}));
+}
+
+function initTree(){
+  treeParticles=[];
+  for(let i=0;i<particleCount;i++){
+    const t=Math.random(), levels=9;
+    const progress=(t*levels)%1;
+    const radius=(300*t)*Math.pow(progress,0.6);
+    const angle=Math.random()*Math.PI*2;
+    const isLight=Math.random()>0.94;
+    treeParticles.push({
+      x:Math.cos(angle)*radius, z:Math.sin(angle)*radius,
+      y:650*(1-t), yNormal:t,
+      size:isLight?(2+Math.random()*2):(0.7+Math.random()),
+      isLight, offset:Math.random()*Math.PI*2
+    });
+  }
+}
+
+function createShootingStar(){ 
+  if(Math.random()>0.015) return;
+  shootingStars.push({x:Math.random()*W, y:Math.random()*(H/2), vx:Math.random()*10+5, vy:Math.random()*5+2, len:Math.random()*150+80, opacity:1});
+}
+
+function createSnow(x,y){
+  for(let i=0;i<4;i++){
+    snowParticles.push({ x, y, vx:(Math.random()-0.5)*2, vy:Math.random()*2+1, s:Math.random()*2+1, o:1 });
+  }
+}
+
+function project(x,y,z,rot){
+  const c=Math.cos(rot), s=Math.sin(rot);
+  const rx=x*c-z*s, rz=x*s+z*c;
+  const sc=1000/(1000+rz);
+  return {x:CX+rx*sc, y:CY-y*sc, s:sc, rz};
+}
+
+let rot=0, hueOffset=0;
+
+function drawStar(cx,cy,spikes,outer,inner){
+  let rotS=Math.PI/2*3, step=Math.PI/spikes;
+  ctx.beginPath(); ctx.moveTo(cx,cy-outer);
+  for(let i=0;i<spikes;i++){
+    ctx.lineTo(cx+Math.cos(rotS)*outer, cy+Math.sin(rotS)*outer); rotS+=step;
+    ctx.lineTo(cx+Math.cos(rotS)*inner, cy+Math.sin(rotS)*inner); rotS+=step;
+  }
+  ctx.fillStyle='#fff59d'; ctx.shadowBlur=50; ctx.shadowColor='gold'; ctx.fill();
+}
+
+function animate(){
+  ctx.fillStyle="#000308"; ctx.fillRect(0,0,W,H);
+  stars.forEach(s=>{ ctx.globalAlpha=0.4+Math.random()*0.6; ctx.fillStyle="white"; ctx.fillRect(s.x,s.y,s.s,s.s); });
+  createShootingStar();
+  shootingStars.forEach((s,i)=>{
+    ctx.lineWidth=2; const grad=ctx.createLinearGradient(s.x,s.y,s.x-s.len,s.y-s.len/2);
+    grad.addColorStop(0,`rgba(255,255,255,${s.opacity})`); grad.addColorStop(1,"rgba(255,255,255,0)");
+    ctx.strokeStyle=grad; ctx.beginPath(); ctx.moveTo(s.x,s.y); ctx.lineTo(s.x-s.len,s.y-s.len/2); ctx.stroke();
+    s.x+=s.vx; s.y+=s.vy; s.opacity-=0.015; if(s.opacity<=0) shootingStars.splice(i,1);
+  });
+  snowParticles.forEach((p,i)=>{
+    ctx.globalAlpha=p.o; ctx.fillStyle="white"; ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,7); ctx.fill();
+    p.x+=p.vx; p.y+=p.vy; p.o-=0.005; if(p.o<=0) snowParticles.splice(i,1);
+  });
+  ctx.globalAlpha=1; rot+=0.006; hueOffset+=0.4;
+  const proj=treeParticles.map(p=>({...p,...project(p.x,p.y,p.z,rot)})).sort((a,b)=>a.rz-b.rz);
+  proj.forEach(p=>{
+    const hue=(hueOffset+(p.yNormal*120))%360;
+    if(p.isLight){
+      const f=Math.sin(Date.now()*0.005+p.offset)*0.5+0.5;
+      ctx.fillStyle=`hsla(${hue},100%,85%,${f})`; ctx.shadowBlur=15*f; ctx.shadowColor=`hsl(${hue},100%,70%)`;
+    } else { ctx.fillStyle=`hsla(${hue},70%,35%,0.6)`; ctx.shadowBlur=0; }
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.size*p.s,0,7); ctx.fill();
+  });
+  ctx.shadowBlur=0; const starPos=project(0,680,0,rot); drawStar(starPos.x,starPos.y,5,35,15);
+  requestAnimationFrame(animate);
+}
+
+const btn=document.getElementById("gift-btn");
+const overlay=document.getElementById("overlay");
+const close=document.getElementById("close-btn");
+
+btn.onclick = () => { overlay.style.display = "flex"; startAudio(); }
+close.onclick = () => { overlay.style.display = "none"; }
+
+resize(); initTree(); animate();
+window.addEventListener("resize",resize);
+
+let isDragging=false;
+window.addEventListener("mousedown",(e)=>{isDragging=true; createSnow(e.clientX,e.clientY);});
+window.addEventListener("mousemove",(e)=>{if(isDragging) createSnow(e.clientX,e.clientY);});
+window.addEventListener("mouseup",()=>{isDragging=false;});
+window.addEventListener("touchstart",(e)=>{ if(e.touches[0]){ isDragging=true; createSnow(e.touches[0].clientX,e.touches[0].clientY);} });
+window.addEventListener("touchmove",(e)=>{ if(e.touches[0]&&isDragging) createSnow(e.touches[0].clientX,e.touches[0].clientY); });
+window.addEventListener("touchend",()=>{isDragging=false;});
+</script>
+</body>
+</html>
