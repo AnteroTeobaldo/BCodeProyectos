@@ -1,0 +1,142 @@
+<!DOCTYPE html>  <html lang="es">  
+<head>  
+<meta charset="UTF-8">  
+<title>Luna y Estrellas – Saturno</title>  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <style>  
+html, body {  
+    margin: 0;  
+    padding: 0;  
+    background: radial-gradient(circle at bottom, #020111, #000000);  
+    overflow: hidden;  
+    height: 100%;  
+    font-family: 'Segoe UI', sans-serif;  
+}  
+  
+/* Contenedor general */  
+#space {  
+    position: relative;  
+    width: 100vw;  
+    height: 100vh;  
+}  
+  
+/* Luna */  
+.moon {  
+    position: absolute;  
+    top: 50%;  
+    left: 50%;  
+    width: 220px;  
+    height: 220px;  
+    margin-left: -110px;  
+    margin-top: -110px;  
+    border-radius: 50%;  
+    background: radial-gradient(circle at 30% 30%, #ffffff, #cfcfcf 60%, #9e9e9e);  
+    box-shadow:  
+        inset -20px -20px 40px rgba(0,0,0,0.3),  
+        0 0 60px rgba(255,255,255,0.3);  
+    z-index: 5;  
+}  
+  
+/* Cráteres */  
+.crater {  
+    position: absolute;  
+    border-radius: 50%;  
+    background: rgba(0,0,0,0.15);  
+    box-shadow: inset 2px 2px 4px rgba(255,255,255,0.2);  
+}  
+  
+/* Estrellas */  
+.star {  
+    position: absolute;  
+    width: 3px;  
+    height: 3px;  
+    background: white;  
+    border-radius: 50%;  
+    box-shadow: 0 0 6px white;  
+}  
+  
+/* Rotación de estrellas */  
+#stars {  
+    position: absolute;  
+    width: 100%;  
+    height: 100%;  
+    animation: rotate 120s linear infinite;  
+}  
+  
+@keyframes rotate {  
+    from { transform: rotate(0deg); }  
+    to   { transform: rotate(360deg); }  
+}  
+  
+/* Texto */  
+.title {  
+    position: absolute;  
+    bottom: 8%;  
+    width: 100%;  
+    text-align: center;  
+    color: #e6e6e6;  
+    font-size: 28px;  
+    letter-spacing: 3px;  
+    opacity: 0.8;  
+}  
+  
+/* Botón música */  
+button {  
+    position: absolute;  
+    top: 20px;  
+    right: 20px;  
+    padding: 10px 16px;  
+    background: rgba(255,255,255,0.1);  
+    color: white;  
+    border: 1px solid rgba(255,255,255,0.3);  
+    border-radius: 8px;  
+    cursor: pointer;  
+    backdrop-filter: blur(6px);  
+}  
+  
+button:hover {  
+    background: rgba(255,255,255,0.2);  
+}  
+</style>  </head>  <body>  <div id="space">  <div id="stars"></div>  
+
+<div class="moon">  
+    <div class="crater" style="width:40px;height:40px;top:40px;left:60px;"></div>  
+    <div class="crater" style="width:25px;height:25px;top:120px;left:100px;"></div>  
+    <div class="crater" style="width:18px;height:18px;top:80px;left:140px;"></div>  
+</div>  
+
+<div class="title">SATURNO • LUNA • ESTRELLAS</div>  
+
+<button onclick="toggleMusic()">🎵 Música</button>
+
+</div>  <audio id="music" loop>  
+    <source src="saturno.mp3" type="audio/mpeg">  
+</audio>  <script>  
+/* Crear estrellas dinámicamente */  
+const starsContainer = document.getElementById('stars');  
+const starCount = 400;  
+  
+for (let i = 0; i < starCount; i++) {  
+    const star = document.createElement('div');  
+    star.className = 'star';  
+    star.style.top = Math.random() * 200 + '%';  
+    star.style.left = Math.random() * 200 + '%';  
+    star.style.opacity = Math.random();  
+    star.style.transform = `scale(${Math.random() * 1.5 + 0.5})`;  
+    starsContainer.appendChild(star);  
+}  
+  
+/* Control de música */  
+const music = document.getElementById('music');  
+let playing = false;  
+  
+function toggleMusic() {  
+    if (!playing) {  
+        music.volume = 0.8;  
+        music.play();  
+    } else {  
+        music.pause();  
+    }  
+    playing = !playing;  
+}  
+</script>  </body>  
+</html>alfredouluri1997@gmail.com
