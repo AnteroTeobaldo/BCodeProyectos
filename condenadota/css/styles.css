@@ -1,0 +1,230 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+:root { 
+    --rosa-claro: #ffd6e8; 
+    --rosa: #ff9bb8; 
+    --rosa-profundo: #e75480; 
+    --violeta: #c9a0dc; 
+    --fondo: #1a0a1a; 
+    --borde: rgba(255, 182, 193, 0.2); 
+    --azul-noche: #2a0c40;
+    --dorado: #ffd700;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    background: linear-gradient(to bottom, var(--azul-noche), var(--fondo));
+    color: var(--rosa-claro); 
+    font-family: 'Montserrat', sans-serif; 
+    min-height: 100vh; 
+    overflow-x: hidden; 
+    line-height: 1.8; 
+    position: relative;
+}
+
+.luna {
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff8e5 10%, #ffeb3b 60%);
+    box-shadow: 0 0 30px #ffeb3b, 0 0 60px rgba(255, 235, 59, 0.4);
+    z-index: -1;
+}
+
+.estrellas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.estrella {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    animation: brillar 4s infinite ease-in-out;
+}
+
+@keyframes brillar {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.carta { 
+    max-width: 800px; 
+    width: 90%; 
+    margin: 0 auto; 
+    padding: 4rem 2rem; 
+    position: relative; 
+}
+
+.seccion { 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    padding: 3rem 0; 
+    opacity: 0; 
+    transform: translateY(30px); 
+    transition: opacity 0.8s ease, transform 0.8s ease; 
+}
+
+.seccion.visible { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+.titulo { 
+    font-family: 'Playfair Display', serif; 
+    font-size: clamp(2.5rem, 5vw, 3.5rem); 
+    color: var(--rosa); 
+    margin-bottom: 2rem; 
+    position: relative; 
+    display: inline-block; 
+    text-shadow: 0 0 10px rgba(231, 84, 128, 0.5);
+}
+
+.titulo::after { 
+    content: ''; 
+    position: absolute; 
+    bottom: -10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 50%; 
+    height: 2px; 
+    background: linear-gradient(90deg, transparent, var(--rosa-profundo), transparent); 
+}
+
+.mensaje { 
+    font-size: clamp(1.1rem, 3vw, 1.2rem); 
+    max-width: 600px; 
+    margin: 0 auto 2rem; 
+    color: var(--rosa-claro); 
+}
+
+.poema {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    line-height: 2;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: rgba(255, 182, 193, 0.1);
+    border: 1px solid var(--borde);
+    position: relative;
+    max-width: 500px;
+}
+
+.imagen {
+    width: 100%; 
+    max-width: 300px; 
+    height: auto; 
+    border-radius: 10px; 
+    margin: 2rem auto; 
+    border: 1px solid var(--borde); 
+    box-shadow: 0 10px 30px rgba(231, 84, 128, 0.2); 
+    transition: transform 0.5s ease; 
+}
+
+.imagen:hover { 
+    transform: scale(1.03) rotate(-1deg); 
+}
+
+.corazon { 
+    font-size: 2.5rem; 
+    margin: 1.5rem 0; 
+    color: var(--rosa-profundo); 
+    animation: latido 1.5s infinite; 
+    text-shadow: 0 0 15px rgba(231, 84, 128, 0.6);
+}
+
+@keyframes latido { 
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.flotantes { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none; 
+    z-index: -1; 
+}
+
+.petalo { 
+    position: absolute; 
+    font-size: 1.2rem; 
+    opacity: 0; 
+    animation: caer 8s linear forwards; 
+}
+
+@keyframes caer { 
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+.final { 
+    background: rgba(255, 182, 193, 0.05); 
+    border: 1px solid var(--borde); 
+    border-radius: 15px; 
+    padding: 3rem; 
+    backdrop-filter: blur(5px); 
+    margin: 3rem auto; 
+    max-width: 600px; 
+    box-shadow: 0 10px 30px rgba(231, 84, 128, 0.1); 
+}
+
+.firma { 
+    font-family: 'Dancing Script', cursive; 
+    font-size: 2rem; 
+    color: var(--violeta); 
+    margin-top: 2rem; 
+    text-align: right;
+}
+
+.btn-audio {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--rosa-profundo);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(231, 84, 128, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) { 
+    .carta { padding: 2rem 1rem; }
+    .poema { font-size: 1.3rem; padding: 1rem; }
+    .luna { width: 60px; height: 60px; right: 5%; }
+}
+
+img, .imagen {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 15px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
