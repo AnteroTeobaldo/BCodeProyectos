@@ -220,11 +220,4 @@ body {
     .poema { font-size: 1.3rem; padding: 1rem; }
     .luna { width: 60px; height: 60px; right: 5%; }
 }
-
-img, .imagen {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 15px;
-    margin: 20px auto;
-    display: block;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+link
