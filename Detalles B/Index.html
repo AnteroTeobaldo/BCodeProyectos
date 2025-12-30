@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mamá</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #fef2f7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Contenedor principal */
+        .contenedor {
+            text-align: center;
+            max-width: 600px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Imagen de gato con flores */
+        .gato-imagen {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.2);
+            margin-bottom: 20px;
+        }
+
+        /* Textos iniciales */
+        .texto-superior {
+            font-size: 28px;
+            color: #be185d;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .texto-inferior {
+            font-size: 22px;
+            color: #b91c1c;
+            margin-top: 15px;
+        }
+
+        /* Botón principal */
+        .boton-principal {
+            background-color: #db2777;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(219, 39, 119, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .boton-principal:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sección de textos finales */
+        .textos-finales {
+            display: none;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .texto-final-1 {
+            font-size: 20px;
+            color: #4c1d95;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .texto-final-2 {
+            font-size: 32px;
+            color: #9333ea;
+            font-weight: bold;
+        }
+
+        /* Animación de lluvia de corazones */
+        .corazon {
+            position: absolute;
+            color: #ef4444;
+            font-size: 20px;
+            animation: caida linear infinite;
+            top: -20px;
+            z-index: 5;
+        }
+
+        @keyframes caida {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Imagen de gato con flores -->
+        <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+             alt="Gato con flores" class="gato-imagen">
+        
+        <!-- Texto superior -->
+        <p class="texto-superior">Te amo mamá</p>
+        
+        <!-- Botón principal -->
+        <button class="boton-principal" id="botonPrecionar">Presione acá</button>
+        
+        <!-- Texto inferior -->
+        <p class="texto-inferior">Rosas Rojas</p>
+        
+        <!-- Textos que aparecen después de la animación -->
+        <div class="textos-finales" id="textosFinales">
+            <p class="texto-final-1">eres la mejor mamá te amo mucho espero que este año te van a bien</p>
+            <p class="texto-final-2">te amo mucho</p>
+        </div>
+    </div>
+
+    <script>
+        // Elementos del DOM
+        const boton = document.getElementById('botonPrecionar');
+        const textosFinales = document.getElementById('textosFinales');
+        const contenedor = document.querySelector('.contenedor');
+
+        // Función para crear lluvia de corazones
+        function crearLluviaCorazones() {
+            // Ocultar elementos iniciales excepto el contenedor
+            boton.style.display = 'none';
+            document.querySelector('.texto-superior').style.display = 'none';
+            document.querySelector('.texto-inferior').style.display = 'none';
+
+            // Crear 50 corazones
+            for (let i = 0; i < 50; i++) {
+                const corazon = document.createElement('div');
+                corazon.classList.add('corazon');
+                corazon.innerText = '❤️';
+                
+                // Posición horizontal aleatoria
+                corazon.style.left = `${Math.random() * 100}vw`;
+                // Duración de la caída aleatoria
+                corazon.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                // Tamaño aleatorio
+                corazon.style.fontSize = `${Math.random() * 15 + 15}px`;
+                
+                document.body.appendChild(corazon);
+
+                // Eliminar corazón después de la animación
+                setTimeout(() => {
+                    corazon.remove();
+                }, 5000);
+            }
+
+            // Mostrar textos finales después de la animación
+            setTimeout(() => {
+                textosFinales.style.display = 'block';
+            }, 5000);
+        }
+
+        // Evento del botón
+        boton.addEventListener('click', crearLluviaCorazones);
+    </script>
+</body>
+</html>
