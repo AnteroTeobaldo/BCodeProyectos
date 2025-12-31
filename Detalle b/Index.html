@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Año Nuevo - Gatito</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0e6f6;
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Imagen del gatito con flores - SVG incrustado */
+        .cat-image {
+            width: 350px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Botón */
+        #trigger-btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #e83e8c;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+        }
+
+        #trigger-btn:hover {
+            background-color: #d63384;
+        }
+
+        /* Título inicial */
+        .initial-title {
+            font-size: 2.5rem;
+            color: #ffc107;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Contenido que aparece al hacer clic */
+        #content-section {
+            display: none;
+            margin-top: 30px;
+        }
+
+        /* Nota/carta */
+        .note {
+            background-color: white;
+            width: 80%;
+            max-width: 500px;
+            margin: 0 auto 20px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .note-title {
+            font-size: 1.8rem;
+            color: #e83e8c;
+            margin-bottom: 15px;
+        }
+
+        .note-body {
+            font-size: 1.2rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Gatito bailando - SVG incrustado */
+        .dancing-cat {
+            width: 80%;
+            max-width: 500px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .video-caption {
+            font-size: 1.3rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Lluvia de rosas - SVG incrustado */
+        .rose {
+            position: absolute;
+            width: 30px;
+            height: auto;
+            opacity: 0.8;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animación para el gatito bailando */
+        @keyframes dance {
+            0% { transform: rotate(-5deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-8px); }
+            100% { transform: rotate(-5deg) translateY(0); }
+        }
+
+        .dancing-cat svg {
+            animation: dance 1.8s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Gatito con flores - SVG completo e incrustado -->
+    <div class="cat-image">
+        <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Fondo -->
+            <rect width="500" height="400" fill="#ffffff" rx="15" ry="15" stroke="#dddddd" stroke-width="2"/>
+            <!-- Cabeza del gatito -->
+            <circle cx="250" cy="200" r="120" fill="#d2b48c"/>
+            <!-- Orejas -->
+            <path d="M150 120 L120 60 L180 100 Z" fill="#b99b7a"/>
+            <path d="M350 120 L380 60 L320 100 Z" fill="#b99b7a"/>
+            <!-- Ojos -->
+            <circle cx="210" cy="180" r="15" fill="#000000"/>
+            <circle cx="290" cy="180" r="15" fill="#000000"/>
+            <circle cx="205" cy="175" r="5" fill="#ffffff"/>
+            <circle cx="285" cy="175" r="5" fill="#ffffff"/>
+            <!-- Nariz -->
+            <path d="M250 210 L235 230 L265 230 Z" fill="#f0a888"/>
+            <!-- Boca -->
+            <path d="M250 230 L250 245" stroke="#000000" stroke-width="2" fill="none"/>
+            <path d="M250 230 L235 240" stroke="#000000" stroke-width="2" fill="none"/>
+            <path d="M250 230 L265 240" stroke="#000000" stroke-width="2" fill="none"/>
+            <!-- Bigotes -->
+            <path d="M200 220 L160 215" stroke="#000000" stroke-width="1.5" fill="none"/>
+            <path d="M200 230 L160 230" stroke="#000000" stroke-width="1.5" fill="none"/>
+            <path d="M200 240 L160 245" stroke="#000000" stroke-width="1.5" fill="none"/>
+            <path d="M300 220 L340 215" stroke="#000000" stroke-width="1.5" fill="none"/>
+            <path d="M300 230 L340 230" stroke="#000000" stroke-width="1.5" fill="none"/>
+            <path d="M300 240 L340 245" stroke="#000000" stroke-width="1.5" fill="none"/>
+            <!-- Mano con flores -->
+            <path d="M320 280 Q350 290 360 320 Q355 330 340 335 L330 310 Q325 300 320 295 Z" fill="#d2b48c"/>
+            <!-- Flores -->
+            <circle cx="360" cy="300" r="15" fill="#e83e8c"/>
+            <circle cx="375" cy="290" r="12" fill="#ff6b6b"/>
+            <circle cx="350" cy="285" r="13" fill="#ff8e8e"/>
+            <path d="M360 300 L360 280 M360 300 L370 305 M360 300 L350 305 M360 300 L365 315" stroke="#ffffff" stroke-width="2" fill="none"/>
+            <path d="M375 290 L375 275 M375 290 L385 295 M375 290 L365 295" stroke="#ffffff" stroke-width="2" fill="none"/>
+            <path d="M350 285 L350 270 M350 285 L360 290 M350 285 L340 290" stroke="#ffffff" stroke-width="2" fill="none"/>
+            <!-- Tallos de flores -->
+            <path d="M360 315 L350 335" stroke="#4CAF50" stroke-width="2" fill="none"/>
+            <path d="M375 302 L365 325" stroke="#4CAF50" stroke-width="2" fill="none"/>
+            <path d="M350 300 L340 320" stroke="#4CAF50" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+
+    <!-- Botón -->
+    <button id="trigger-btn">Tocar el botón</button>
+
+    <!-- Título inicial -->
+    <h1 class="initial-title">Feliz Año Nuevo</h1>
+
+    <!-- Sección con contenido que aparece al hacer clic -->
+    <div id="content-section">
+        <!-- Nota/carta -->
+        <div class="note">
+            <h2 class="note-title">Feliz Año Nuevo</h2>
+            <p class="note-body">que este año tenga suerte y un bonito próspero año</p>
+        </div>
+
+        <!-- Gatito bailando - SVG completo e incrustado -->
+        <div class="dancing-cat">
+            <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Fondo -->
+                <rect width="500" height="400" fill="#ffffff" rx="15" ry="15" stroke="#dddddd" stroke-width="2"/>
+                <!-- Cuerpo del gatito -->
+                <ellipse cx="250" cy="250" rx="90" ry="100" fill="#d2b48c"/>
+                <!-- Cabeza -->
+                <circle cx="250" cy="150" r="70" fill="#d2b48c"/>
+                <!-- Orejas -->
+                <path d="M200 100 L180 60 L220 85 Z" fill="#b99b7a"/>
+                <path d="M300 100 L320 60 L280 85 Z" fill="#b99b7a"/>
+                <!-- Ojos -->
+                <circle cx="230" cy="140" r="10" fill="#000000"/>
+                <circle cx="270" cy="140" r="10" fill="#000000"/>
+                <circle cx="225" cy="135" r="3" fill="#ffffff"/>
+                <circle cx="265" cy="135" r="3" fill="#ffffff"/>
+                <!-- Nariz y boca -->
+                <path d="M250 160 L240 170 L260 170 Z" fill="#f0a888"/>
+                <path d="M250 170 L250 180" stroke="#000000" stroke-width="1.5" fill="none"/>
+                <!-- Patas -->
+                <rect x="190" y="330" width="25" height="40" rx="10" ry="10" fill="#d2b48c"/>
+                <rect x="285" y="330" width="25" height="40" rx="10" ry="10" fill="#d2b48c"/>
+                <rect x="170" y="220" width="20" height="30" rx="8" ry="8" fill="#d2b48c" transform="rotate(-15 180 235)"/>
+                <rect x="310" y="220" width="20" height="30" rx="8" ry="8" fill="#d2b48c" transform="rotate(15 320 235)"/>
+                <!-- Cola -->
+                <path d="M340 250 Q370 230 380 260 Q370 290 340 270 Z" fill="#b99b7a"/>
+                <!-- Detalles -->
+                <path d="M250 190 L250 220" stroke="#b99b7a" stroke-width="3" fill="none"/>
+                <circle cx="210" cy="250" r="10" fill="#b99b7a"/>
+                <circle cx="290" cy="250" r="10" fill="#b99b7a"/>
+            </svg>
+        </div>
+
+        <p class="video-caption">Año Nuevo</p>
+    </div>
+
+    <script>
+        const triggerBtn = document.getElementById('trigger-btn');
+        const contentSection = document.getElementById('content-section');
+        const body = document.body;
+        let rainInterval;
+        const rainDuration = 30000; // 30 segundos
+
+        // SVG de la rosa para la lluvia (completo)
+        const roseSVG = `
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 20 C60 5 75 15 80 30 C85 45 75 60 60 70 C70 80 55 90 50 95 C45 90 30 80 40 70 C25 60 15 45 20 30 C25 15 40 5 50 20 Z" fill="#e83e8c"/>
+                <path d="M50 70 C55 75 50 85 50 95 C50 85 45 75 50 70 Z" fill="#c2185b"/>
+                <path d="M50 95 L45 85 L55 85 Z" fill="#4CAF50"/>
+            </svg>
+        `;
+
+        // Función para crear lluvia de rosas
+        function createRoseRain() {
+            rainInterval = setInterval(() => {
+                const roseContainer = document.createElement('div');
+                roseContainer.className = "rose";
+                
+                // Posición horizontal aleatoria
+                const xPos = Math.random() * window.innerWidth;
+                roseContainer.style.left = `${xPos}px`;
+                
+                // Duración de caída aleatoria (4 a 8 segundos)
+                const fallDuration = 4 + Math.random() * 4;
+                roseContainer.style.animationDuration = `${fallDuration}s`;
+                
+                // Añadir SVG de la rosa
+                roseContainer.innerHTML = roseSVG;
+                body.appendChild(roseContainer);
+
+                // Eliminar rosa después de que caiga
+                setTimeout(() => {
+                    roseContainer.remove();
+                }, fallDuration * 1000);
+            }, 120);
+
+            // Detener lluvia después de 30 segundos
+            setTimeout(() => {
+                clearInterval(rainInterval);
+            }, rainDuration);
+        }
+
+        // Acción al hacer clic en el botón
+        triggerBtn.addEventListener('click', () => {
+            triggerBtn.disabled = true;
+            triggerBtn.style.opacity = "0.7";
+            createRoseRain();
+            contentSection.style.display = "block";
+        });
+    </script>
+</body>
+</html>
