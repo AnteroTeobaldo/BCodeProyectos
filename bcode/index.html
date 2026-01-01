@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>para ti mi amor ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 40px;
+      overflow: hidden;
+    }
+
+    h1 {
+      z-index: 2;
+      position: relative;
+    }
+
+    #text {
+      font-size: 2rem;
+      margin-top: 30px;
+      min-height: 60px;
+      opacity: 0;
+      transition: opacity 1.5s;
+      z-index: 2;
+      position: relative;
+    }
+
+    iframe {
+      margin-top: 40px;
+      border-radius: 10px;
+      z-index: 2;
+      position: relative;
+    }
+
+    /* corazones */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      color: red;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>te amo corazón 🤍</h1>
+
+  <div id="text"></div>
+
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/qFnU0jO8siU?autoplay=1&mute=1"
+    title="Cuco - Melting"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+
+  <script>
+    const mensajes = [
+      "mi sadracito lindo",
+      "mi sueño",
+      "mi acompañante",
+      "mi negro",
+      "mi café",
+      "mi niño",
+      "sabes que eres el mejor novio",
+      "gracias por otro año más de vida contigo",
+      "eres mi mejor amigo",
+      "espero que quieras estar conmigo",
+      "te amo demasiado"
+    ];
+
+    let index = 0;
+    const textDiv = document.getElementById("text");
+
+    function mostrarTexto() {
+      textDiv.style.opacity = 0;
+      setTimeout(() => {
+        textDiv.textContent = mensajes[index];
+        textDiv.style.opacity = 1;
+        index = (index + 1) % mensajes.length;
+      }, 1000);
+    }
+
+    mostrarTexto();
+    setInterval(mostrarTexto, 4000);
+
+    // generar corazones
+    function crearCorazon() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      heart.style.fontSize = (15 + Math.random() * 25) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(crearCorazon, 500);
+  </script>
+
+</body>
+</html>
