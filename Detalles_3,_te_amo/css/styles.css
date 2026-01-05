@@ -15,8 +15,8 @@ body{
 .text-container {
     position: absolute;
     width: 100%;
-    color: #ff1493;
-    font-family: 'Courier New', monospace;
+    color: red
+    font-family 'Courier New', monospace;
     font-size: 24px;
     text-shadow: 0 0 15px #ff69b4;
     line-height: 1.2;
@@ -35,7 +35,7 @@ body{
 
     50% {
         opacity: 1;
-        text-shadow: 0 0 25px #ff1493;
+        text-shadow: 0 0 25px #f43;
     }
 }
 
@@ -120,7 +120,7 @@ body{
 .centro span {
     font-size: 3rem;
     color: red;
-}
+
 
 @keyframes brilloPerpetuo {
 
@@ -132,7 +132,6 @@ body{
     50% {
         filter: drop-shadow(0 0 40px #ff69b4);
     }
-}
 
 .efecto-bloom {
     position: fixed;
