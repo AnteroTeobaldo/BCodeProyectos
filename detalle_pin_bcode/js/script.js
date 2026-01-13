@@ -1,5 +1,5 @@
 
-const correctPIN = "2022";
+const correctPIN = "2011";
 let enteredPIN = "";
 const pinDisplay = document.getElementById("pinDisplay");
 const keypad = document.getElementById("keypad");
