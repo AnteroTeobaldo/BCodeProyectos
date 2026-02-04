@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>baby.html</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Lluvia de Te Quiero</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .gota {
+      position: absolute;
+      top: -40px;
+      color: #ff8fd4;
+      font-size: 16px;
+      opacity: 0.85;
+      animation: caer linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes caer {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(110vh);
+      }
+    }
+  </style>rgb(189, 147, 249)
+</head>
+
+<body>
+  <script>
+    const frases = ["te quiero 💖", "tu eres mi persona favorita ✨"];
+  function crearGota() {
+    const gota = document.createElement("div");
+    gota.className = "gota";
+    gota.innerText = frases[Math.floor(Math.random() * frases.length)];
+
+    gota.style.left = Math.random() * window.innerWidth + "px";
+    gota.style.fontSize = (Math.random() * 10 + 12) + "px";
+    gota.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+    document.body.appendChild(gota);
+
+    setTimeout(() => gota.remove(), 7000);
+  }
+
+  setInterval(crearGota, 200);
+  </script>
+</body>
+<!-- </html> -->
