@@ -1,117 +1,131 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Regalis.html</title>
 </head>
+
 <body>
 
 </body>
+
 </html>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-    <title>Un regalito para ti ❤️</title>
-      <style>
-          body {
-                background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-                      font-family: "Segoe UI", sans-serif;
-                            display: flex;
-                                  justify-content: center;
-                                        align-items: center;
-                                              height: 100vh;
-                                                    margin: 0;
-                                                          color: #fff;
-                                                                text-align: center;
-                                                                    }
+  <title>Un regalito para ti ❤️</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #fff;
+      text-align: center;
+    }
 
-                                                                        .card {
-                                                                              background: rgba(255, 255, 255, 0.15);
-                                                                                    backdrop-filter: blur(10px);
-                                                                                          border-radius: 20px;
-                                                                                                padding: 30px 40px;
-                                                                                                      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-                                                                                                            max-width: 400px;
-                                                                                                                  animation: aparecer 1.2s ease;
-                                                                                                                      }
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      animation: aparecer 1.2s ease;
+    }
 
-                                                                                                                          h1 {
-                                                                                                                                font-size: 2rem;
-                                                                                                                                      margin-bottom: 10px;
-                                                                                                                                          }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
 
-                                                                                                                                              p {
-                                                                                                                                                    font-size: 1.1rem;
-                                                                                                                                                          line-height: 1.6;
-                                                                                                                                                                margin-bottom: 20px;
-                                                                                                                                                                    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
 
-                                                                                                                                                                        button {
-                                                                                                                                                                              background: #ff4d6d;
-                                                                                                                                                                                    border: none;
-                                                                                                                                                                                          border-radius: 30px;
-                                                                                                                                                                                                padding: 10px 25px;
-                                                                                                                                                                                                      color: white;
-                                                                                                                                                                                                            font-size: 1rem;
-                                                                                                                                                                                                                  cursor: pointer;
-                                                                                                                                                                                                                        transition: 0.3s;
-                                                                                                                                                                                                                            }
+    button {
+      background: #ff4d6d;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 25px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-                                                                                                                                                                                                                                button:hover {
-                                                                                                                                                                                                                                      background: #ff1f4c;
-                                                                                                                                                                                                                                            transform: scale(1.05);
-                                                                                                                                                                                                                                                }
+    button:hover {
+      background: #ff1f4c;
+      transform: scale(1.05);
+    }
 
-                                                                                                                                                                                                                                                    .mensaje {
-                                                                                                                                                                                                                                                          margin-top: 15px;
-                                                                                                                                                                                                                                                                font-size: 1.1rem;
-                                                                                                                                                                                                                                                                      display: none;
-                                                                                                                                                                                                                                                                            animation: aparecer 0.8s ease;
-                                                                                                                                                                                                                                                                                }
+    .mensaje {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      display: none;
+      animation: aparecer 0.8s ease;
+    }
 
-                                                                                                                                                                                                                                                                                    @keyframes aparecer {
-                                                                                                                                                                                                                                                                                          from {
-                                                                                                                                                                                                                                                                                                  opacity: 0;
-                                                                                                                                                                                                                                                                                                          transform: scale(0.8);
-                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                                      to {
-                                                                                                                                                                                                                                                                                                                              opacity: 1;
-                                                                                                                                                                                                                                                                                                                                      transform: scale(1);
-                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                }
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
 
-                                                                                                                                                                                                                                                                                                                                                    .corazon {
-                                                                                                                                                                                                                                                                                                                                                          font-size: 2rem;
-                                                                                                                                                                                                                                                                                                                                                                animation: latir 1s infinite;
-                                                                                                                                                                                                                                                                                                                                                                    }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                        @keyframes latir {
-                                                                                                                                                                                                                                                                                                                                                                              0%, 100% { transform: scale(1); }
-                                                                                                                                                                                                                                                                                                                                                                                    50% { transform: scale(1.2); }
-                                                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                                                          </style>
-                                                                                                                                                                                                                                                                                                                                                                                          </head>
-                                                                                                                                                                                                                                                                                                                                                                                          <body>
+    .corazon {
+      font-size: 2rem;
+      animation: latir 1s infinite;
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                            <div class="card">
-                                                                                                                                                                                                                                                                                                                                                                                                <div class="corazon">❤️</div>
-                                                                                                                                                                                                                                                                                                                                                                                                    <h1>Para ti, mi amor</h1>
-                                                                                                                                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                                                                                                                                              Este es un pequeño regalito digital para recordarte  
-                                                                                                                                                                                                                                                                                                                                                                                                                    lo importante que eres para mí 💕
-                                                                                                                                                                                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                            <button onclick="mostrarMensaje()">Haz clic aquí 💌</button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="mensaje" id="mensaje">
-                                                                                                                                                                                                                                                                                                                                                                                                                                      Gracias por existir ✨  
-                                                                                                                                                                                                                                                                                                                                                                                                                                            Te quiero muchísimo 💖
-                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
+    @keyframes latir {
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    <script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        function mostrarMensaje() {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <div class="corazon">❤️</div>
+    <h1>Para ti, mi amor</h1>
+    <p>
+      Este es un pequeño regalito digital para recordarte
+      lo importante que eres para mí 💕
+    </p>
+    <button onclick="mostrarMensaje()">Haz clic aquí 💌</button>
+    <div class="mensaje" id="mensaje">
+      Gracias por existir ✨
+      Te quiero muchísimo, Gracias No ser lo Más Bonito De Mi vida Y Por estar Aquí Siempre 💖
+    </div>
+  </div>
+
+  <script>
+    function mostrarMensaje() {
                                                                                                                                                                                                                                                                                                                                                                                                                                                               document.getElementById("mensaje").style.display = "block";
                                                                                                                                                                                                                                                                                                                                                                                                                                                                   }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </script>
+  </script>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </html>
+</body>
+
+</html>
