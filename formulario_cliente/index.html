@@ -1,0 +1,540 @@
+Brenda Yajayra Narvaez Medel 6-39
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Estudiantil</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .preference-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .preference-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .preference-option:hover {
+            border-color: #3498db;
+            background-color: #f8fafc;
+        }
+
+        .preference-option.selected {
+            border-color: #2ecc71;
+            background-color: #f0f9f4;
+        }
+
+        .preference-option input {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .preference-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .valid {
+            border-color: #2ecc71;
+        }
+
+        .invalid {
+            border-color: #e74c3c;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #submitBtn {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        #submitBtn:hover {
+            background-color: #27ae60;
+        }
+
+        #resetBtn {
+            background-color: #f1f2f6;
+            color: #333;
+        }
+
+        #resetBtn:hover {
+            background-color: #dfe4ea;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .success {
+            background-color: #d5f4e6;
+            color: #27ae60;
+            border: 1px solid #2ecc71;
+        }
+
+        .error-result {
+            background-color: #fdeaea;
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        .counter {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .counter strong {
+            color: #2c3e50;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .preference-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Formulario Estudiantil</h1>
+
+    <div class="container">
+        <form id="interactiveForm">
+            <div class="form-group">
+                <label for="name">Nombre completo *</label>
+                <input type="text" id="name" name="name" placeholder="Ingresa tu nombre">
+                <div class="error" id="nameError">El nombre debe tener al menos 3 caracteres</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo electrónico *</label>
+                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com">
+                <div class="error" id="emailError">Ingresa un correo electrónico válido</div>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Edad</label>
+                <input type="number" id="age" name="age" min="15" max="100" placeholder="15">
+                <div class="error" id="ageError">Debes tener entre 15 y 100 años</div>
+            </div>
+
+            <div class="form-group">
+                <label for="semester">Semestre *</label>
+                <select id="semester" name="semester">
+                    <option value="">Selecciona tu semestre</option>
+                    <option value="1">Semestre 1</option>
+                    <option value="2">Semestre 2</option>
+                    <option value="3">Semestre 3</option>
+                    <option value="4">Semestre 4</option>
+                    <option value="5">Semestre 5</option>
+                    <option value="6">Semestre 6</option>
+                </select>
+                <div class="error" id="semesterError">Debes seleccionar tu semestre</div>
+            </div>
+
+            <div class="form-group">
+                <label>¿Prefieres el elote o el esquite? *</label>
+                <div class="preference-group">
+                    <div class="preference-option" id="eloteOption">
+                        <div class="preference-icon">🌽</div>
+                        <input type="radio" id="elote" name="preference" value="elote">
+                        <label for="elote" style="cursor:pointer;">Elote</label>
+                    </div>
+
+                    <div class="preference-option" id="esquiteOption">
+                        <div class="preference-icon">🥣</div>
+                        <input type="radio" id="esquite" name="preference" value="esquite">
+                        <label for="esquite" style="cursor:pointer;">Esquite</label>
+                    </div>
+                </div>
+                <div class="error" id="preferenceError">Debes seleccionar una preferencia</div>
+            </div>
+
+            <div class="counter">
+                <strong>Respuestas recibidas:</strong> <span id="responseCount">0</span>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" id="submitBtn">Enviar Formulario</button>
+                <button type="button" id="resetBtn">Limpiar</button>
+            </div>
+        </form>
+
+        <div class="result" id="formResult"></div>
+    </div>
+
+    <script>
+        // Referencias a elementos del DOM
+        const form = document.getElementById('interactiveForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const ageInput = document.getElementById('age');
+        const semesterSelect = document.getElementById('semester');
+        const eloteOption = document.getElementById('eloteOption');
+        const esquiteOption = document.getElementById('esquiteOption');
+        const eloteRadio = document.getElementById('elote');
+        const esquiteRadio = document.getElementById('esquite');
+        const resetBtn = document.getElementById('resetBtn');
+        const formResult = document.getElementById('formResult');
+        const responseCount = document.getElementById('responseCount');
+
+        // Referencias a mensajes de error
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const ageError = document.getElementById('ageError');
+        const semesterError = document.getElementById('semesterError');
+        const preferenceError = document.getElementById('preferenceError');
+
+        // Contador de respuestas (almacenado en localStorage)
+        let count = localStorage.getItem('formResponseCount') || 0;
+        responseCount.textContent = count;
+
+        // Validación en tiempo real
+        nameInput.addEventListener('input', function() {
+            validateName();
+        });
+
+        emailInput.addEventListener('input', function() {
+            validateEmail();
+        });
+
+        ageInput.addEventListener('input', function() {
+            validateAge();
+        });
+
+        semesterSelect.addEventListener('change', function() {
+            validateSemester();
+        });
+
+        // Manejar la selección de preferencia
+        eloteOption.addEventListener('click', function() {
+            eloteRadio.checked = true;
+            updatePreferenceStyle();
+            hidePreferenceError();
+        });
+
+        esquiteOption.addEventListener('click', function() {
+            esquiteRadio.checked = true;
+            updatePreferenceStyle();
+            hidePreferenceError();
+        });
+
+        // Función para actualizar estilos de preferencia
+        function updatePreferenceStyle() {
+            eloteOption.classList.remove('selected');
+            esquiteOption.classList.remove('selected');
+
+            if (eloteRadio.checked) {
+                eloteOption.classList.add('selected');
+            } else if (esquiteRadio.checked) {
+                esquiteOption.classList.add('selected');
+            }
+        }
+
+        // Función para validar el nombre
+        function validateName() {
+            const name = nameInput.value.trim();
+            if (name.length < 3) {
+                showError(nameInput, nameError);
+                return false;
+            } else {
+                showValid(nameInput, nameError);
+                return true;
+            }
+        }
+
+        // Función para validar el email
+        function validateEmail() {
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+                showError(emailInput, emailError);
+                return false;
+            } else {
+                showValid(emailInput, emailError);
+                return true;
+            }
+        }
+
+        // Función para validar la edad
+        function validateAge() {
+            const age = parseInt(ageInput.value);
+
+            if (ageInput.value === "") {
+                // Si está vacío, no mostrar error
+                clearValidation(ageInput, ageError);
+                return true;
+            }
+
+            if (isNaN(age) || age < 15 || age > 100) {
+                showError(ageInput, ageError);
+                return false;
+            } else {
+                showValid(ageInput, ageError);
+                return true;
+            }
+        }
+
+        // Función para validar el semestre
+        function validateSemester() {
+            if (semesterSelect.value === "") {
+                showError(semesterSelect, semesterError);
+                return false;
+            } else {
+                showValid(semesterSelect, semesterError);
+                return true;
+            }
+        }
+
+        // Función para validar la preferencia
+        function validatePreference() {
+            if (!eloteRadio.checked && !esquiteRadio.checked) {
+                preferenceError.style.display = 'block';
+                return false;
+            } else {
+                hidePreferenceError();
+                return true;
+            }
+        }
+
+        // Ocultar error de preferencia
+        function hidePreferenceError() {
+            preferenceError.style.display = 'none';
+        }
+
+        // Mostrar error en un campo
+        function showError(inputElement, errorElement) {
+            inputElement.classList.remove('valid');
+            inputElement.classList.add('invalid');
+            errorElement.style.display = 'block';
+        }
+
+        // Mostrar que un campo es válido
+        function showValid(inputElement, errorElement) {
+            inputElement.classList.remove('invalid');
+            inputElement.classList.add('valid');
+            errorElement.style.display = 'none';
+        }
+
+        // Limpiar validación de un campo
+        function clearValidation(inputElement, errorElement) {
+            inputElement.classList.remove('invalid');
+            inputElement.classList.remove('valid');
+            errorElement.style.display = 'none';
+        }
+
+        // Validar todo el formulario
+        function validateForm() {
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isAgeValid = validateAge();
+            const isSemesterValid = validateSemester();
+            const isPreferenceValid = validatePreference();
+
+            return isNameValid && isEmailValid && isAgeValid && isSemesterValid && isPreferenceValid;
+        }
+
+        // Manejar el envío del formulario
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar envío tradicional
+
+            if (validateForm()) {
+                // Obtener texto de la preferencia
+                const preferenceText = eloteRadio.checked ? "Elote 🌽" : "Esquite 🥣";
+
+                // Incrementar contador
+                count++;
+                responseCount.textContent = count;
+                localStorage.setItem('formResponseCount', count);
+
+                // Mostrar datos enviados
+                const formData = {
+                    nombre: nameInput.value,
+                    email: emailInput.value,
+                    edad: ageInput.value || "No especificada",
+                    semestre: `Semestre ${semesterSelect.value}`,
+                    preferencia: preferenceText
+                };
+
+                // Mostrar resultado exitoso
+                formResult.textContent = `¡Formulario enviado con éxito!`;
+                formResult.innerHTML += `<br><small>${nameInput.value} (Sem ${semesterSelect.value}) prefiere: ${preferenceText}</small>`;
+                formResult.className = "result success";
+                formResult.style.display = "block";
+
+                // Aquí normalmente enviarías los datos a un servidor
+                console.log("Datos del formulario:", formData);
+
+                // Resetear estilos de validación después de enviar
+                [nameInput, emailInput, ageInput, semesterSelect].forEach(input => {
+                    input.classList.remove('valid');
+                });
+
+                // Opcional: Resetear el formulario después de 5 segundos
+                setTimeout(() => {
+                    form.reset();
+                    formResult.style.display = "none";
+                    clearValidation(nameInput, nameError);
+                    clearValidation(emailInput, emailError);
+                    clearValidation(ageInput, ageError);
+                    clearValidation(semesterSelect, semesterError);
+                    hidePreferenceError();
+                    updatePreferenceStyle();
+                }, 5000);
+            } else {
+                // Mostrar error de validación
+                formResult.textContent = "Por favor, corrige los errores en el formulario antes de enviar.";
+                formResult.className = "result error-result";
+                formResult.style.display = "block";
+
+                // Ocultar mensaje después de 5 segundos
+                setTimeout(() => {
+                    formResult.style.display = "none";
+                }, 5000);
+            }
+        });
+
+        // Manejar el botón de reset
+        resetBtn.addEventListener('click', function() {
+            form.reset();
+
+            // Limpiar mensajes de error y estilos
+            [nameInput, emailInput, ageInput, semesterSelect].forEach(input => {
+                input.classList.remove('invalid');
+                input.classList.remove('valid');
+            });
+
+            [nameError, emailError, ageError, semesterError].forEach(error => {
+                error.style.display = 'none';
+            });
+
+            hidePreferenceError();
+            updatePreferenceStyle();
+            formResult.style.display = 'none';
+        });
+
+        // Inicializar validaciones al cargar la página
+        window.addEventListener('load', function() {
+            // Solo validamos si hay valores ya ingresados
+            if (nameInput.value) validateName();
+            if (emailInput.value) validateEmail();
+            if (ageInput.value) validateAge();
+            if (semesterSelect.value) validateSemester();
+        });
+    </script>
+</body>
+
+</html>
