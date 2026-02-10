@@ -1,58 +1,230 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para Mi Novia BCode</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Arial:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-     <link rel="stylesheet" href="./css/styles.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Para Mi Novia</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+
+    body{
+      min-height:100vh;
+      background:radial-gradient(circle at top,#1a1a2e,#0b0b0f);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden
+    }
+
+    .card{
+      background:rgba(20,20,30,.92);
+      border-radius:22px;
+      padding:26px;
+      max-width:380px;
+      width:92%;
+      text-align:center;
+      box-shadow:0 25px 60px rgba(0,0,0,.7);
+      animation:fadeIn 1.2s ease
+    }
+
+    .header h1{
+      font-family:'Dancing Script',cursive;
+      font-size:36px;
+      margin-bottom:6px
+    }
+
+    .date{font-size:14px;opacity:.85}
+
+    .photo-frame{
+      margin:20px auto;
+      border-radius:18px;
+      overflow:hidden;
+      width:230px;
+      height:230px;
+      box-shadow:0 15px 35px rgba(0,0,0,.6)
+    }
+    .photo-frame img{width:100%;height:100%;object-fit:cover}
+
+    .heart-btn{
+      margin-top:16px;
+      background:linear-gradient(135deg,#ff2d55,#ff6f91);
+      border:none;
+      color:#fff;
+      padding:14px 22px;
+      border-radius:30px;
+      font-size:16px;
+      cursor:pointer
+    }
+
+    .signature{
+      margin-top:16px;
+      font-family:'Dancing Script',cursive;
+      font-size:24px
+    }
+
+    /* MODAL */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.75);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px
+    }
+    .modal.show{display:flex}
+
+    .modal-content{
+      background:#f7f2e9;
+      color:#333;
+      border-radius:14px;
+      max-width:520px;
+      width:100%;
+      padding:24px;
+      position:relative;
+      max-height:85vh;
+      overflow:hidden
+    }
+
+    .close-btn{
+      position:absolute;
+      top:10px;
+      right:14px;
+      font-size:26px;
+      cursor:pointer
+    }
+
+    /* BLOQUE MOVIBLE */
+    .draggable-letter{
+      cursor:grab;
+      user-select:none;
+      position:relative
+    }
+    .draggable-letter:active{cursor:grabbing}
+
+    .letter-title{
+      font-family:'Dancing Script',cursive;
+      font-size:32px;
+      margin-bottom:12px;
+      text-align:center
+    }
+
+    .letter-content p{
+      margin:12px 0;
+      line-height:1.6
+    }
+
+    .letter-photo{
+      margin-top:22px;
+      text-align:center
+    }
+    .letter-photo img{
+      width:100%;
+      max-width:420px;
+      border-radius:18px;
+      box-shadow:0 15px 35px rgba(0,0,0,.5)
+    }
+
+    .letter-signature{
+      text-align:right;
+      margin-top:18px;
+      font-style:italic
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:scale(.95)}
+      to{opacity:1}
+    }
+  </style>
 </head>
+
 <body>
-    <div class="matrix-hearts" id="matrixHearts"></div>
-    
-    <div class="card">
-        <div class="header">
-            <h1>Feliz Día de la Novia MI <br>Amor</h1>
-            <div class="date">1 de Agosto</div>
-        </div>
-        <button class="music-btn" id="musicBtn">♪</button>
-        <div class="photo-frame">
-            <img src="https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/IMG/ramo.png" alt="Ramo">
-        </div>
 
-        <p class="message" style="animation-delay: 0.3s;">
-            En este día especial, quiero que sepas...
-        </p>
-
-        <p class="message" style="animation-delay: 0.6s;"> Eres el amor que ilumina mi vida como el rosa en esta oscuridad. </p>
-
-        <button class="heart-btn" id="heartBtn">❤️ Abre Mi Corazón</button>
-
-        <div class="signature">Para ti, con amor</div>
+  <div class="card">
+    <div class="header">
+      <h1>Feliz Aniversario<br>y San Valentín</h1>
+      <div class="date">mi gruñona bella</div>
     </div>
 
-    <div class="modal" id="letterModal">
-        <span class="close-btn" id="closeBtn">×</span>
-        <div class="modal-content">
-            <div class="torn-paper">
-                <h2 class="letter-title">Para Mi Amor</h2>
-                
-                <div class="letter-content">
-                    <p>Querida mía,</p>
-                    <p>En este día tan especial, quiero expresarte todo lo que siento en mi corazón.</p>
-                    <p>Eres la luz que ilumina mis días más oscuros, la melodía que da ritmo a mi vida. Cada momento a tu lado es un tesoro que atesoro profundamente.</p>
-                    <p>Recuerdo la primera vez que te vi, cómo tu sonrisa iluminó la habitación y cómo desde ese instante supe que quería pasar el resto de mi vida contigo.</p>
-                    <p>Tus ojos reflejan la profundidad del océano, y en ellos me pierdo cada día. Tu risa es la música más dulce que he escuchado, y tu amor es el regalo más valioso que he recibido.</p>
-                    <p>En este día, quiero prometerte que siempre estaré a tu lado, en las buenas y en las malas, apoyándote, amándote y construyendo un futuro juntos.</p>
-                    <p>Eres mi inspiración, mi fortaleza y mi razón para ser mejor cada día. Gracias por elegirme, por amarme y por ser tú.</p>
-                </div>
-                
-                <div class="letter-signature">Con todo mi amor</div>
-            </div>
-        </div>
+    <div class="photo-frame">
+      <img src="https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/IMG/ramo.png">
     </div>
+
+    <button class="heart-btn" id="heartBtn">❤️ click si me amas</button>
+    <div class="signature">Para ti, mi amor</div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="letterModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeBtn">×</span>
+
+      <div class="draggable-letter" id="draggableMessage">
+
+        <h2 class="letter-title">Para la mujer más bella</h2>
+
+        <div class="letter-content">
+          <p>Vidaaa,</p>
+                <p>Hoy me tomé un momento para escribirte, porque a veces lo que siento por ti es tan grande que no alcanza con decirlo en voz alta. Quería dejarlo aquí, con calma, como nace desde el corazón.</p>
+        <p>Desde que llegaste a mi vida, muchas cosas cambiaron sin que yo lo notara de inmediato. Empecé a ver los días de otra forma, a sonreír más, a encontrar tranquilidad incluso en medio del cansancio. Tú te volviste ese lugar al que siempre quiero volver.</p>
+        <p>Recuerdo la primera vez que te vi y cómo algo dentro de mí se acomodó, como si ya te conociera desde antes. Tu sonrisa, tu forma de hablar, tu manera de ser… todo en ti se quedó conmigo desde ese momento.</p>
+        <p>Me pierdo en tu mirada, encuentro paz en tu abrazo y fuerza en tu amor. Tu risa tiene el poder de cambiar mis días, y tu presencia hace que incluso el silencio se sienta bonito.</p>
+        <p>Amarte me enseñó que el amor no es perfecto, pero sí real. Que se construye con paciencia, con apoyo, con detalles pequeños y con la decisión de estar, incluso cuando no es fácil.</p>
+        <p>Quiero que sepas que estoy aquí, para cuidarte, escucharte y acompañarte en cada paso. En los días buenos y en los complicados, en las sonrisas y en las lágrimas. Mi lugar es a tu lado.</p>
+        <p>Eres mi motivación, mi calma y mi razón para querer ser mejor cada día. Gracias por elegirme, por confiar en mí y por regalarme tu amor.</p>
+        <p>Te amo más de lo que estas palabras pueden explicar.</p>
+      </div>
+
+        <div class="letter-photo">
+          <img src="imagenes/recuerdos.jpg" alt="Nuestros recuerdos">
+        </div>
+
+        <div class="letter-signature">
+          Con mucho amor, Walter
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("heartBtn");
+    const modal = document.getElementById("letterModal");
+    const close = document.getElementById("closeBtn");
+
+    btn.onclick = () => modal.classList.add("show");
+    close.onclick = () => modal.classList.remove("show");
+
+    const box = document.getElementById("draggableMessage");
+    let isDragging = false;
+    let startY = 0;
+    let currentY = 0;
+
+    box.addEventListener("mousedown", startDrag);
+    box.addEventListener("touchstart", startDrag);
+
+    function startDrag(e){
+      isDragging = true;
+      startY = (e.touches ? e.touches[0].clientY : e.clientY) - currentY;
+    }
+
+    document.addEventListener("mousemove", drag);
+    document.addEventListener("touchmove", drag);
+
+    function drag(e){
+      if(!isDragging) return;
+      let y = (e.touches ? e.touches[0].clientY : e.clientY);
+      currentY = y - startY;
+      box.style.transform = `translateY(${currentY}px)`;
+    }
+
+    document.addEventListener("mouseup", ()=> isDragging=false);
+    document.addEventListener("touchend", ()=> isDragging=false);
+  </script>
 
 </body>
-<script src="./js/script.js"></script>
 </html>
