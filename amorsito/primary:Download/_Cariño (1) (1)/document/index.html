@@ -1,0 +1,333 @@
+ <!DOCTYPE html>
+ <html lang="es">
+ 
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Para el amor de mi vida🤍</title>
+   <style>
+     :root {
+       --pink: #FF1717;
+       --light-pink: #fff0f3;
+       --dark-green: #38996E;
+     }
+     
+     body {
+       margin: 1;
+       font-family: 'Segoe UI', sans-serif;
+       background: var(--light-pink);
+       overflow: hidden;
+       height: 100vh;
+     }
+     
+     /* --- Pantalla de Inicio y Modales --- */
+     #start-screen,
+     .modal {
+       position: fixed;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       text-align: center;
+       z-index: 100;
+     }
+     
+     .modal {
+       display: none;
+       background: white;
+       padding: 30px;
+       border-radius: 20px;
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+       width: 85%;
+       max-width: 380px;
+     }
+     
+     input[type="datetime-local"] {
+       padding: 10px;
+       border-radius: 10px;
+       border: 2px solid var(--pink);
+       margin: 15px 0;
+       font-family: inherit;
+     }
+     
+     button {
+       padding: 12px 20px;
+       margin: 10px;
+       border: none;
+       border-radius: 20px;
+       cursor: pointer;
+       background: var(--pink);
+       color: white;
+       font-weight: bold;
+     }
+     
+     #heart-trigger {
+       font-size: 60px;
+       cursor: pointer;
+       display: inline-block;
+       animation: pulse 1.5s infinite;
+     }
+     
+     @keyframes pulse {
+
+       0%,
+       100% {
+         transform: scale(1);
+       }
+       
+       50% {
+         transform: scale(1.6);
+       }
+     }
+     
+     /* --- Escena Principal --- */
+     #main-scene {
+       display: none;
+       width: 100vw;
+       height: 100vh;
+       position: relative;
+     }
+     
+     #canvas {
+       position: absolute;
+       top: 0;
+       left: 0;
+       z-index: 1;
+     }
+     
+     /* --- Álbum de Fotos --- */
+     .photo-book {
+       position: absolute;
+       top: 10%;
+       left: 5%;
+       z-index: 5;
+       display: flex;
+       flex-wrap: wrap;
+       gap: 15px;
+       max-width: 400px;
+     }
+     
+     .photo-frame {
+       width: 100px;
+       height: 130px;
+       background: white;
+       padding: 5px;
+       border-radius: 5px;
+       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+       transform: rotate(var(--r));
+       transition: 1.5s;
+       cursor: pointer;
+     }
+     
+     .photo-frame:hover {
+       transform: scale(1.8) rotate(0deg);
+       z-index: 20;
+     }
+     
+     .photo-frame img {
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+     }
+     
+     /* --- Contador --- */
+     .overlay-text {
+       position: absolute;
+       bottom: 5%;
+       left: 5%;
+       z-index: 5;
+       text-align: left;
+       background: rgba(255, 255, 255, 0.7);
+       padding: 15px;
+       border-radius: 20px;
+       max-width: 400px;
+       border-left: 10px solid var(--pink);
+     }
+     
+     .timer-val {
+       font-weight: bold;
+       color: var(--pink);
+       font-size: 1.4rem;
+     }
+   </style>
+ </head>
+ 
+ <body>
+   
+   <div id="start-screen">
+     <h2>¿Cuándo comenzó nuestra relación?🥺</h2>
+     <button onclick="showDateInput()">Sé la fecha exacta😏</button>
+     <button style="background:#ccc" onclick="showModal('sad')">No me acuerdo 💔</button>
+   </div>
+   
+   <div id="date-input-modal" class="modal">
+     <h3>Ingresa el momento exacto:</h3>
+     <input type="datetime-local" id="user-date">
+     <br>
+     <button onclick="checkDate()">Confirmar 🌹</button>
+   </div>
+   
+   <div id="modal-correct" class="modal">
+     <p id="feedback-text"></p>
+     <span id="heart-trigger" onclick="startExperience()">❤️</span>
+   </div>
+   
+   <div id="modal-sad" class="modal">
+     <p>¿Seguro? ¿Ni un intento? owo <br> Toca el corazón igual:</p>
+     <span id="heart-trigger" onclick="startExperience()">❤️</span>
+   </div>
+   
+   <div id="main-scene">
+     
+     <div class="photo-book">
+       <div class="photo-frame" style="--r: -5deg"><img src="/64 sin título_20260210103233.jpg" alt="Foto 1"></div>
+       <div class="photo-frame" style="--r: 3deg"><img src="/65 sin título_20260210103410.jpg" alt="Foto 2"></div>
+       <div class="photo-frame" style="--r: -8deg"><img src="/Fotos0755.jpg" alt="Foto 3"></div>
+       <div class="photo-frame" style="--r: 5deg"><img src="/Snapchat-1343249013.jpg" alt="Foto 4"></div>
+       
+     </div>
+     
+     <canvas id="canvas"></canvas>
+     
+     <div class="overlay-text">
+       <p><i>"Feliz día de San Valentín, amor mío❤🌹, te he creado esta página con alegría y destreza, porque sé que tu mente codifica sueños en cada línea, y juntos escribimos nuestro propio algoritmo de felicidad.❤🌹Ti amo-Abajo esta un contador que lleva el tiempo de estar juntos⏰🦋🤍💜te amo. "</i></p>
+       <div id="timer">
+         nuestro tiempo:<br>
+         <span id="days" class="timer-val">0</span> días,
+         <span id="hours" class="timer-val">0</span>h,
+         <span id="minutes" class="timer-val">0</span>m y
+         <span id="seconds" class="timer-val">0</span>s
+       </div>
+     </div>
+   </div>
+   
+   <script>
+     const targetDate = "2021-05-07T11:33"; // Fecha de validación
+     const startDate = new Date(2021, 5, 7, 11, 33, 0); // Fecha para el contador
+     const canvas = document.getElementById('canvas');
+     const ctx = canvas.getContext('2d');
+     let hearts = [];
+     
+     function showDateInput() {
+       document.getElementById('start-screen').style.display = 'none';
+       document.getElementById('date-input-modal').style.display = 'block';
+     }
+     
+     function checkDate() {
+       const userVal = document.getElementById('user-date').value;
+       document.getElementById('date-input-modal').style.display = 'none';
+       const feedback = document.getElementById('feedback-text');
+       
+       if (userVal === targetDate) {
+         feedback.innerHTML = "¡Sí amor, es exacto! 🥺❤️<br>Novia Happy ✨ Toca el corazón:";
+       } else {
+         feedback.innerHTML = "Casi... pero al menos lo intentaste 🥺<br>Toca el corazón:";
+       }
+       document.getElementById('modal-correct').style.display = 'block';
+     }
+     
+     function showModal(type) {
+       document.getElementById('start-screen').style.display = 'none';
+       document.getElementById('modal-sad').style.display = 'block';
+     }
+     
+     function startExperience() {
+       document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+       document.getElementById('main-scene').style.display = 'block';
+       
+       resize();
+       drawTree(canvas.width * 0.75, canvas.height, -90, 10);
+       
+       // Corazones que caen (pétalos)
+       for (let i = 0; i < 60; i++) {
+         hearts.push(new Heart(Math.random() * canvas.width, Math.random() * canvas.height, false));
+       }
+       
+       animate();
+       setInterval(updateTimer, 1000);
+     }
+     
+     function resize() {
+       canvas.width = window.innerWidth;
+       canvas.height = window.innerHeight;
+     }
+     
+     function drawTree(x, y, angle, depth) {
+       if (depth === 0) return;
+       const length = depth * 10;
+       const x2 = x + Math.cos(angle * Math.PI / 180) * length;
+       const y2 = y + Math.sin(angle * Math.PI / 180) * length;
+       
+       ctx.lineWidth = depth;
+       ctx.strokeStyle = '#3d2b1f';
+       ctx.beginPath();
+       ctx.moveTo(x, y);
+       ctx.lineTo(x2, y2);
+       ctx.stroke();
+       
+       if (depth < 5) {
+         for (let i = 0; i < 2; i++) hearts.push(new Heart(x2, y2, true));
+       }
+       
+       drawTree(x2, y2, angle - 22, depth - 1);
+       drawTree(x2, y2, angle + 22, depth - 1);
+     }
+     
+     function Heart(x, y, isLeaf) {
+       this.x = x + (Math.random() - 1.5) * 30;
+       this.y = y + (Math.random() - 2) * 30;
+       this.size = Math.random() * 7 + 3;
+       this.color = `rgb(255, ${Math.floor(Math.random()*100 + 50)}, ${Math.floor(Math.random()*150 + 100)})`;
+       this.speedY = isLeaf ? 0 : Math.random() * 1.5 + 0.5;
+       this.speedX = (Math.random() - 0.5) * 1;
+       this.isLeaf = isLeaf;
+       
+       this.draw = function() {
+         ctx.fillStyle = this.color;
+         ctx.beginPath();
+         ctx.moveTo(this.x, this.y);
+         ctx.bezierCurveTo(this.x, this.y - this.size / 2, this.x - this.size, this.y - this.size / 2, this.x - this.size, this.y);
+         ctx.bezierCurveTo(this.x - this.size, this.y + this.size / 2, this.x, this.y + this.size, this.x, this.y + this.size);
+         ctx.bezierCurveTo(this.x, this.y + this.size, this.x + this.size, this.y + this.size / 2, this.x + this.size, this.y);
+         ctx.bezierCurveTo(this.x + this.size, this.y - this.size / 2, this.x, this.y - this.size / 2, this.x, this.y);
+         ctx.fill();
+       };
+       
+       this.update = function() {
+         if (!this.isLeaf) {
+           this.y += this.speedY;
+           this.x += this.speedX;
+           if (this.y > canvas.height) {
+             this.y = -20;
+             this.x = Math.random() * canvas.width;
+           }
+         }
+       };
+     }
+     
+     function animate() {
+       ctx.clearRect(0, 0, canvas.width, canvas.height);
+       // Dibujar tronco estático
+       ctx.fillStyle = '#3d2b1f';
+       ctx.fillRect(canvas.width * 0.74, canvas.height - 20, 25, 20);
+       
+       drawTree(canvas.width * 0.75, canvas.height, -90, 10);
+       
+       hearts.forEach(h => {
+         h.update();
+         h.draw();
+       });
+       requestAnimationFrame(animate);
+     }
+     
+     function updateTimer() {
+       const now = new Date();
+       const diff = now - startDate;
+       document.getElementById('days').innerText = Math.floor(diff / 86400000);
+       document.getElementById('hours').innerText = Math.floor((diff / 3600000) % 24);
+       document.getElementById('minutes').innerText = Math.floor((diff / 60000) % 60);
+       document.getElementById('seconds').innerText = Math.floor((diff / 1000) % 60);
+     }
+   </script>
+ </body>
+ 
+ </html>
