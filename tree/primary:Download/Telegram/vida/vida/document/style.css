@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #fff;
+    --bg-color: #ffebf2; /* Soft pink background */
+    --bg-envelope-color: #ffe3ed; /* Light pink envelope */
+    --envelope-tab: #ffccd5; /* Darker pink tab */
+    --envelope-cover: #ffc1d1; /* Medium pink cover */
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --txt-color:  #003049; /* Deep red text */
+    --heart-color: #ff477e; /* Bright pink heart */
+}
+
+body {
+    background: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+h1 {
+    font-family: "Marck Script", serif;
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 50px;
+    color: #444;
+}
+
+.container {
+    width: 400px;
+}
+
+.container > .envelope-wrapper {
+    position: relative;
+    background-color: var(--bg-envelope-color);
+    box-shadow: 0 0 40px var(--shadow-color);
+    border-radius: 15px;
+}
+
+.envelope-wrapper > .envelope {
+    position: relative;
+    width: 400px;
+    height: 300px;
+}
+
+.envelope-wrapper > .envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    border-top: 180px solid var(--envelope-tab);
+    border-right: 200px solid transparent;
+    border-left: 200px solid transparent;
+    transform-origin: top;
+    transition: all 0.5s ease-in-out 0.7s;
+    border-radius: 10px;
+}
+
+
+
+.tap-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    transform: rotate(-90deg,90deg);
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: var(--envelope-cover);
+}
+
+.tap-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
+    background-color: var(--envelope-cover);
+    transform: rotate(90deg, -90deg);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+  
+
+.envelope-wrapper.disable-envelope .envelope::before {
+    pointer-events: none;
+}
+
+
+.envelope > .letter {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    text-align: center;
+    box-shadow: 0 0 5px var(--shadow-color);
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform .5s ease-in-out;
+
+}
+
+.envelope > .letter > .text {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    color: var(--txt-color);
+    text-align: left;
+    font-size: 12px;
+    border: 3px dotted var(--txt-color);
+    padding: 10px;
+    height: 100%;
+    line-height: 16px;
+    cursor: pointer;
+    overflow: scroll;
+}
+
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    background: var(--heart-color);
+    transform: translate(-50%, 0%) rotate(45deg);
+    transition: transform 0.5s ease-in-out 1s;
+    box-shadow: 0 1px 6px var(--shadow-color);
+    cursor: pointer;
+    z-index: 999;
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: var(--heart-color);
+    border-radius: 80%;
+}
+
+.heart:before {
+    top: -15px;
+}
+  
+.heart:after {
+    right: 15px;
+}
+
+.flap > .envelope:before {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.flap > .heart {
+    transform: rotate(90deg);
+    transition-delay: 0.4s;
+}
+
+.letter.letter-opening {
+    transform: translateY(-290px);
+    animation-delay: 0.5s;
+    transition: transform .5s ease-in-out;
+}
+
+.letter.closing-letter {
+    transform: translateY(-290px);
+    transition: transform .5s ease-in-out;
+    z-index: 10000;
+}
+
+.letter.opened{
+    z-index: 10000;
+}
+
+::-webkit-scrollbar {
+    width: 8px; 
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; 
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--envelope-cover); 
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--heart-color); 
+}
+
+@media  screen and  (max-width: 400px){
+    .container {
+        width: 300px;
+    }
+
+    
+    .envelope-wrapper > .envelope {
+        position: relative;
+        width: 300px;
+        height: 250px;
+    }
+
+    .tap-left,
+    .tap-right{
+        width: 100%;
+    }
+
+    
+    .envelope-wrapper > .envelope::before {
+        border-top: 150px solid var(--envelope-tab);
+        border-right: 150px solid transparent;
+        border-left: 150px solid transparent;
+}
+
+}
+
+
+
+
+
+  
