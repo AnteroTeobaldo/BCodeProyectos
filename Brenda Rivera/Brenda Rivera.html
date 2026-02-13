@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Brenda Rivera</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe6e6; /* Fondo rosado suave */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            z-index: 10;
+        }
+        button {
+            font-size: 1.5rem;
+            padding: 10px 30px;
+            margin: 10px;
+            borde: ninguno;
+            radio del borde: 50px;
+            cursor: puntero;
+            transición: transformar 0.2s;
+        }
+        #btnSi {
+            color de fondo: #ff4d6d;
+            color: blanco;
+        }
+        #btnSi:hover {
+            transformar: escala(1.1);
+            color de fondo: #e01e37;
+        }
+        #btnNo {
+            color de fondo: #fff;
+            color: #ff4d6d;
+            borde: 2px sólido #ff4d6d;
+        }
+        #mensajeFinal {
+            visualización: ninguno;
+            color: #d63384;
+            tamaño de fuente: 3rem;
+            peso de fuente: negrita;
+            relleno: 20px;
+            índice z: 20;
+            animación: desvanecer 2s;
+        }
+        .corazon {
+            posición: absoluta;
+            color: #ff0000;
+            tamaño de fuente: 20px;
+            animación: flotar 4s lineal infinito;
+            fondo: -10vh;
+            índice z: 1;
+        }
+        @keyframes fadeIn {
+            de { opacidad: 0; }
+            a { opacidad: 1; }
+        }
+        @keyframes flotar {
+            0% { transformar: translateY(0); opacidad: 1; }
+            100% { transformar: translateY(-110vh); opacidad:0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contenidoInicial">
+        <h1>Brenda Rivera,<br>¿Quieres ser mi San Valentín?</h1>
+        <div class="buttons">
+            <button id="btnSi" onclick="aceptar()">¡SÍ!</button>
+            <button id="btnNo" onmouseover="moverBoton(this)" onclick="moverBoton(this)">No</button>
+        </div>
+    </div>
+
+    <div id="mensajeFinal">
+        Eres lo mejor que me ha pasado en mi vida ❤️
+    </div>
+
+    <script>
+        function aceptar() {
+            document.getElementById('contenidoInicial').style.display = 'none';
+            document.getElementById('mensajeFinal').style.display = 'bloque';
+            crearLluviaCorazones();
+        }
+
+        // Hace que el botón "No" se escape si intentan darle click
+        function moverBoton(elem) {
+            elem.style.position = 'absolute';
+            elem.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+            elem.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+        }
+
+        function crearLluviaCorazones() {
+            setInterval(() => {
+                const corazon = document.createElement('div');
+                corazon.classList.add('corazon');
+                corazon.innerHTML = '❤️';
+                corazon.style.left = Math.random() * 100 + 'vw';
+                corazon.style.fontSize = Math.random() * 30 + 20 + 'px';
+                corazon.style.animationDuration = Math.random() * 2 + 3 + 's';
+                document.body.appendChild(corazon);
+               
+                // Limpiar corazones viejos para que no se sature
+                setTimeout(() => {
+                    corazon.remove();
+                }, 5000);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
