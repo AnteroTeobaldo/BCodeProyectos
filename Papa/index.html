@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>¿Me prestas dinero?</title>
+
+<style>
+body{
+    margin:0;
+        height:100vh;
+            display:flex;
+                flex-direction:column;
+                    justify-content:center;
+                        align-items:center;
+                            background:linear-gradient(to top,#e0f7fa,#ffffff);
+                                font-family:Arial, sans-serif;
+                                    text-align:center;
+                                    }
+
+                                    /* Cara */
+                                    .cara{
+                                        font-size:120px;
+                                            transition:all 0.4s ease;
+                                            }
+
+                                            .texto{
+                                                font-size:24px;
+                                                    margin:15px;
+                                                    }
+
+                                                    /* Botones */
+                                                    .botones{
+                                                        margin-top:15px;
+                                                        }
+
+                                                        button{
+                                                            padding:10px 20px;
+                                                                margin:5px;
+                                                                    font-size:18px;
+                                                                        border:none;
+                                                                            border-radius:20px;
+                                                                                cursor:pointer;
+                                                                                    transition:0.3s;
+                                                                                    }
+
+                                                                                    #si{
+                                                                                        background:#4caf50;
+                                                                                            color:white;
+                                                                                            }
+
+                                                                                            #no{
+                                                                                                background:#f44336;
+                                                                                                    color:white;
+                                                                                                    }
+
+                                                                                                    button:hover{
+                                                                                                        transform:scale(1.1);
+                                                                                                        }
+
+                                                                                                        </style>
+                                                                                                        </head>
+                                                                                                        <body>
+
+                                                                                                        <div class="cara" id="cara">😢</div>
+                                                                                                        <div class="texto">¿Me prestas dinero por favor?</div>
+
+                                                                                                        <div class="botones">
+                                                                                                            <button id="si">Sí</button>
+                                                                                                                <button id="no">No</button>
+                                                                                                                </div>
+
+                                                                                                                <script>
+                                                                                                                const cara = document.getElementById("cara");
+                                                                                                                const btnSi = document.getElementById("si");
+                                                                                                                const btnNo = document.getElementById("no");
+
+                                                                                                                let tamaño = 120;
+
+                                                                                                                btnNo.onclick = function(){
+                                                                                                                    tamaño += 20;
+                                                                                                                        cara.style.fontSize = tamaño + "px";
+                                                                                                                            cara.textContent = "😭";
+                                                                                                                            }
+
+                                                                                                                            btnSi.onclick = function(){
+                                                                                                                                cara.textContent = "😄";
+                                                                                                                                    cara.style.fontSize = "120px";
+                                                                                                                                    }
+                                                                                                                                    </script>
+
+                                                                                                                                    </body>
+                                                                                                                                    </html>
+                                                                                                                                    
