@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index.html</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para FER 💖</title>
+<style>
+    body{
+        margin:0;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#ffdde1,#fad0c4,#fbc2eb);
+        font-family: 'Segoe UI', sans-serif;
+        overflow:hidden;
+    }
+
+    .card{
+        background:white;
+        padding:40px;
+        border-radius:30px;
+        box-shadow:0 20px 40px rgba(0,0,0,0.25);
+        text-align:center;
+        animation:fadeIn 2s ease-in-out;
+        max-width:520px;
+        position:relative;
+        z-index:2;
+    }
+
+    h1{
+        color:#e75480;
+        margin-bottom:10px;
+        font-size:32px;
+    }
+
+    p{
+        font-size:18px;
+        color:#444;
+        line-height:1.7;
+    }
+
+    .flowers{
+        font-size:55px;
+        margin:20px 0;
+        animation:float 3s ease-in-out infinite;
+    }
+
+    .heart{
+        font-size:35px;
+        color:red;
+        animation:beat 1s infinite;
+        margin-top:15px;
+    }
+
+    /* Flores flotando */
+    .floating{
+        position:absolute;
+        font-size:30px;
+        animation:fall 8s linear infinite;
+    }
+
+    @keyframes fadeIn{
+        from{opacity:0; transform:translateY(30px);}
+        to{opacity:1; transform:translateY(0);}
+    }
+
+    @keyframes float{
+        0%{transform:translateY(0);}
+        50%{transform:translateY(-12px);}
+        100%{transform:translateY(0);}
+    }
+
+    @keyframes beat{
+        0%{transform:scale(1);}
+        50%{transform:scale(1.2);}
+        100%{transform:scale(1);}
+    }
+
+    @keyframes fall{
+        0%{top:-10%; left:calc(100% * var(--i)); opacity:1;}
+        100%{top:110%; left:calc(100% * var(--i) - 50px); opacity:0;}
+    }
+</style>
+</head>
+<body>
+
+<!-- Flores cayendo -->
+<div class="floating" style="--i:0.1;">🌷</div>
+<div class="floating" style="--i:0.3;">🌻</div>
+<div class="floating" style="--i:0.5;">🌷</div>
+<div class="floating" style="--i:0.7;">🌻</div>
+<div class="floating" style="--i:0.9;">🌷</div>
+
+<div class="card">
+    <h1>FER 💖</h1>
+    
+    <div class="flowers">
+        🌷 🌻 🌷 🌻 🌷
+    </div>
+
+    <p>
+        FER, eres como un tulipán en primavera,  
+        delicada, hermosa y única 🌷  
+        Y como un girasol que siempre busca la luz,  
+        iluminas cada rincón de mi vida 🌻  
+    </p>
+
+    <p>
+        Gracias por existir, por tu sonrisa y por hacer que mi mundo sea más bonito cada día.
+    </p>
+
+    <div class="heart">❤️</div>
+</div>
+
+</body>
+</html>
+
+</body>
+</html>
