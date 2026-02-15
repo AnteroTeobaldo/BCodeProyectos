@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para YAMI ❤️</title>
+
+    <style>
+        body{
+            margin:0;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align:center;
+            background:#ffe6f0;
+        }
+
+        .container{
+            display:none;
+            padding:40px 20px;
+        }
+
+        .active{
+            display:block;
+        }
+
+        h1{
+            color:#d63384;
+        }
+
+        .btn a{
+            display:inline-block;
+            margin:10px;
+            padding:10px 20px;
+            background:#ff4d88;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:bold;
+        }
+
+        .btn a:hover{
+            background:#cc0066;
+        }
+
+        #btn-random{
+            position:relative;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Música -->
+<audio id="musica" loop>
+    <source src="MUSICA/DRIAN BYE ME DESPIDO (Reggaeton Romantico).mp3" type="audio/mpeg">
+</audio>
+
+<!-- Pantalla 1 -->
+<div class="container active" id="pantalla1">
+    <div class="tenor-gif-embed"
+         data-postid="22845398"
+         data-share-method="host"
+         data-width="100%">
+    </div>
+
+    <h1>¿YAMI me perdonas?</h1>
+
+
+    <div class="btn">
+        <a href="#" onclick="mostrar(2)">SI</a>
+        <a href="#" onclick="mostrar(3)">NO</a>
+    </div>
+</div>
+
+<!-- Pantalla 2 -->
+<div class="container" id="pantalla2">
+    <div class="tenor-gif-embed"
+         data-postid="3200692683736487185"
+         data-share-method="host"
+         data-width="100%">
+    </div>
+
+    <h1>Por favor, perdóname</h1>
+
+    <div class="btn">
+        <a href="#" onclick="mostrarFinal()">SI</a>
+        <a href="#" onclick="mostrar(3)">NO</a>
+    </div>
+</div>
+
+<!-- Pantalla 3 (NO imposible) -->
+<div class="container" id="pantalla3">
+    <div class="tenor-gif-embed"
+         data-postid="15824838"
+         data-share-method="host"
+         data-width="100%">
+    </div>
+
+    <h1>¿Segura? </h1>
+
+    <div class="btn">
+        <a href="#" onclick="mostrarFinal()">SI</a>
+        <a href="#" id="btn-random">NO</a>
+    </div>
+</div>
+
+<!-- Pantalla Final -->
+<div class="container" id="pantallaFinal">
+    <div class="tenor-gif-embed"
+         data-postid="24836380"
+         data-share-method="host"
+         data-width="100%">
+    </div>
+
+    <h1>Gracias por decir que sí ❤️</h1>
+    <p>Te quiero </p>
+</div>
+
+<script src="https://tenor.com/embed.js" async></script>
+
+<script>
+function mostrar(num){
+    document.querySelectorAll(".container").forEach(c => c.classList.remove("active"));
+    document.getElementById("pantalla"+num).classList.add("active");
+}
+
+function mostrarFinal(){
+    document.querySelectorAll(".container").forEach(c => c.classList.remove("active"));
+    document.getElementById("pantallaFinal").classList.add("active");
+
+    // Activar música
+    document.getElementById("musica").play();
+}
+
+// Botón NO que se mueve
+const btnNo = document.getElementById("btn-random");
+
+if(btnNo){
+    btnNo.addEventListener("mouseover", () => {
+        btnNo.style.position = "absolute";
+        btnNo.style.top = Math.random()*80 + "%";
+        btnNo.style.left = Math.random()*80 + "%";
+    });
+}
+</script>
+
+</body>
+</html>
