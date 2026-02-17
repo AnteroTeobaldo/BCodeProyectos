@@ -1,0 +1,36 @@
+=======================================
+  LEEME: INSTRUCCIONES IMPORTANTES
+=======================================
+
+¡Hola! Gracias por tu interés en este código de amor. Para que tu experiencia sea la mejor, por favor lee las siguientes opciones:
+
+---------------------------------------------------------------------
+
+OPCION 1: PARA QUIENES SABEN PROGRAMAR
+--------------------------------------
+Este es un proyecto web que utiliza HTML, CSS y JavaScript.
+
+1. Descomprime el archivo .zip que descargaste.
+2. Edita el contenido (textos, imágenes, etc.) directamente en los archivos (.html, .css y .js) con un editor de código como Visual Studio Code.
+3. Sube la carpeta con todos los archivos a un servicio de hosting para generar un link y poder compartirlo.
+
+¡OJO! Esta opción REQUIERE CONOCIMIENTOS BÁSICOS de programación para personalizar y subir los archivos a internet.
+
+---------------------------------------------------------------------
+
+OPCION 2: ¡YO LO PERSONALIZO POR TI!
+------------------------------------
+¿No sabes programar? ¡No te preocupes! Yo me encargo de todo.
+
+* Personalizo el código con tus fotos, nombres, fechas y mensajes.
+* Lo subo a internet y te entrego un link listo para enviar.
+
+Simplemente contáctame y yo hago el resto.
+
+
+== Contacto para personalizar ==
+
+WhatsApp: +52 1 55 6628 1018
+
+Link directo (copia y pega en tu navegador):
+https://wa.me/5215566281018
