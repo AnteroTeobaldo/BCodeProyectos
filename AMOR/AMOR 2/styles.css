@@ -1,0 +1,63 @@
+/* styles.css */
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3 años y 11 Meses Juntos</title>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(heart, #1a002a, #000000);
+      overflow: hidden;
+      text-align: center;
+      color: black;
+      font-family: Arial;
+    }
+
+    #planeta {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, #ff66cc, #cc0066);
+      border-radius: 50%;
+      margin: 150px auto;
+      box-shadow: 0 0 50px pink;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #mensaje {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌍 3 años y 11 Meses Juntos💕</h1>
+
+  <div id="planeta"></div>
+
+  <div id="mensaje"></div>
+
+  <script>
+    const frases = [
+      "Mi bebesito fiu fiu💖",
+      "Mi marquito ✨",
+      "Mi gordito 💕",
+      "21-02-2026🌟"
+    ];
+
+    const planeta = document.getElementById("planeta");
+    const mensaje = document.getElementById("mensaje");
+
+    planeta.addEventListener("click", () => {
+      const random = Math.floor(Math.random() * frases.length);
+      mensaje.textContent = frases[random];
+      planeta.style.transform = "scale(1.2)";
+      setTimeout(() => {
+        planeta.style.transform = "scale(1)";
+      }, 300);
+    });
+  </script>
+
+</body>
+</html>
