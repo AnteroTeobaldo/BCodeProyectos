@@ -1,26 +1,106 @@
-<!-- html -->
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCode</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./css/styles.css" />
-    
+  <title>index.html</title>
 </head>
+<body>
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>3 años y 11 Meses Juntos 💕</title>
 
-<body class="bg-black">
-    <audio id="backgroundAudio" autoplay loop>
-        <source src="./audio/audio.mp3" type="audio/mpeg">
-        Tu navegador no soporta audio HTML5
-    </audio>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle, #1a002a, #000000);
+      overflow: hidden;
+      text-align: center;
+      color: white;
+      font-family: Arial;
+    }
 
-    <div class="efecto-bloom"></div>
-    <div class="terminal" id="terminal"></div>
-    <div class="love-container" id="loveContainer"></div>
+    h1 {
+      margin-top: 40px;
+    }
 
-       <div class="centro">TE QUIERO <span>❤</span> SOL☀</div> 
+    /* ❤️ CORAZÓN */
+    #corazon {
+      position: relative;
+      width: 200px;
+      height: 180px;
+      margin: 120px auto;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    #corazon::before,
+    #corazon::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 160px;
+      background: #ff3366;
+      border-radius: 100px 100px 0 0;
+      box-shadow: 0 0 40px pink;
+    }
+
+    #corazon::before {
+      left: 100px;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    #corazon::after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    #mensaje {
+      font-size: 24px;
+      margin-top: 40px;
+      color: pink;
+      min-height: 30px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>3 años y 11 Meses Juntos 💕</h1>
+
+  <div id="corazon"></div>
+
+  <div id="mensaje"></div>
+
+  <audio id="musica" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+  <script>
+    const frases = [
+      "Mi bebesito fiu fiu 💖",
+      "Mi marquito ✨",
+      "Mi gordito hermoso 💕",
+      "21-02-2026 🌟"
+    ];
+
+    const corazon = document.getElementById("corazon");
+    const mensaje = document.getElementById("mensaje");
+    const musica = document.getElementById("musica");
+
+    corazon.addEventListener("click", () => {
+      const random = Math.floor(Math.random() * frases.length);
+      mensaje.textContent = frases[random];
+
+      // Reproducir música
+      musica.play();
+
+      // Efecto latido
+      corazon.style.transform = "scale(1.2)";
+      setTimeout(() => {
+        corazon.style.transform = "scale(1)";
+      }, 300);
+    });
+  </script>
+
 </body>
-<script src="./js/script.js"></script>
 </html>
