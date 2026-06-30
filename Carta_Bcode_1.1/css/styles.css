@@ -1,0 +1,489 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #ff7eb3, #ff758c, #ff7eb3);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, #ff4d94 20%, #ff4d94 80%, transparent 80%, transparent);
+    background-size: 50px 50px;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    z-index: 10;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    margin-bottom: 30px;
+    animation: fadeIn 1.5s ease;
+}
+
+.header h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 0, 85, 0.7);
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.special-name {
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 0 20px #ff0077, 0 0 30px #ff0077;
+    animation: nameGlow 2s infinite alternate;
+}
+
+.envelope-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    margin: 0 auto 30px;
+    cursor: pointer;
+    perspective: 1000px;
+    z-index: 20;
+    transition: transform 0.3s ease;
+}
+
+.envelope-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.envelope.open {
+    transform: rotateX(180deg);
+}
+
+.envelope-front,
+.envelope-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.envelope-front {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    box-shadow: 0 15px 35px rgba(255, 0, 85, 0.5);
+    z-index: 2;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 100px solid #ff3366;
+    transform-origin: top;
+    transition: transform 0.5s ease;
+    filter: drop-shadow(0 -5px 5px rgba(0, 0, 0, 0.1));
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope-back {
+    background: #fff;
+    transform: rotateX(180deg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    padding: 20px;
+    overflow: visible;
+    justify-content: flex-start;
+}
+
+.letter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fffdf0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translateY(0) scale(1);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.envelope.open .letter {
+    transform: translateY(-75%) scale(1.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.letter-content {
+    padding: 15px;
+    text-align: center;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.letter h2 {
+    color: #ff3366;
+    margin-bottom: 20px;
+    font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+    font-family: 'Dancing Script', cursive;
+    text-shadow: 0 0 5px rgba(255, 51, 102, 0.3);
+}
+
+.letter p {
+    font-size: clamp(1rem, 3.5vw, 1.2rem);
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.letter .signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: #ff3366;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.fullscreen-letter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fffaf0, #fff0f5);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+    border-radius: 0;
+    visibility: hidden;
+}
+
+.fullscreen-letter.active {
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 101;
+    box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.close-btn:hover {
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 0, 85, 0.6);
+}
+
+.fullscreen-letter-content {
+    padding: 80px 20px 20px;
+    height: 100%;
+    overflow-y: auto;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+.fullscreen-letter h2 {
+    color: #ff3366;
+    margin-bottom: 30px;
+    font-size: 3rem;
+    font-family: 'Dancing Script', cursive;
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
+}
+
+.fullscreen-letter p {
+    font-size: 1.8rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 25px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.fullscreen-letter .signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #ff3366;
+    margin-top: 40px;
+}
+
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart-fall {
+    position: absolute;
+    top: -50px;
+    animation: fall linear forwards;
+    color: #ff4081;
+    font-size: 24px;
+}
+
+.heart-explosion {
+    position: absolute;
+    animation: explode 1.5s ease-out forwards;
+    color: #ff0077;
+    font-size: 24px;
+    z-index: 99;
+}
+
+.floating-heart {
+    position: absolute;
+    animation: float 8s ease-in-out infinite;
+    color: #ff4081;
+    font-size: 48px;
+    opacity: 0.7;
+    z-index: 5;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes nameGlow {
+    from {
+        text-shadow: 0 0 5px rgba(255, 0, 119, 0.5);
+    }
+
+    to {
+        text-shadow: 0 0 20px #ff0077, 0 0 40px #ff0077;
+    }
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(0, 0) scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(20px, -20px) rotate(20deg);
+    }
+
+    50% {
+        transform: translate(0, -40px) rotate(0deg);
+    }
+
+    75% {
+        transform: translate(-20px, -20px) rotate(-20deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+@keyframes floatText {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.floating {
+    animation: floatText 3s ease-in-out infinite;
+}
+
+.paper-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff4081' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.notification.show {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .fullscreen-letter h2 {
+        font-size: 2.5rem;
+    }
+
+    .fullscreen-letter p {
+        font-size: 1.5rem;
+    }
+
+    .close-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fullscreen-letter {
+        top: 0;
+        height: 100%;
+    }
+
+    .fullscreen-letter-content {
+        padding: 70px 15px 15px;
+    }
+
+    .fullscreen-letter h2 {
+        font-size: 2rem;
+    }
+
+    .fullscreen-letter p {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    .close-btn {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+}
