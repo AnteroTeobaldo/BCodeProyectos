@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorpresa Para ti mi Amor BCode</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+    <div class="hearts-container" id="hearts-container"></div>
+    <div class="floating-hearts" id="floating-hearts"></div>
+    <div class="notification" id="notification">Haz clic en el sobre para abrir la carta</div>
+    
+    <div class="container" id="main-container">
+        <div class="header">
+            <h1>Para Ti Mi<span class="special-name floating">  Princesa </span></h1>
+            <p style="color: white; text-shadow: 0 0 10px rgba(255,0,119,0.5);">Haz clic en el sobre para tu sorpresa</p>
+        </div>
+        
+        <div class="envelope-wrapper" id="envelope-wrapper">
+            <div class="envelope" id="envelope">
+                <div class="envelope-front">
+                    <div class="envelope-flap"></div>
+                    <i class="fas fa-heart" style="color: white; font-size: 3rem; animation: pulse 1.5s infinite;"></i>
+                </div>
+                <div class="envelope-back">
+                    <div class="letter">
+                        <div class="paper-texture"></div>
+                        <div class="letter-content">
+                            <h2>Mi Amor</h2>
+                            <p>Eres la luz de mis días</p>
+                            <p>y la razón de mi sonrisa.</p>
+                            <p>Contigo todo es mejor.</p>
+                            <div class="signature">Te amo</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-heart" style="color: #ff4081; font-size: 2.5rem; animation: pulse 1.5s infinite; position: absolute; bottom: 10px; right: 10px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="fullscreen-letter" id="fullscreen-letter">
+        <div class="close-btn" id="close-btn">×</div>
+        <div class="paper-texture"></div>
+        <div class="fullscreen-letter-content">
+            <h2>MI PRINCESA</h2>
+            <p>Eres la luz que ilumina mis días</p>
+            <p>y la razón de mi sonrisa eterna.</p>
+            <p>Contigo, cada momento es mágico</p>
+            <p>y mi corazón late más fuerte.</p>
+            <p>Tu presencia transforma lo ordinario en extraordinario,</p>
+            <p>y cada instante a tu lado es un tesoro que atesoro.</p>
+            <p>Tu sonrisa es mi alegría, tu mirada mi refugio,</p>
+            <p>y tu amor, el motor que impulsa mis sueños.</p>
+            <p>Te amo más de lo que las palabras pueden expresar.</p>
+            <div class="signature">Para siempre, Tu Novio</div>
+        </div>
+    </div>
+
+    
+</body>
+<script src="./js/script.js"></script>
+</html>
