@@ -1,8 +1,0 @@
-love__you{
-  margim:0;
-  padding:0;
-  backgroud: #FSE80C;
-  front-size: 28px;
-  front-family: 'love';
-  color: #504833;
-  overflow: auto ;
