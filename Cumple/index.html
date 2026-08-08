@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Feliz cumpleaños, Yoyis!</title>
+<style>
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+    font-family: 'Segoe UI', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .tarjeta {
+    background: white;
+    width: 340px;
+    padding: 40px 30px;
+    border-radius: 30px;
+    border: 3px solid #ffcdd8;
+    box-shadow: 0 20px 45px rgba(255,150,180,0.35);
+    text-align: center;
+    animation: flotar 3.5s ease-in-out infinite;
+    position: relative;
+    z-index: 5;
+  }
+
+  @keyframes flotar {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .estrella {
+    font-size: 60px;
+    animation: girar 5s linear infinite;
+    display: inline-block;
+  }
+
+  @keyframes girar {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(12deg) scale(1.15); }
+    100% { transform: rotate(0deg) scale(1); }
+  }
+
+  h1 {
+    color: #ff6b8a;
+    font-size: 28px;
+    margin: 12px 0;
+  }
+
+  p {
+    color: #5c3a43;
+    line-height: 1.8;
+    font-size: 17px;
+    font-style: italic;
+  }
+
+  .boton-musica {
+    margin-top: 25px;
+    background: linear-gradient(90deg, #ff758f, #ff9aaa);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,117,143,0.4);
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .boton-musica:hover {
+    background: linear-gradient(90deg, #ff9aaa, #ff758f);
+    transform: translateY(-2px);
+  }
+
+  .lluvia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .item {
+    position: absolute;
+    animation: caer 7s linear infinite;
+  }
+
+  @keyframes caer {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0.2; }
+  }
+</style>
+</head>
+<body>
+
+  <audio id="cancion" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+  </audio>
+
+  <div class="lluvia">
+    <div class="item" style="left:10%; animation-delay:0s; font-size:24px;">💖</div>
+    <div class="item" style="left:25%; animation-delay:1s; font-size:25px;">🌸</div>
+    <div class="item" style="left:42%; animation-delay:2s; font-size:26px;">🎂</div>
+    <div class="item" style="left:58%; animation-delay:0.5s; font-size:24px;">💕</div>
+    <div class="item" style="left:74%; animation-delay:1.5s; font-size:25px;">🌷</div>
+    <div class="item" style="left:88%; animation-delay:2.5s; font-size:24px;">🎂</div>
+    <div class="item" style="left:5%;  animation-delay:3.2s; font-size:24px;">💗</div>
+    <div class="item" style="left:93%; animation-delay:4s; font-size:25px;">🌼</div>
+  </div>
+
+  <div class="tarjeta">
+    <div class="estrella">⭐</div>
+    <h1>Feliz cumpleaños Yoyis ♡</h1>
+    <p>
+      Para mi mejor amiga, hoy y siempre.<br><br>
+      Yoyis,<br>
+      hoy el calendario te celebra,<br>
+      pero yo te celebro todos los días.<br><br>
+      Eres risas que no se planean,<br>
+      secretos bien guardados,<br>
+      la que llega sin avisar y hace que todo pese menos.<br><br>
+      Que la vida te devuelva bonito<br>
+      todo lo bonito que tú das.<br><br>
+      Feliz vida, Yoyis.<br>
+      Te quiero muchísimo.<br><br>
+      - Tu Pollito 💖
+    </p>
+    <button class="boton-musica" id="boton" aria-label="Reproducir o pausar música de cumpleaños">🎵 Toca para poner música</button>
+  </div>
+
+<script>
+  const musica = document.getElementById('cancion');
+  const boton = document.getElementById('boton');
+
+  boton.addEventListener('click', function() {
+    if (musica.paused) {
+      musica.play();
+      boton.textContent = '🔊 ¡Felicidades! 🎉';
+      boton.setAttribute('aria-label', 'Música de cumpleaños sonando');
+    } else {
+      musica.pause();
+      boton.textContent = '🎵 Toca para poner música';
+      boton.setAttribute('aria-label', 'Reproducir o pausar música de cumpleaños');
+    }
+  });
+</script>
+
+</body>
+</html>
