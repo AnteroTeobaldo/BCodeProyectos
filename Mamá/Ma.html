@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para Mamá - Gracias por todo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,ital,wght@6..96,0..1,400;6..96,0..1,600&family=Cinzel:wght@400;600&family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+<style>
+  :root { --gold: #FFD700; --gold-light: #FFEC8B; --gold-dim: rgba(255,215,0,0.15); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden;background:#000}
+  body{
+    background: radial-gradient(ellipse at 50% -20%, #1a1500 0%, #000000 60%);
+    display:flex; justify-content:center; align-items:center;
+    font-family:'Bodoni Moda', serif; color:var(--gold-light);
+    cursor:pointer; -webkit-tap-highlight-color: transparent;
+  }
+  #universe{position:fixed; inset:0; z-index:0}
+  #gold-dust{position:fixed; inset:0; z-index:1; pointer-events:none}
+  #shooting{position:fixed; inset:0; z-index:2; pointer-events:none}
+
+ .vignette{position:fixed; inset:0; z-index:3; pointer-events:none;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.8) 100%),
+                linear-gradient(to bottom, rgba(0,0,0,0.3), transparent 30%, transparent 70%, rgba(0,0,0,0.6));
+  }
+
+ .container{
+    position:relative; z-index:10; width:100%; max-width:460px; height:100vh;
+    display:flex; justify-content:center; align-items:center; padding:20px;
+  }
+ .card{
+    position:relative; width:100%; max-height:92vh; overflow-y:auto; overflow-x:hidden;
+    background: linear-gradient(180deg, rgba(15,12,0,0.9) 0%, rgba(5,4,0,0.95) 100%);
+    border:1px solid rgba(255,215,0,0.12); border-radius:4px;
+    padding:70px 50px 50px;
+    box-shadow: 0 0 0 1px rgba(255,215,0,0.05), 0 0 80px rgba(0,0,0,1), 0 0 120px rgba(255,215,0,0.06), inset 0 1px 0 rgba(255,255,255,0.05);
+    backdrop-filter: blur(40px) saturate(1.2);
+    transform: translateY(20px); opacity:0; animation: cardIn 2s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
+  }
+  @keyframes cardIn{ to{transform:translateY(0); opacity:1} }
+ .card::-webkit-scrollbar{width:1px}.card::-webkit-scrollbar-thumb{background:var(--gold); opacity:0.3}
+
+ .frame-corner{position:absolute; width:28px; height:28px; border-color:rgba(255,215,0,0.3); border-style:solid; transition:0.6s}
+ .frame-corner.tl{top:15px; left:15px; border-width:1px 0 0 1px}
+ .frame-corner.tr{top:15px; right:15px; border-width:1px 1px 0 0}
+ .frame-corner.bl{bottom:15px; left:15px; border-width:0 0 1px 1px}
+ .frame-corner.br{bottom:15px; right:15px; border-width:0 1px 1px 0}
+ .card:hover .frame-corner{border-color:rgba(255,215,0,0.6); width:32px; height:32px}
+
+ .header{margin-bottom:50px; text-align:center}
+ .eyebrow{font-family:'Montserrat', sans-serif; font-weight:200; font-size:9px; letter-spacing:6px; color:rgba(255,215,0,0.5); text-transform:uppercase; margin-bottom:18px}
+ .title{font-family:'Cinzel', serif; font-size:13px; font-weight:600; letter-spacing:10px; color:var(--gold); text-shadow: 0 0 30px rgba(255,215,0,0.6), 0 0 60px rgba(255,215,0,0.2); }
+ .gold-line{width:40px; height:1px; margin:22px auto; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity:0.6}
+
+ .poem{position:relative; min-height:420px}
+ .poem-line{display:block; font-size:21px; line-height:2.1; font-weight:300; letter-spacing:0.2px; color:var(--gold-light); opacity:0; transform:translateY(8px); transition: all 1s cubic-bezier(0.16,1,0.3,1); text-shadow: 0 0 20px rgba(255,215,0,0.1)}
+ .poem-line.visible{opacity:1; transform:translateY(0)}
+ .poem-line.italic{font-style:italic; color:var(--gold); font-weight:400}
+ .poem-line.bold{font-weight:600; color:var(--gold); text-shadow: 0 0 25px rgba(255,215,0,0.7), 0 0 50px rgba(255,215,0,0.3); font-size:22px}
+ .poem-line.space{height:28px}
+
+ .signature-block{margin-top:50px; text-align:center; opacity:0; animation: fadeIn 2s forwards 8s}
+  @keyframes fadeIn{to{opacity:1}}
+ .sep{width:1px; height:60px; background:linear-gradient(to bottom, transparent, var(--gold), transparent); margin:0 auto 30px; opacity:0.4}
+ .sign{font-family:'Bodoni Moda', serif; font-style:italic; font-size:28px; color:var(--gold); text-shadow:0 0 20px rgba(255,215,0,0.5)}
+ .date{font-family:'Montserrat', sans-serif; font-weight:200; font-size:9px; letter-spacing:3px; color:rgba(255,215,0,0.4); margin-top:12px; text-transform:uppercase}
+
+ .player{margin-top:45px; display:flex; flex-direction:column; align-items:center; gap:12px}
+ .play-btn{
+    width:62px; height:62px; border-radius:50%; border:1px solid rgba(255,215,0,0.25);
+    background: radial-gradient(circle, rgba(255,215,0,0.12), transparent);
+    color:var(--gold); display:flex; justify-content:center; align-items:center;
+    cursor:pointer; transition: all 0.5s; font-size:18px; position:relative;
+  }
+ .play-btn::before{content:''; position:absolute; inset:-6px; border-radius:50%; border:1px solid rgba(255,215,0,0.1); animation: ring 3s infinite}
+  @keyframes ring{0%{transform:scale(1); opacity:1} 100%{transform:scale(1.4); opacity:0}}
+ .play-btn:hover{background:var(--gold); color:#000; box-shadow:0 0 40px var(--gold); transform:scale(1.05)}
+ .play-btn.playing{background:var(--gold); color:#000; box-shadow:0 0 40px var(--gold)}
+ .play-text{font-family:'Montserrat', sans-serif; font-size:9px; letter-spacing:3px; color:rgba(255,215,0,0.5); text-transform:uppercase}
+
+ .hint{position:fixed; bottom:25px; left:50%; transform:translateX(-50%); z-index:20; font-family:'Montserrat', sans-serif; font-size:9px; letter-spacing:3px; color:rgba(255,215,0,0.3); text-transform:uppercase; animation: hintPulse 2.5s infinite; pointer-events:none}
+  @keyframes hintPulse{0%,100%{opacity:0.3} 50%{opacity:0.7}}
+</style>
+</head>
+<body>
+
+<audio id="audio" loop preload="auto" crossorigin="anonymous">
+  <source src="https://cdn.pixabay.com/audio/2023/01/audio_816821e627.mp3" type="audio/mpeg">
+</audio>
+
+<canvas id="universe"></canvas>
+<canvas id="gold-dust"></canvas>
+<canvas id="shooting"></canvas>
+<div class="vignette"></div>
+
+<div class="container">
+  <div class="card" id="card">
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+
+    <div class="header">
+      <div class="eyebrow">Con todo mi amor</div>
+      <div class="title">PARA MAMÁ</div>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="poem" id="poem">
+      <!-- Se llena con JS letra por letra -->
+    </div>
+
+    <div class="signature-block" id="signature">
+      <div class="sep"></div>
+      <div class="sign">Te amo, mamá ♡</div>
+      <div class="date">Gracias por todo y por tanto — <span id="currentYear"></span></div>
+    </div>
+
+    <div class="player">
+      <button class="play-btn" id="playBtn">▶</button>
+      <div class="play-text" id="playText">Toca para escuchar</div>
+    </div>
+  </div>
+</div>
+
+<div class="hint" id="hint">Toca la pantalla • Hay música</div>
+
+<script>
+// Obtener el año actual para la firma
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+// ================== 1. UNIVERSO ESTRELLADO REALISTA ==================
+const uniCanvas = document.getElementById('universe');
+const uniCtx = uniCanvas.getContext('2d');
+let UW, UH, stars=[];
+function resizeUni(){ UW=uniCanvas.width=window.innerWidth; UH=uniCanvas.height=window.innerHeight; }
+window.addEventListener('resize', resizeUni); resizeUni();
+for(let i=0;i<350;i++){
+  stars.push({
+    x:Math.random()*UW, y:Math.random()*UH,
+    r: Math.random()*1.5, r2: Math.random()*2.5,
+    o: Math.random()*0.8+0.2, tw: Math.random()*0.03,
+    color: Math.random()<0.15? '#FFD700' : '#FFFFFF',
+    speed: Math.random()*0.15
+  });
+}
+function drawUni(){
+  uniCtx.clearRect(0,0,UW,UH);
+  stars.forEach(s=>{
+    s.o += s.tw; if(s.o>1 || s.o<0.2) s.tw*=-1;
+    s.y -= s.speed; if(s.y<0){s.y=UH; s.x=Math.random()*UW}
+    uniCtx.beginPath();
+    uniCtx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    uniCtx.fillStyle = s.color;
+    uniCtx.globalAlpha = s.o;
+    uniCtx.shadowBlur = s.color=='#FFD700'? 8 : 0;
+    uniCtx.shadowColor = s.color;
+    uniCtx.fill();
+    uniCtx.shadowBlur=0; uniCtx.globalAlpha=1;
+    // Cruz de estrella brillante
+    if(s.r>1.2 && s.o>0.7){
+      uniCtx.beginPath(); uniCtx.moveTo(s.x-s.r2, s.y); uniCtx.lineTo(s.x+s.r2, s.y);
+      uniCtx.moveTo(s.x, s.y-s.r2); uniCtx.lineTo(s.x, s.y+s.r2);
+      uniCtx.strokeStyle=s.color; uniCtx.globalAlpha=s.o*0.3; uniCtx.lineWidth=0.5; uniCtx.stroke(); uniCtx.globalAlpha=1;
+    }
+  });
+  requestAnimationFrame(drawUni);
+}
+drawUni();
+
+// ================== 2. POLVO DE ORO FLOTANDO ==================
+const goldCanvas = document.getElementById('gold-dust');
+const goldCtx = goldCanvas.getContext('2d');
+let GW, GH, dust=[];
+function resizeGold(){ GW=goldCanvas.width=window.innerWidth; GH=goldCanvas.height=window.innerHeight; }
+window.addEventListener('resize', resizeGold); resizeGold();
+for(let i=0;i<120;i++) dust.push({x:Math.random()*GW, y:Math.random()*GH, vx:(Math.random()-0.5)*0.3, vy:0.1+Math.random()*0.9, r:Math.random()*2+0.3, o:Math.random()*0.8+0.2, sw:Math.random()*0.05});
+function drawGold(){
+  goldCtx.clearRect(0,0,GW,GH);
+  dust.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy; p.o+=p.sw; if(p.o>1||p.o<0.1) p.sw*=-1;
+    if(p.y>GH){p.y=-10; p.x=Math.random()*GW} if(p.x<0||p.x>GW) p.vx*=-1;
+    goldCtx.beginPath(); goldCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    goldCtx.fillStyle=`rgba(255,215,0,${p.o})`; goldCtx.shadowBlur=12; goldCtx.shadowColor='#FFD700'; goldCtx.fill(); goldCtx.shadowBlur=0;
+  });
+  requestAnimationFrame(drawGold);
+}
+drawGold();
+
+// ================== 3. ESTRELLAS FUGAZES ==================
+const shootCanvas = document.getElementById('shooting');
+const shootCtx = shootCanvas.getContext('2d');
+let SW, SH;
+function resizeShoot(){ SW=shootCanvas.width=window.innerWidth; SH=shootCanvas.height=window.innerHeight; }
+window.addEventListener('resize', resizeShoot); resizeShoot();
+let shooters=[];
+function createShooter(){
+  if(Math.random()<0.015) shooters.push({x:Math.random()*SW*0.6, y:Math.random()*SH*0.3, len:100+Math.random()*150, speed:8+Math.random()*8, o:1});
+}
+function drawShooters(){
+  shootCtx.clearRect(0,0,SW,SH);
+  createShooter();
+  shooters.forEach((s,idx)=>{
+    s.x+=s.speed; s.y+=s.speed*0.4; s.o-=0.02;
+    let grad = shootCtx.createLinearGradient(s.x-s.len, s.y-s.len*0.4, s.x, s.y);
+    grad.addColorStop(0, 'rgba(255,215,0,0)'); grad.addColorStop(1, `rgba(255,215,0,${s.o})`);
+    shootCtx.beginPath(); shootCtx.moveTo(s.x-s.len, s.y-s.len*0.4); shootCtx.lineTo(s.x, s.y);
+    shootCtx.strokeStyle=grad; shootCtx.lineWidth=1.5; shootCtx.stroke();
+    if(s.o<=0) shooters.splice(idx,1);
+  });
+  requestAnimationFrame(drawShooters);
+}
+drawShooters();
+
+// ================== 4. POEMA ESCRITURA LETRA POR LETRA ==================
+const poemaTexto = [
+  {t:"Si me preguntan", c:""},
+  {t:"de dónde saqué lo bueno,", c:""},
+  {t:"digo tu nombre sin pensarlo.", c:"italic"},
+  {t:"", c:"space"},
+  {t:"Gracias por las desveladas", c:""},
+  {t:"que nunca contaste,", c:""},
+  {t:"por quedarte con hambre", c:""},
+  {t:"para que yo comiera.", c:""},
+  {t:"", c:"space"},
+  {t:"Por regañarme cuando hacía falta", c:""},
+  {t:"y abrazarme cuando más lo necesitaba.", c:""},
+  {t:"", c:"space"},
+  {t:"Por tus manos que todo lo curan,", c:""},
+  {t:"por tu risa que todo lo arregla.", c:""},
+  {t:"", c:"space"},
+  {t:"No hay nada que podamos hacer", c:"bold"},
+  {t:"para pagarte tanto amor.", c:"bold"},
+  {t:"Solo amarte,", c:""},
+  {t:"hoy y siempre.", c:"italic"},
+];
+
+const poemContainer = document.getElementById('poem');
+poemaTexto.forEach(obj=>{
+  const span = document.createElement('span');
+  span.className = `poem-line ${obj.c}`;
+  if(obj.c==='space'){ span.innerHTML=' '; }
+  else span.textContent = obj.t;
+  poemContainer.appendChild(span);
+});
+
+const lines = document.querySelectorAll('.poem-line');
+let currentLine = 0;
+function showNextLine(){
+  if(currentLine < lines.length){
+    lines[currentLine].classList.add('visible');
+    currentLine++;
+    setTimeout(showNextLine, lines[currentLine-1]?.classList.contains('space')? 400 : 700);
+  }
+}
+setTimeout(showNextLine, 1200);
+
+// ================== 5. AUDIO CON FADE IN ==================
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('playBtn');
+const playText = document.getElementById('playText');
+const hint = document.getElementById('hint');
+let isPlaying=false;
+
+function fadeInAudio(){
+  audio.volume=0;
+  audio.play();
+  let v=0;
+  let fade = setInterval(()=>{
+    v+=0.02;
+    if(v >= 0.8){ // Target volume set to 0.8
+      v = 0.8;
+      clearInterval(fade);
+    }
+    audio.volume = v;
+  }, 100); // Adjust interval time for smoother/faster fade
+}
+
+function fadeOutAudio(){
+  let v = audio.volume;
+  let fade = setInterval(()=>{
+    v-=0.02;
+    if(v <= 0){
+      v=0;
+      audio.pause();
+      clearInterval(fade);
+    }
+    audio.volume = v;
+  }, 100);
+}
+
+playBtn.addEventListener('click', (event)=>{
+  event.stopPropagation(); // Prevent card click event from firing
+  if(isPlaying){
+    fadeOutAudio();
+    playBtn.textContent = '▶';
+    playBtn.classList.remove('playing');
+    playText.textContent = 'Toca para escuchar';
+    hint.style.opacity = '1'; // Show hint again
+    hint.style.display = 'block';
+  } else {
+    fadeInAudio();
+    playBtn.textContent = '❚❚';
+    playBtn.classList.add('playing');
+    playText.textContent = 'Sonando...';
+    hint.style.opacity = '0'; // Hide hint once music starts
+    setTimeout(() => { hint.style.display = 'none'; }, 500); // Completely hide after fade
+  }
+  isPlaying = !isPlaying;
+});
+
+// Hide hint after some time if no interaction
+setTimeout(() => {
+  if (!isPlaying) {
+    hint.style.opacity = '0';
+    setTimeout(() => {
+      hint.style.display = 'none';
+    }, 500);
+  }
+}, 5000);
+
+// Also handle interaction with the card to start music (if not playing)
+document.getElementById('card').addEventListener('click', () => {
+  if (!isPlaying) {
+    playBtn.click(); // Simulate click on play button
+  }
+});
+
+// Ensure initial hint state
+hint.style.opacity = '1';
+hint.style.display = 'block';
+
+</script>
+
+</body>
+</html>
