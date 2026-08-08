@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz cumpleaños Yoyis</title>
+<style>
+  body { 
+    margin: 0; 
+    background: #fff5f7; 
+    font-family: 'Segoe UI', cursive; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    overflow: hidden; 
+  }
+  .card { 
+    position: relative; 
+    width: 340px; 
+    background: white; 
+    border-radius: 30px; 
+    box-shadow: 0 20px 40px rgba(255,182,193,0.4); 
+    padding: 40px 30px; 
+    text-align: center; 
+    animation: float 3s ease-in-out infinite; 
+    border: 3px solid #ffccd5; 
+    z-index: 1; 
+  }
+  @keyframes float { 
+    0%, 100% { transform: translateY(0px); } 
+    50% { transform: translateY(-10px); } 
+  }
+  .star { 
+    font-size: 60px; 
+    animation: spin 4s linear infinite; 
+    display: inline-block; 
+  }
+  @keyframes spin { 
+    0% { transform: rotate(0deg) scale(1); } 
+    50% { transform: rotate(10deg) scale(1.1); } 
+    100% { transform: rotate(0deg) scale(1); } 
+  }
+  h1 { color: #ff8fa3; font-size: 26px; margin: 10px 0; }
+  p { color: #5a3a42; line-height: 1.7; font-size: 16px; white-space: pre-line; }
+
+  /* Elementos que pasan EN FRENTE */
+  .frente { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none; 
+    z-index: 10; /* ¡Aquí se ponen enfrente de todo! */
+  }
+  .elemento { 
+    position: absolute; 
+    animation: caer 6s linear infinite; 
+  }
+  @keyframes caer { 
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; } 
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } 
+  }
+</style>
+</head>
+<body>
+
+  <div class="frente">
+    <div class="elemento" style="left:12%; animation-delay:0s; font-size:22px;">💖</div>
+    <div class="elemento" style="left:28%; animation-delay:1s; font-size:23px;">🌸</div>
+    <div class="elemento" style="left:45%; animation-delay:2s; font-size:24px;">🎂</div>
+    <div class="elemento" style="left:62%; animation-delay:0.5s; font-size:22px;">💕</div>
+    <div class="elemento" style="left:78%; animation-delay:1.5s; font-size:23px;">🌷</div>
+    <div class="elemento" style="left:88%; animation-delay:2.5s; font-size:22px;">🎂</div>
+    <div class="elemento" style="left:5%;  animation-delay:3s; font-size:22px;">💗</div>
+    <div class="elemento" style="left:92%; animation-delay:3.5s; font-size:23px;">🌼</div>
+  </div>
+
+  <div class="card">
+    <div class="star">⭐</div>
+    <h1>Feliz cumpleaños Yoyis ♡</h1>
+    <p>Para mi mejor amiga, hoy y siempre
+
+Yoyis,
+hoy el calendario te celebra,
+pero yo te celebro todos los días.
+
+Eres risas que no se planean,
+secretos bien guardados,
+la que llega sin avisar y hace que todo pese menos.
+
+Que la vida te devuelva bonito
+todo lo bonito que tú das.
+
+Feliz vida, Yoyis.
+Te quiero muchísimo.
+
+- Tu Pollito</p>
+  </div>
+
+</body>
+</html>
