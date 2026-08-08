@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Mamá - Gracias por todo</title>
+<style>
+  body{
+    margin:0;
+    background:#000000;
+    font-family:'Segoe UI', cursive;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+  }
+  .card{
+    position:relative;
+    width:360px;
+    background:#0a0a0a;
+    border-radius:30px;
+    box-shadow:0 0 30px rgba(255,221,0,0.3);
+    padding:40px 30px;
+    text-align:center;
+    border:2px solid #ffdd00;
+    z-index:1;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  .icon {
+    font-size: 60px;
+    color: #ffdd00;
+    animation: pulse 2s linear infinite;
+    display: inline-block;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  h1 {
+    color: #ffdd00;
+    font-size: 32px;
+    margin: 15px 0;
+    text-shadow: 0 0 10px rgba(255,221,0,0.5);
+  }
+  p {
+    color: #cccccc;
+    line-height: 1.8;
+    font-size: 18px;
+    white-space: pre-line;
+    margin-bottom: 20px;
+  }
+  .signature {
+    font-family: 'Dancing Script', cursive; /* Usar una fuente más elegante si está disponible */
+    font-size: 28px;
+    color: #ffdd00;
+    margin-top: 25px;
+    text-shadow: 0 0 8px rgba(255,221,0,0.4);
+  }
+
+  /* Elementos que pasan EN FRENTE */
+  .frente {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10; /* ¡Aquí se ponen enfrente de todo! */
+  }
+  .elemento {
+    position: absolute;
+    animation: caer 8s linear infinite;
+    color: #ffdd00; /* Color de los elementos que caen */
+    text-shadow: 0 0 5px rgba(255,221,0,0.5);
+  }
+  @keyframes caer {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Botón de música */
+  .boton-musica {
+    margin-top: 25px;
+    background: linear-gradient(90deg, #ffdd00, #ffc400);
+    color: #333;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 221, 0, 0.4);
+    transition: all 0.3s ease;
+    font-weight: bold;
+  }
+
+  .boton-musica:hover {
+    background: linear-gradient(90deg, #ffc400, #ffdd00);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(255, 221, 0, 0.6);
+  }
+</style>
+</head>
+<body>
+
+  <!-- El elemento de audio se ha movido dentro del body para una estructura HTML correcta -->
+  <audio id="cancion" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+  </audio>
+
+  <div class="frente">
+    <div class="elemento" style="left:10%; animation-delay:0s; font-size:25px;">⭐</div>
+    <div class="elemento" style="left:25%; animation-delay:1.5s; font-size:22px;">✨</div>
+    <div class="elemento" style="left:40%; animation-delay:3s; font-size:28px;">🌟</div>
+    <div class="elemento" style="left:55%; animation-delay:0.8s; font-size:23px;">⭐</div>
+    <div class="elemento" style="left:70%; animation-delay:2.2s; font-size:26px;">✨</div>
+    <div class="elemento" style="left:85%; animation-delay:4s; font-size:24px;">🌟</div>
+    <div class="elemento" style="left:5%; animation-delay:2.5s; font-size:20px;">⭐</div>
+    <div class="elemento" style="left:90%; animation-delay:0.3s; font-size:27px;">✨</div>
+  </div>
+
+  <div class="card">
+    <div class="icon">👑</div>
+    <h1>Para la mejor Mamá del mundo</h1>
+    <p>
+      Querida Mamá,
+      <br><br>
+      Hoy y siempre, mi corazón se llena de gratitud al pensar en ti.
+      Eres mi guía, mi fuerza, mi primer amor y mi eterna confidente.
+      Cada día me enseñas el verdadero significado del amor incondicional
+      y la resiliencia.
+      <br><br>
+      Gracias por tus abrazos que curan,
+      por tus consejos sabios,
+      por tu paciencia infinita
+      y por ser el pilar de nuestra familia.
+      <br><br>
+      Que la vida te colme de alegría, paz y todo lo hermoso que mereces.
+      Te quiero con todo mi ser, hoy, mañana y siempre.
+    </p>
+    <div class="signature">Con amor, Tu [Hijo/Hija]</div>
+    <button class="boton-musica" id="boton">🎵 Toca para poner música</button>
+  </div>
+
+<script>
+  const musica = document.getElementById('cancion');
+  const boton = document.getElementById('boton');
+
+  boton.addEventListener('click', function() {
+    if (musica.paused) {
+      musica.play();
+      boton.textContent = '🔊 ¡Sonando! 🎉';
+    } else {
+      musica.pause();
+      boton.textContent = '🎵 Poner música';
+    }
+  });
+</script>
+
+</body>
+</html>
