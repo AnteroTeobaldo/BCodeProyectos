@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti, mamá ❤️</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 30%, #4b2e66 60%, #e94580 100%);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow-x: hidden;
+  }
+
+  .estrellas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .estrella {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: parpadeo 3s ease-in-out infinite;
+  }
+  @keyframes parpadeo {
+    0%,100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  .contenedor {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px 60px;
+  }
+
+  .caja-boton {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .boton-musica {
+    background: linear-gradient(90deg, #ff4d79, #ff66a3, #ff80bf);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255,77,121,0.4);
+    transition: all 0.3s ease;
+  }
+  .boton-musica:hover {
+    transform: translateY(-3px);
+  }
+  .boton-musica.activo {
+    background: linear-gradient(90deg, #28b463, #58d68d);
+  }
+
+  .titulo {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .titulo h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    color: #fff;
+    text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff66b2;
+    margin-bottom: 10px;
+  }
+  .titulo .sub {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: #ffd6e8;
+  }
+
+  .tarjeta {
+    background: rgba(255,255,255,0.95);
+    border-radius: 30px;
+    padding: 35px 25px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 
+      0 0 0 4px rgba(255,182,193,0.5),
+      0 0 40px rgba(255,105,180,0.3);
+  }
+
+  .poema {
+    text-align: center;
+    color: #4a154b;
+    line-height: 1.9;
+    font-size: clamp(1rem, 3vw, 1.15rem);
+  }
+  .poema h2 {
+    color: #c71585;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+  .poema p {
+    margin-bottom: 12px;
+  }
+  .firma {
+    margin-top: 25px;
+    text-align: right;
+    font-size: 1.05rem;
+    color: #8b005c;
+    font-style: italic;
+  }
+
+  .mensaje-final {
+    margin-top: 30px;
+    text-align: center;
+    color: white;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    text-shadow: 0 0 12px rgba(255,182,193,0.8);
+  }
+</style>
+</head>
+<body>
+
+  <div class="estrellas" id="estrellas"></div>
+
+  <div class="contenedor">
+
+    <div class="caja-boton">
+      <button class="boton-musica" id="boton">
+        🎵 No hay nada que podamos hacer
+      </button>
+    </div>
+
+    <div class="titulo">
+      <h1>Para la mejor mamá ❤️</h1>
+      <p class="sub">No hay nada que agradezca tanto amor</p>
+    </div>
+
+    <div class="tarjeta">
+      <div class="poema">
+        <h2>Gracias, mamá</h2>
+
+        <p>No hay palabras que alcancen para decirte,</p>
+        <p>ni estrellas suficientes para agradecer,</p>
+        <p>todo lo que con amor me has dado,</p>
+        <p>cada día, cada instante, cada amanecer.</p>
+
+        <p>Gracias por tus manos que siempre me cuidan,</p>
+        <p>por tu voz que calma cualquier temor,</p>
+        <p>por creer en mí cuando yo no podía,</p>
+        <p>por ser mi luz, mi refugio y mi calor.</p>
+
+        <p>Me enseñaste que el amor no tiene medida,</p>
+        <p>que la paciencia es el alma del cariño,</p>
+        <p>que aunque todo parezca perdido,</p>
+        <p>siempre hay esperanza, siempre hay un camino.</p>
+
+        <p>No hay distancia ni tiempo que separe,</p>
+        <p>lo que unen tus cuidados y tu bondad,</p>
+        <p>porque llevas en el alma tanta belleza,</p>
+        <p>que iluminas con solo mirarme.</p>
+
+        <p>Dicen que no hay nada más grande en el mundo,</p>
+        <p>y lo entiendo cada día más y más:</p>
+        <p>tu amor, mamá, no tiene comparación,</p>
+        <p>no hay nada que podamos hacer para igualarlo,</p>
+        <p>ni nada que pueda jamás reemplazar.</p>
+
+        <p>Gracias por ser tú, por estar siempre,</p>
+        <p>por darme la vida y enseñarme a vivirla.</p>
+
+        <p class="firma">Con todo mi amor, tu hijo Kevin ❤️</p>
+      </div>
+    </div>
+
+    <div class="mensaje-final">
+      "Te quiero muchísimo, mamá" 💖
+    </div>
+  </div>
+
+<audio id="cancion" loop preload="auto">
+  <source src="cancion.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio.
+
+
+<script>
+  // ESTRELLAS DE FONDO
+  const cajaEstrellas = document.getElementById('estrellas');
+  for (let i = 0; i < 120; i++) {
+    const estrella = document.createElement('div');
+    estrella.classList.add('estrella');
+    const tam = Math.random() * 3 + 1;
+    estrella.style.width = estrella.style.height = `${tam}px`;
+    estrella.style.left = `${Math.random() * 100}%`;
+    estrella.style.top = `${Math.random() * 100}%`;
+    estrella.style.animationDelay = `${Math.random() * 3}s`;
+    cajaEstrellas.appendChild(estrella);
+  }
+
+  // BOTÓN DE MÚSICA
+  const cancion = document.getElementById('cancion');
+  const boton = document.getElementById('boton');
+  let reproduciendo = false;
+
+  boton.addEventListener('click', function() {
+    if (!reproduciendo) {
+      cancion.play().catch(err => alert('Toca de nuevo para escuchar 🎶'));
+      reproduciendo = true;
+      boton.classList.add('activo');
+      boton.textContent = '🔊 Sonando... ❤️';
+    } else {
+      cancion.pause();
+      reproduciendo = false;
+      boton.classList.remove('activo');
+      boton.textContent = '🎵 No hay nada que podamos hacer';
+    }
+  });
+</script>
+
+</body>
+</html>
