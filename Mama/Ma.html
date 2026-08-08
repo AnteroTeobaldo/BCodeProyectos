@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti, mamá ❤️</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #e94560 100%);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ESTRELLAS DE FONDO */
+  .estrellas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .estrella {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: parpadeo 3s ease-in-out infinite;
+  }
+  @keyframes parpadeo {
+    0%,100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  /* CORAZONES FLOTANTES */
+  .corazones {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .corazon {
+    position: absolute;
+    font-size: 24px;
+    animation: flotarCorazon 10s linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes flotarCorazon {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-50px) rotate(360deg); opacity: 0; }
+  }
+
+  /* CONTENEDOR PRINCIPAL */
+  .contenedor {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+  }
+
+  /* TÍTULO */
+  .titulo {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: aparecerDesdeArriba 1.5s ease-out forwards;
+    opacity: 0;
+  }
+  @keyframes aparecerDesdeArriba {
+    0% { opacity: 0; transform: translateY(-40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .titulo h1 {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    color: #fff;
+    text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff66b2, 0 0 60px #ff3399;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  .titulo .sub {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: #ffd6e8;
+    font-style: italic;
+  }
+
+  /* TARJETA DEL POEMA */
+  .tarjeta {
+    background: rgba(255,255,255,0.95);
+    border-radius: 30px;
+    padding: 40px 30px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 
+      0 0 0 4px rgba(255,182,193,0.5),
+      0 0 40px rgba(255,105,180,0.3),
+      inset 0 0 30px rgba(255,228,240,0.5);
+    position: relative;
+    overflow: hidden;
+    animation: aparecerEscala 2s ease-out 0.5s forwards;
+    opacity: 0;
+  }
+  @keyframes aparecerEscala {
+    0% { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .tarjeta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,182,193,0.25), transparent);
+    transform: rotate(45deg);
+    animation: brillo 6s linear infinite;
+  }
+  @keyframes brillo {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+  }
+
+  .poema {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #4a154b;
+    line-height: 2;
+    font-size: clamp(1rem, 3vw, 1.15rem);
+  }
+  .poema h2 {
+    color: #c71585;
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 3px rgba(199,21,133,0.2);
+  }
+  .poema p {
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: aparecerLinea 1.2s ease-out forwards;
+  }
+  @keyframes aparecerLinea {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .poema p:nth-child(2) { animation-delay: 1.0s; }
+  .poema p:nth-child(3) { animation-delay: 1.8s; }
+  .poema p:nth-child(4) { animation-delay: 2.6s; }
+  .poema p:nth-child(5) { animation-delay: 3.4s; }
+  .poema p:nth-child(6) { animation-delay: 4.2s; }
+  .poema p:nth-child(7) { animation-delay: 5.0s; }
+  .poema p:nth-child(8) { animation-delay: 5.8s; }
+  .poema p:nth-child(9) { animation-delay: 6.6s; }
+  .poema p:nth-child(10) { animation-delay: 7.4s; }
+  .poema p:nth-child(11) { animation-delay: 8.2s; }
+  .poema p:nth-child(12) { animation-delay: 9.0s; }
+  .poema p:nth-child(13) { animation-delay: 9.8s; }
+  .poema p:nth-child(14) { animation-delay: 10.6s; }
+  .poema p:nth-child(15) { animation-delay: 11.4s; }
+  .poema p:nth-child(16) { animation-delay: 12.2s; }
+  .poema p:nth-child(17) { animation-delay: 13.0s; }
+  .poema p:nth-child(18) { animation-delay: 13.8s; }
+  .poema p:nth-child(19) { animation-delay: 14.6s; }
+
+  .firma {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 1.05rem;
+    color: #8b005c;
+    font-style: italic;
+  }
+
+  /* BOTÓN DE MÚSICA */
+  .caja-boton {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .boton-musica {
+    background: linear-gradient(90deg, #ff4d79, #ff66a3, #ff80bf);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 25px rgba(255,77,121,0.45);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .boton-musica:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 35px rgba(255,77,121,0.55);
+  }
+  .boton-musica:active {
+    transform: translateY(0) scale(0.98);
+  }
+  .boton-musica.activo {
+    background: linear-gradient(90deg, #28b463, #58d68d);
+    box-shadow: 0 6px 25px rgba(40,180,99,0.45);
+  }
+
+  /* BARRA DE MÚSICA ANIMADA */
+  .barras {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    height: 28px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .barra {
+    width: 5px;
+    background: white;
+    border-radius: 3px 3px 0 0;
+    animation: ritmo 0.55s ease-in-out infinite alternate;
+  }
+  .barra.pausa { animation-play-state: paused; }
+  .barra:nth-child(1) { height: 8px; animation-delay: 0s; }
+  .barra:nth-child(2) { height: 18px; animation-delay: 0.1s; }
+  .barra:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+  .barra:nth-child(4) { height: 22px; animation-delay: 0.05s; }
+  .barra:nth-child(5) { height: 14px; animation-delay: 0.15s; }
+  @keyframes ritmo {
+    0% { height: 6px; }
+    100% { height: 28px; }
+  }
+
+  /* FLOR DE CORAZONES */
+  .flor {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    animation: girarSuave 25s linear infinite;
+  }
+  @keyframes girarSuave {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .petalo {
+    position: absolute;
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(180deg, #ff66b2, #ff3399);
+    border-radius: 50px 50px 0 0;
+    transform-origin: bottom center;
+    box-shadow: inset 0 0 8px rgba(204,0,102,0.3);
+  }
+  .petalo:nth-child(1) { top: 0; left: 40px; transform: rotate(0deg); }
+  .petalo:nth-child(2) { top: 15px; left: 78px; transform: rotate(45deg); }
+  .petalo:nth-child(3) { top: 40px; left: 80px; transform: rotate(90deg); }
+  .petalo:nth-child(4) { top: 60px; left: 42px; transform: rotate(135deg); }
+  .petalo:nth-child(5) { top: 40px; left: 5px; transform: rotate(-135deg); }
+  .petalo:nth-child(6) { top: 15px; left: 0px; transform: rotate(-45deg); }
+  .centro {
+    position: absolute;
+    top: 45px;
+    left: 40px;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #ffd700, #ffb300);
+    border-radius: 50%;
+    box-shadow: 0 0 15px #ffd700;
+  }
+
+  /* MENSAJE FINAL */
+  .mensaje-final {
+    margin-top: 40px;
+    text-align: center;
+    color: white;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    text-shadow: 0 0 12px rgba(255,182,193,0.8);
+    animation: latido 2s ease-in-out infinite;
+  }
+  @keyframes latido {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* LUCES BRILLANTES */
+  .luces {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .luz {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 4px rgba(255,255,255,0.3);
+    animation: destello 4s ease-in-out infinite;
+  }
+  @keyframes destello {
+    0%,100% { opacity: 0; transform: scale(0.2); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* ONDAS DE FONDO */
+  .ondas {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0.35;
+  }
+  .onda {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='%23ff66b2' d='M0,60 C150,120 350,0 600,60 C850,120 1050,0 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E") repeat-x;
+    background-size: 50% 100%;
+  }
+  .onda:nth-child(1) { animation: onda1 8s linear infinite; opacity: 0.5; }
+  .onda:nth-child(2) { animation: onda2 10s linear infinite; opacity: 0.4; }
+  .onda:nth-child(3) { animation: onda3 12s linear infinite; opacity: 0.3; }
+  @keyframes onda1 { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes onda2 { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes onda3 { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+</style>
+</head>
+<body>
+
+  <!-- ESTRELLAS -->
+  <div class="estrellas" id="estrellas"></div>
+
+  <!-- CORAZONES QUE SUBEN -->
+  <div class="corazones" id="corazones"></div>
+
+  <!-- LUCES DESTELLANTES -->
+  <div class="luces" id="luces"></div>
+
+  <!-- ONDAS ABAJO -->
+  <div class="ondas">
+    <div class="onda"></div>
+    <div class="onda"></div>
+    <div class="onda"></div>
+  </div>
+
+  <!-- AUDIO — Canción: No hay nada que podamos hacer -->
+  <audio id="cancion" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+  
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="contenedor">
+
+    <div class="titulo">
+      <h1>Para la mejor mamá ❤️</h1>
+      <p class="sub">No hay nada que podamos hacer para agradecerte tanto amor</p>
+    </div>
+
+    <div class="tarjeta">
+
+      <!-- Flor decorativa -->
+      <div class="flor">
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="centro"></div>
+      </div>
+
+      <div class="poema">
+        <h2>Gracias, mamá</h2>
+
+        <p>No hay palabras que alcancen para decirte,</p>
+        <p>ni estrellas suficientes para agradecer,</p>
+        <p>todo lo que con amor me has dado,</p>
+        <p>cada día, cada instante, cada amanecer.</p>
+
+        <p>Gracias por tus manos que siempre me cuidan,</p>
+        <p>por tu voz que calma cualquier temor,</p>
+        <p>por creer en mí cuando yo no podía,</p>
+        <p>por ser mi luz, mi refugio y mi calor.</p>
+
+        <p>Me enseñaste que el amor no tiene medida,</p>
+        <p>que la paciencia es el alma del cariño,</p>
+        <p>que aunque todo parezca perdido,</p>
+        <p>siempre hay esperanza, siempre hay un camino.</p>
+
+        <p>No hay distancia ni tiempo que separe,</p>
+        <p>lo que unen tus cuidados y tu bondad,</p>
+        <p>porque llevas en el alma tanta belleza,</p>
+        <p>que iluminas con solo mirarme.</p>
+
+        <p>Dicen que no hay nada más grande en el mundo,</p>
+        <p>y lo entiendo cada día más y más:</p>
+        <p>tu amor, mamá, no tiene comparación,</p>
+        <p>no hay nada que podamos hacer para igualarlo,</p>
+        <p>ni nada que pueda jamás reemplazar.</p>
+
+        <p>Gracias por ser tú, por estar siempre,</p>
+        <p>por darme la vida y enseñarme a vivirla.</p>
+        <p>Te quiero con todo mi corazón, mamá.</p>
+
+        <p class="firma">— Con todo mi amor ❤️</p>
+      </div>
+    </div>
+
+    <div class="caja-boton">
+      <button class="boton-musica" id="boton">
+        🎵 Toca para poner música
+        <span class="barras" id="barritas">
+          <span class="barra pausa"></span>
+          <span class="barra pausa"></span>
+          <span class="barra pausa"></span>
+          <span class="barra pausa"></span>
+          <span class="barra pausa"></span>
+        </span>
+      </button>
+    </div>
+
+    <div class="mensaje-final">
+      "No hay nada que podamos hacer para agradecerte tanto amor" 💖
+    </div>
+
+  </div>
+
+<script>
+  // GENERAR ESTRELLAS
+  const cajaEstrellas = document.getElementById('estrellas');
+  for (let i = 0; i < 150; i++) {
+    const estrella = document.createElement('div');
+    estrella.classList.add('estrella');
+    const tam = Math.random() * 3 + 1;
+    estrella.style.width = `${tam}px`;
+    estrella.style.height = `${tam}px`;
+    estrella.style.left = `${Math.random() * 100}%`;
+    estrella.style.top = `${Math.random() * 100}%`;
+    estrella.style.animationDelay = `${Math.random() * 3}s`;
+    cajaEstrellas.appendChild(estrella);
+  }
+
+  // GENERAR CORAZONES FLOTANTES
+  const cajaCorazones = document.getElementById('corazones');
+  const corazonesDisponibles = ['❤️', '💕', '💖', '💗', '💓', '🌹', '✨', '💝'];
+  function crearCorazon() {
+    const corazon = document.createElement('div');
+    corazon.classList.add('corazon');
+    corazon.textContent = corazonesDisponibles[Math.floor(Math.random() * corazonesDisponibles.length)];
+    corazon.style.left = `${Math.random() * 100}%`;
+    corazon.style.fontSize = `${Math.random() * 16 + 16}px`;
+    corazon.style.animationDuration = `${Math.random() * 6 + 8}s`;
+    cajaCorazones.appendChild(corazon);
+    setTimeout(() => corazon.remove(), 14000);
+  }
+  setInterval(crearCorazon, 1200);
+
+  // GENERAR LUCES DESTELLANTES
+  const cajaLuces = document.getElementById('luces');
+  for (let i = 0; i < 40; i++) {
+    const luz = document.createElement('div');
+    luz.classList.add('luz');
+    luz.style.left = `${Math.random() * 100}%`;
+    luz.style.top = `${Math.random() * 100}%`;
+    luz.style.animationDelay = `${Math.random() * 4}s`;
+    luz.style.width = `${Math.random() * 8 + 4}px`;
+    luz.style.height = luz.style.width;
+    cajaLuces.appendChild(luz);
+  }
+
+  // CONTROL DE MÚSICA
+  const cancion = document.getElementById('cancion');
+  const boton = document.getElementById('boton');
+  const barras = document.querySelectorAll('.barra');
+  let reproduciendo = false;
+
+  boton.addEventListener('click', function() {
+    if (!reproduciendo) {
+      cancion.play().catch(err => console.log('Toca primero para escuchar la música'));
+      reproduciendo = true;
+      boton.classList.add('activo');
+      boton.innerHTML = '🔊 Suena: No hay nada que podamos hacer ❤️';
+      barras.forEach(b => b.classList.remove('pausa'));
+    } else {
+      cancion.pause();
+      reproduciendo = false;
+      boton.classList.remove('activo');
+      boton.innerHTML = '🎵 Toca para poner música' +
+        '<span class="barras">' +
+          '<span class="barra pausa"></span>' +
+          '<span class="barra pausa"></span>' +
+          '<span class="barra pausa"></span>' +
+          '<span class="barra pausa"></span>' +
+          '<span class="barra pausa"></span>' +
+        '</span>';
+    }
+  });
+
+  cancion.preload = 'auto';
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti, mamá ❤️</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #e94560 100%);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ESTRELLAS DE FONDO */
+  .estrellas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .estrella {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: parpadeo 3s ease-in-out infinite;
+  }
+  @keyframes parpadeo {
+    0%,100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  /* CORAZONES FLOTANTES */
+  .corazones {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .corazon {
+    position: absolute;
+    font-size: 24px;
+    animation: flotarCorazon 10s linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes flotarCorazon {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-50px) rotate(360deg); opacity: 0; }
+  }
+
+  /* CONTENEDOR PRINCIPAL */
+  .contenedor {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+  }
+
+  /* TÍTULO */
+  .titulo {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: aparecerDesdeArriba 1.5s ease-out forwards;
+    opacity: 0;
+  }
+  @keyframes aparecerDesdeArriba {
+    0% { opacity: 0; transform: translateY(-40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .titulo h1 {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    color: #fff;
+    text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff66b2, 0 0 60px #ff3399;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  .titulo .sub {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: #ffd6e8;
+    font-style: italic;
+  }
+
+  /* TARJETA DEL POEMA */
+  .tarjeta {
+    background: rgba(255,255,255,0.95);
+    border-radius: 30px;
+    padding: 40px 30px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 
+      0 0 0 4px rgba(255,182,193,0.5),
+      0 0 40px rgba(255,105,180,0.3),
+      inset 0 0 30px rgba(255,228,240,0.5);
+    position: relative;
+    overflow: hidden;
+    animation: aparecerEscala 2s ease-out 0.5s forwards;
+    opacity: 0;
+  }
+  @keyframes aparecerEscala {
+    0% { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .tarjeta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,182,193,0.25), transparent);
+    transform: rotate(45deg);
+    animation: brillo 6s linear infinite;
+  }
+  @keyframes brillo {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+  }
+
+  .poema {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #4a154b;
+    line-height: 2;
+    font-size: clamp(1rem, 3vw, 1.15rem);
+  }
+  .poema h2 {
+    color: #c71585;
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 3px rgba(199,21,133,0.2);
+  }
+  .poema p {
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: aparecerLinea 1.2s ease-out forwards;
+  }
+  @keyframes aparecerLinea {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .poema p:nth-child(2) { animation-delay: 1.0s; }
+  .poema p:nth-child(3) { animation-delay: 1.8s; }
+  .poema p:nth-child(4) { animation-delay: 2.6s; }
+  .poema p:nth-child(5) { animation-delay: 3.4s; }
+  .poema p:nth-child(6) { animation-delay: 4.2s; }
+  .poema p:nth-child(7) { animation-delay: 5.0s; }
+  .poema p:nth-child(8) { animation-delay: 5.8s; }
+  .poema p:nth-child(9) { animation-delay: 6.6s; }
+  .poema p:nth-child(10) { animation-delay: 7.4s; }
+  .poema p:nth-child(11) { animation-delay: 8.2s; }
+  .poema p:nth-child(12) { animation-delay: 9.0s; }
+  .poema p:nth-child(13) { animation-delay: 9.8s; }
+  .poema p:nth-child(14) { animation-delay: 10.6s; }
+  .poema p:nth-child(15) { animation-delay: 11.4s; }
+  .poema p:nth-child(16) { animation-delay: 12.2s; }
+  .poema p:nth-child(17) { animation-delay: 13.0s; }
+  .poema p:nth-child(18) { animation-delay: 13.8s; }
+  .poema p:nth-child(19) { animation-delay: 14.6s; }
+
+  .firma {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 1.05rem;
+    color: #8b005c;
+    font-style: italic;
+  }
+
+  /* BOTÓN DE MÚSICA */
+  .caja-boton {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .boton-musica {
+    background: linear-gradient(90deg, #ff4d79, #ff66a3, #ff80bf);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 25px rgba(255,77,121,0.45);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .boton-musica:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 35px rgba(255,77,121,0.55);
+  }
+  .boton-musica:active {
+    transform: translateY(0) scale(0.98);
+  }
+  .boton-musica.activo {
+    background: linear-gradient(90deg, #28b463, #58d68d);
+    box-shadow: 0 6px 25px rgba(40,180,99,0.45);
+  }
+
+  /* BARRA DE MÚSICA ANIMADA */
+  .barras {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    height: 28px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .barra {
+    width: 5px;
+    background: white;
+    border-radius: 3px 3px 0 0;
+    animation: ritmo 0.55s ease-in-out infinite alternate;
+  }
+  .barra.pausa { animation-play-state: paused; }
+  .barra:nth-child(1) { height: 8px; animation-delay: 0s; }
+  .barra:nth-child(2) { height: 18px; animation-delay: 0.1s; }
+  .barra:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+  .barra:nth-child(4) { height: 22px; animation-delay: 0.05s; }
+  .barra:nth-child(5) { height: 14px; animation-delay: 0.15s; }
+  @keyframes ritmo {
+    0% { height: 6px; }
+    100% { height: 28px; }
+  }
+
+  /* FLOR DE CORAZONES */
+  .flor {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    animation: girarSuave 25s linear infinite;
+  }
+  @keyframes girarSuave {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .petalo {
+    position: absolute;
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(180deg, #ff66b2, #ff3399);
+    border-radius: 50px 50px 0 0;
+    transform-origin: bottom center;
+    box-shadow: inset 0 0 8px rgba(204,0,102,0.3);
+  }
+  .petalo:nth-child(1) { top: 0; left: 40px; transform: rotate(0deg); }
+  .petalo:nth-child(2) { top: 15px; left: 78px; transform: rotate(45deg); }
+  .petalo:nth-child(3) { top: 40px; left: 80px; transform: rotate(90deg); }
+  .petalo:nth-child(4) { top: 60px; left: 42px; transform: rotate(135deg); }
+  .petalo:nth-child(5) { top: 40px; left: 5px; transform: rotate(-135deg); }
+  .petalo:nth-child(6) { top: 15px; left: 0px; transform: rotate(-45deg); }
+  .centro {
+    position: absolute;
+    top: 45px;
+    left: 40px;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #ffd700, #ffb300);
+    border-radius: 50%;
+    box-shadow: 0 0 15px #ffd700;
+  }
+
+  /* MENSAJE FINAL */
+  .mensaje-final {
+    margin-top: 40px;
+    text-align: center;
+    color: white;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    text-shadow: 0 0 12px rgba(255,182,193,0.8);
+    animation: latido 2s ease-in-out infinite;
+  }
+  @keyframes latido {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* LUCES BRILLANTES */
+  .luces {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .luz {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 4px rgba(255,255,255,0.3);
+    animation: destello 4s ease-in-out infinite;
+  }
+  @keyframes destello {
+    0%,100% { opacity: 0; transform: scale(0.2); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* ONDAS DE FONDO */
+  .ondas {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0.35;
+  }
+  .onda {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='%23ff66b2' d='M0,60 C150,120 350,0 600,60 C850,120 1050,0 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E") repeat-x;
+    background-size: 50% 100%;
+  }
+  .onda:nth-child(1) { animation: onda1 8s linear infinite; opacity: 0.5; }
+  .onda:nth-child(2) { animation: onda2 10s linear infinite; opacity: 0.4; }
+  .onda:nth-child(3) { animation: onda3 12s linear infinite; opacity: 0.3; }
+  @keyframes onda1 { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes onda2 { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes onda3 { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+</style>
+</head>
+<body>
+
+  <!-- ESTRELLAS -->
+  <div class="estrellas" id="estrellas"></div>
+
+  <!-- CORAZONES QUE SUBEN -->
+  <div class="corazones" id="corazones"></div>
+
+  <!-- LUCES DESTELLANTES -->
+  <div class="luces" id="luces"></div>
+
+  <!-- ONDAS ABAJO -->
+  <div class="ondas">
+    <div class="onda"></div>
+    <div class="onda"></div>
+    <div class="onda"></div>
+  </div>
+
+  <!-- AUDIO — Canción: No hay nada que podamos hacer -->
+  <audio id="cancion" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+  
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="contenedor">
+
+    <div class="titulo">
+      <h1>Para la mejor mamá ❤️</h1>
+      <p class="sub">No hay nada que podamos hacer para agradecerte tanto amor</p>
+    </div>
+
+    <div class="tarjeta">
+
+      <!-- Flor decorativa -->
+      <div class="flor">
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="centro"></div>
+      </div>
+
+      <div class="poema">
+        <h2>Gracias, mamá</h2>
+
+        <p>No hay palabras que alcancen para decirte,</p>
+        <p>ni estrellas suficientes para agradecer,</p>
+        <p>todo lo que con amor me has dado,</p>
+        <p>cada día, cada instante, cada amanecer.</p>
+
+        <p>Gracias por tus manos que siempre me cuidan,</p>
+        <p>por tu voz que calma cualquier temor,</p>
+        <p>por creer en mí cuando yo no podía,</p>
+        <p>por ser mi luz, mi refugio y mi calor.</p>
+
+        <p>Me enseñaste que el amor no tiene medida,</p>
+        <p>que la paciencia es el alma del cariño,</p>
+        <p>que aunque todo parezca perdido,</p>
+        <p>siempre hay esperanza, siempre hay un camino.</p>
+
+        <p>No hay distancia ni tiempo que separe,</p>
+        <p>lo que unen tus cuidados y tu bondad,</p>
+        <p>porque llevas en el alma tanta belleza,</p>
+        <p>que iluminas con solo mirarme.</p>
+
+        <p>Dicen que no hay nada más grande en el mundo,</p>
+        <p>y lo entiendo cada día más y más:</p>
+        <p>tu amor, mamá, no tiene comparación,</p>
+        <p>no hay nada que podamos hacer para igualarlo,</p>
+        <p>ni nada que pueda jamás reemplazar.</p>
+
+        <p>Gracias por ser tú, por estar siempre,</p>
+        <p>por darme la vida y enseñarme a vivirla.</p>
+        <p>Te quiero con todo mi corazón, mamá.</p>
+
+        <p class="firma">— Con todo mi amor ❤️</p>
+      </div>
+    </div>
+
+    <div class="caja-boton">
+      <button class="boton-musica" id="boton">
+        🎵 Toca para poner música
+        <span class="barras" id="barritas">
+          <span class="barra pausa"></span>
+          <span class="barra pausa"></span>
+          <span class="barra pausa"></span>
+          <span class="barra pausa"></span>
+          <span class="barra pausa"></span>
+        </span>
+      </button>
+    </div>
+
+    <div class="mensaje-final">
+      "No hay nada que podamos hacer para agradecerte tanto amor" 💖
+    </div>
+
+  </div>
+
+<script>
+  // GENERAR ESTRELLAS
+  const cajaEstrellas = document.getElementById('estrellas');
+  for (let i = 0; i < 150; i++) {
+    const estrella = document.createElement('div');
+    estrella.classList.add('estrella');
+    const tam = Math.random() * 3 + 1;
+    estrella.style.width = `${tam}px`;
+    estrella.style.height = `${tam}px`;
+    estrella.style.left = `${Math.random() * 100}%`;
+    estrella.style.top = `${Math.random() * 100}%`;
+    estrella.style.animationDelay = `${Math.random() * 3}s`;
+    cajaEstrellas.appendChild(estrella);
+  }
+
+  // GENERAR CORAZONES FLOTANTES
+  const cajaCorazones = document.getElementById('corazones');
+  const corazonesDisponibles = ['❤️', '💕', '💖', '💗', '💓', '🌹', '✨', '💝'];
+  function crearCorazon() {
+    const corazon = document.createElement('div');
+    corazon.classList.add('corazon');
+    corazon.textContent = corazonesDisponibles[Math.floor(Math.random() * corazonesDisponibles.length)];
+    corazon.style.left = `${Math.random() * 100}%`;
+    corazon.style.fontSize = `${Math.random() * 16 + 16}px`;
+    corazon.style.animationDuration = `${Math.random() * 6 + 8}s`;
+    cajaCorazones.appendChild(corazon);
+    setTimeout(() => corazon.remove(), 14000);
+  }
+  setInterval(crearCorazon, 1200);
+
+  // GENERAR LUCES DESTELLANTES
+  const cajaLuces = document.getElementById('luces');
+  for (let i = 0; i < 40; i++) {
+    const luz = document.createElement('div');
+    luz.classList.add('luz');
+    luz.style.left = `${Math.random() * 100}%`;
+    luz.style.top = `${Math.random() * 100}%`;
+    luz.style.animationDelay = `${Math.random() * 4}s`;
+    luz.style.width = `${Math.random() * 8 + 4}px`;
+    luz.style.height = luz.style.width;
+    cajaLuces.appendChild(luz);
+  }
+
+  // CONTROL DE MÚSICA
+  const cancion = document.getElementById('cancion');
+  const boton = document.getElementById('boton');
+  const barras = document.querySelectorAll('.barra');
+  let reproduciendo = false;
+
+  boton.addEventListener('click', function() {
+    if (!reproduciendo) {
+      cancion.play().catch(err => console.log('Toca primero para escuchar la música'));
+      reproduciendo = true;
+      boton.classList.add('activo');
+      boton.innerHTML = '🔊 Suena: No hay nada que podamos hacer ❤️';
+      barras.forEach(b => b.classList.remove('pausa'));
+    } else {
+      cancion.pause();
+      reproduciendo = false;
+      boton.classList.remove('activo');
+      boton.innerHTML = '🎵 Toca para poner música' +
+        '<span class="barras">' +
+          '<span class="barra pausa"></span>' +
+          '<span class="barra pausa"></span>' +
+          '<span class="barra pausa"></span>' +
+          '<span class="barra pausa"></span>' +
+          '<span class="barra pausa"></span>' +
+        '</span>';
+    }
+  });
+
+  cancion.preload = 'auto';
+</script>
+
+</body>
+</html>
