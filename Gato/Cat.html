@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gatito Interactivo 🐱</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #e0f7ff, #fff4e6);
+    overflow: hidden;
+  }
+
+  .escenario {
+    position: relative;
+    width: 400px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* GATO COMPLETO */
+  .gato {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .gato.bailando {
+    animation: baile 0.35s ease-in-out infinite alternate;
+  }
+
+  @keyframes baile {
+    0% { transform: rotate(-8deg) translateY(0); }
+    100% { transform: rotate(8deg) translateY(-15px); }
+  }
+
+  /* CUERPO */
+  .cuerpo {
+    width: 170px;
+    height: 140px;
+    background: linear-gradient(180deg, #ffb366, #ff9933);
+    border-radius: 50% 50% 45% 45%;
+    position: relative;
+    box-shadow: inset -10px -10px 20px rgba(204, 102, 0, 0.3);
+  }
+
+  .panza {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 80px;
+    background: #fff2e6;
+    border-radius: 50%;
+  }
+
+  /* CABEZA */
+  .cabeza {
+    width: 150px;
+    height: 130px;
+    background: linear-gradient(180deg, #ffb366, #ff9933);
+    border-radius: 50%;
+    position: absolute;
+    top: -90px;
+    left: 10px;
+    box-shadow: inset -8px -8px 15px rgba(204, 102, 0, 0.25);
+  }
+
+  /* OREJAS */
+  .oreja {
+    position: absolute;
+    top: -10px;
+    width: 50px;
+    height: 60px;
+    background: linear-gradient(180deg, #ffb366, #ff9933);
+    border-radius: 50% 50% 0 0;
+    transform-origin: bottom center;
+  }
+
+  .oreja.izquierda {
+    left: 10px;
+    transform: rotate(-20deg);
+  }
+  .oreja.derecha {
+    right: 10px;
+    transform: rotate(20deg);
+  }
+
+  .oreja.bailando {
+    animation: moverOrejas 0.35s ease-in-out infinite alternate;
+  }
+  .oreja.izquierda.bailando {
+    animation-name: moverOrejaIzq;
+  }
+  .oreja.derecha.bailando {
+    animation-name: moverOrejaDer;
+  }
+
+  @keyframes moverOrejaIzq {
+    0% { transform: rotate(-25deg); }
+    100% { transform: rotate(-10deg); }
+  }
+  @keyframes moverOrejaDer {
+    0% { transform: rotate(25deg); }
+    100% { transform: rotate(10deg); }
+  }
+
+  .oreja-interna {
+    position: absolute;
+    top: 15px;
+    left: 12px;
+    width: 26px;
+    height: 35px;
+    background: #ffb3c6;
+    border-radius: 50% 50% 0 0;
+  }
+
+  /* OJOS */
+  .ojos {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .ojo {
+    width: 35px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  }
+
+  .pupila {
+    width: 16px;
+    height: 24px;
+    background: #2c1a00;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
+
+  .brillo {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 6px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+  }
+
+  .ojo.parpadeando .pupila {
+    transform: translate(-50%, 100%);
+    height: 2px;
+  }
+  .ojo.parpadeando {
+    animation: parpadeo 0.2s ease-in-out;
+  }
+  @keyframes parpadeo {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(0.05); }
+    100% { transform: scaleY(1); }
+  }
+
+  /* NARIZ */
+  .nariz {
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 12px;
+    background: #ff8095;
+    border-radius: 50%;
+  }
+
+  .nariz::before, .nariz::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    width: 2px;
+    height: 15px;
+    background: #442200;
+  }
+  .nariz::before { left: 3px; transform: rotate(15deg); }
+  .nariz::after { right: 3px; transform: rotate(-15deg); }
+
+  /* BOCA */
+  .boca {
+    position: absolute;
+    top: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 20px;
+  }
+  .boca-linea {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 8px;
+    background: #442200;
+  }
+  .boca-izq, .boca-der {
+    position: absolute;
+    top: 6px;
+    width: 20px;
+    height: 15px;
+    border: 2px solid #442200;
+    border-top: none;
+    border-radius: 0 0 50% 50%;
+  }
+  .boca-izq { left: 0; }
+  .boca-der { right: 0; }
+
+  .gato.bailando .boca-izq,
+  .gato.bailando .boca-der {
+    animation: sonrisa 0.35s ease-in-out infinite alternate;
+  }
+  @keyframes sonrisa {
+    0% { border-radius: 0 0 50% 50%; }
+    100% { border-radius: 0 0 40% 40%; height: 18px; }
+  }
+
+  /* BIGOTES */
+  .bigotes {
+    position: absolute;
+    top: 72px;
+    width: 100%;
+  }
+  .bigote {
+    position: absolute;
+    width: 45px;
+    height: 2px;
+    background: #442200;
+  }
+  .bigote.izq1 { left: -35px; top: 0; transform: rotate(-8deg); }
+  .bigote.izq2 { left: -38px; top: 10px; transform: rotate(0deg); }
+  .bigote.izq3 { left: -35px; top: 20px; transform: rotate(8deg); }
+  .bigote.der1 { right: -35px; top: 0; transform: rotate(8deg); }
+  .bigote.der2 { right: -38px; top: 10px; transform: rotate(0deg); }
+  .bigote.der3 { right: -35px; top: 20px; transform: rotate(-8deg); }
+
+  .gato.bailando .bigote {
+    animation: mueveBigotes 0.35s ease-in-out infinite alternate;
+  }
+  @keyframes mueveBigotes {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(12deg); }
+  }
+
+  /* COLA */
+  .cola {
+    position: absolute;
+    bottom: 30px;
+    right: -45px;
+    width: 35px;
+    height: 110px;
+    background: linear-gradient(180deg, #ffb366, #ff9933);
+    border-radius: 20px;
+    transform-origin: top center;
+    transform: rotate(30deg);
+  }
+  .cola-punta {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 35px;
+    height: 40px;
+    background: #fff2e6;
+    border-radius: 50%;
+  }
+
+  .cola.bailando {
+    animation: mueveCola 0.35s ease-in-out infinite alternate;
+  }
+  @keyframes mueveCola {
+    0% { transform: rotate(20deg); }
+    100% { transform: rotate(45deg); }
+  }
+
+  /* PATAS */
+  .pata {
+    position: absolute;
+    bottom: -10px;
+    width: 30px;
+    height: 40px;
+    background: linear-gradient(180deg, #ffb366, #ff9933);
+    border-radius: 15px 15px 12px 12px;
+  }
+  .pata.izq { left: 30px; }
+  .pata.der { right: 30px; }
+
+  .gato.bailando .pata.izq {
+    animation: pataIzq 0.35s ease-in-out infinite alternate;
+  }
+  .gato.bailando .pata.der {
+    animation: pataDer 0.35s ease-in-out infinite alternate;
+  }
+  @keyframes pataIzq {
+    0% { transform: translateY(0) rotate(-5deg); }
+    100% { transform: translateY(-8px) rotate(5deg); }
+  }
+  @keyframes pataDer {
+    0% { transform: translateY(-8px) rotate(-5deg); }
+    100% { transform: translateY(0) rotate(5deg); }
+  }
+
+  /* GLOBO DE DIÁLOGO */
+  .habla {
+    position: absolute;
+    top: -130px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-size: 18px;
+    color: #ff6600;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .habla.visible {
+    opacity: 1;
+  }
+
+  /* BOTONES */
+  .botones {
+    margin-top: 40px;
+    display: flex;
+    gap: 15px;
+  }
+  button {
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .btn-baile {
+    background: linear-gradient(90deg, #ff6666, #ff9933);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255,102,51,0.3);
+  }
+  .btn-baile:hover {
+    transform: scale(1.05);
+  }
+  .btn-musica {
+    background: linear-gradient(90deg, #6699ff, #33ccff);
+    color: white;
+    box-shadow: 0 4px 15px rgba(51,153,255,0.3);
+  }
+
+  .instruccion {
+    margin-top: 25px;
+    color: #884400;
+    font-size: 15px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <div class="escenario">
+    <div class="gato" id="gato">
+      <!-- Orejas -->
+      <div class="oreja izquierda" id="orejaIzq">
+        <div class="oreja-interna"></div>
+      </div>
+      <div class="oreja derecha" id="orejaDer">
+        <div class="oreja-interna"></div>
+      </div>
+
+      <!-- Cabeza -->
+      <div class="cabeza">
+        <div class="ojos">
+          <div class="ojo" id="ojoIzq">
+            <div class="pupila"></div>
+            <div class="brillo"></div>
+          </div>
+          <div class="ojo" id="ojoDer">
+            <div class="pupila"></div>
+            <div class="brillo"></div>
+          </div>
+        </div>
+        <div class="nariz"></div>
+        <div class="boca">
+          <div class="boca-linea"></div>
+          <div class="boca-izq"></div>
+          <div class="boca-der"></div>
+        </div>
+        <div class="bigotes">
+          <div class="bigote izq1"></div>
+          <div class="bigote izq2"></div>
+          <div class="bigote izq3"></div>
+          <div class="bigote der1"></div>
+          <div class="bigote der2"></div>
+          <div class="bigote der3"></div>
+        </div>
+      </div>
+
+      <!-- Cuerpo -->
+      <div class="cuerpo">
+        <div class="panza"></div>
+        <div class="pata izq"></div>
+        <div class="pata der"></div>
+      </div>
+
+      <!-- Cola -->
+      <div class="cola" id="cola">
+        <div class="cola-punta"></div>
+      </div>
+
+      <!-- Diálogo -->
+      <div class="habla" id="habla">¡Miau! 🐱</div>
+    </div>
+  </div>
+
+  <div class="botones">
+    <button class="btn-baile" id="btnBaile">💃 ¡Baila!</button>
+    <button class="btn-musica" id="btnMusica">🎵 Música</button>
+  </div>
+
+  <p class="instruccion">Mueve el ratón → lo sigue con los ojos<br>Toca al gatito → reacciona 😺</p>
+
+  <audio id="cancion" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+  </audio>
+
+<script>
+  const gato = document.getElementById('gato');
+  const ojoIzq = document.getElementById('ojoIzq');
+  const ojoDer = document.getElementById('ojoDer');
+  const pupilaIzq = ojoIzq.querySelector('.pupila');
+  const pupilaDer = ojoDer.querySelector('.pupila');
+  const orejaIzq = document.getElementById('orejaIzq');
+  const orejaDer = document.getElementById('orejaDer');
+  const cola = document.getElementById('cola');
+  const habla = document.getElementById('habla');
+  const btnBaile = document.getElementById('btnBaile');
+  const btnMusica = document.getElementById('btnMusica');
+  const cancion = document.getElementById('cancion');
+
+  let estaBailando = false;
+  let frases = ['¡Miau! 🐱', '¡Juega conmigo! 😺', '¡Qué rico! 😻', '¡Bailamos! 💃', 'Ron ron ron 😽', '¡Acaríciame! 🥰'];
+
+  // OJOS SIGUEN EL RATÓN
+  document.addEventListener('mousemove', function(e) {
+    const centroX = window.innerWidth / 2;
+    const centroY = window.innerHeight / 2;
+    const dx = e.clientX - centroX;
+    const dy = e.clientY - centroY;
+    const angulo = Math.atan2(dy, dx);
+    const distancia = Math.min(Math.hypot(dx, dy) / 40, 6);
+
+    const px = Math.cos(angulo) * distancia;
+    const py = Math.sin(angulo) * distancia;
+
+    pupilaIzq.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`;
+    pupilaDer.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`;
+  });
+
+  // PARPADEO AUTOMÁTICO
+  function parpadear() {
+    ojoIzq.classList.add('parpadeando');
+    ojoDer.classList.add('parpadeando');
+    setTimeout(() => {
+      ojoIzq.classList.remove('parpadeando');
+      ojoDer.classList.remove('parpadeando');
+    }, 200);
+    setTimeout(parpadear, Math.random() * 3000 + 2500);
+  }
+  parpadear();
+
+  // AL TOCAR AL GATO
+  gato.addEventListener('click', function() {
+    const frase = frases[Math.floor(Math.random() * frases.length)];
+    habla.textContent = frase;
+    habla.classList.add('visible');
+    setTimeout(() => habla.classList.remove('visible'), 2000);
+  });
+
+  // ACTIVAR / DESACTIVAR BAILE
+  btnBaile.addEventListener('click', function() {
+    estaBailando = !estaBailando;
+    if (estaBailando) {
+      gato.classList.add('bailando');
+      orejaIzq.classList.add('bailando');
+      orejaDer.classList.add('bailando');
+      cola.classList.add('bailando');
+      btnBaile.textContent = '🛑 ¡Para!';
+      habla.textContent = '¡Qué bien se baila! 💃';
+      habla.classList.add('visible');
+    } else {
+      gato.classList.remove('bailando');
+      orejaIzq.classList.remove('bailando');
+      orejaDer.classList.remove('bailando');
+      cola.classList.remove('bailando');
+      btnBaile.textContent = '💃 ¡Baila!';
+      habla.classList.remove('visible');
+    }
+  });
+
+  // MÚSICA
+  btnMusica.addEventListener('click', function() {
+    if (cancion.paused) {
+      cancion.play();
+      btnMusica.textContent = '🔊 Sonando...';
+    } else {
+      cancion.pause();
+      btnMusica.textContent = '🎵 Música';
+    }
+  });
+</script>
+
+</body>
+</html>
