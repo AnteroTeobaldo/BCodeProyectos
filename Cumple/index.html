@@ -14,7 +14,6 @@
     overflow-x: hidden;
   }
 
-  /* ✅ PANTALLA DE CARGA Y SOBRE */
   .pantalla-apertura {
     position: fixed;
     inset: 0;
@@ -46,7 +45,6 @@
   .sobre:hover { transform: translateY(-8px); }
   .sobre:active { transform: translateY(-2px) scale(0.98); }
 
-  /* Solapa del sobre */
   .sobre-solapa {
     position: absolute;
     top: 0; left: 0;
@@ -61,7 +59,6 @@
     transform: rotateX(180deg);
   }
 
-  /* Sello */
   .sobre-sello {
     position: absolute;
     top: 55px; left: 50%;
@@ -83,7 +80,6 @@
     transform: translateX(-50%) scale(0.5) rotate(180deg);
   }
 
-  /* Icono de carga */
   .icono-carga {
     margin-top: 30px;
     width: 40px; height: 40px;
@@ -92,9 +88,7 @@
     border-radius: 50%;
     animation: girarCarga 1s linear infinite;
   }
-  @keyframes girarCarga {
-    to { transform: rotate(360deg); }
-  }
+  @keyframes girarCarga { to { transform: rotate(360deg); } }
 
   .texto-apertura {
     margin-top: 20px;
@@ -109,7 +103,6 @@
     font-size: 14px;
   }
 
-  /* CONTENIDO PRINCIPAL — OCULTO AL INICIO */
   .contenido-principal {
     opacity: 0;
     transform: translateY(30px);
@@ -120,7 +113,6 @@
     transform: translateY(0);
   }
 
-  /* ESTRELLAS LIGERAS */
   .estrellas-fondo {
     position: fixed;
     inset: 0;
@@ -140,7 +132,6 @@
     50% { opacity: 1; box-shadow: 0 0 6px #ffd700; }
   }
 
-  /* CORAZONES INTERACTIVOS — POR ENFRENTE 💖 */
   .corazones-caen {
     position: fixed;
     inset: 0;
@@ -162,7 +153,6 @@
     100% { transform: translateY(105vh) rotate(360deg); opacity: 0.3; }
   }
 
-  /* ESTALLIDO — SIEMPRE VISIBLE */
   .estallido {
     position: fixed;
     pointer-events: none;
@@ -175,8 +165,7 @@
   }
   .estallido .frase {
     position: absolute;
-    top: 55px;
-    left: 50%;
+    top: 55px; left: 50%;
     transform: translateX(-50%);
     font-size: 17px;
     font-weight: bold;
@@ -201,7 +190,6 @@
   @keyframes aparecerFrase { 0%{opacity:0;transform:translateX(-50%)translateY(8px)} 100%{opacity:1;transform:translateX(-50%)translateY(0)} }
   @keyframes ondaBrillo { 0%{opacity:1;transform:scale(0.6)} 100%{opacity:0;transform:scale(2.2)} }
 
-  /* 5 PARTÍCULAS CON RETRASO LARGO */
   .particulas { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
   .particula { position: absolute; font-size: 20px; animation: caer 12s linear forwards; will-change: transform; }
   @keyframes caer {
@@ -209,7 +197,6 @@
     100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
   }
 
-  /* DESTELLOS MÍNIMOS */
   .destellos { position: fixed; inset: 0; pointer-events: none; z-index: 40; }
   .destello {
     position: absolute;
@@ -222,12 +209,10 @@
   }
   @keyframes estallarDestello { 0%{transform:scale(0);opacity:1} 100%{transform:scale(2);opacity:0} }
 
-  /* GLOBOS */
   .globos { position: fixed; inset: 0; pointer-events: none; z-index: 30; }
   .globo { position: absolute; font-size: 32px; animation: flotarGlobo 14s ease-in-out infinite; will-change: transform; }
   @keyframes flotarGlobo { 0%{transform:translateY(100vh)rotate(-6deg)} 50%{transform:translateY(-15vh)rotate(6deg)} 100%{transform:translateY(100vh)rotate(-6deg)} }
 
-  /* TARJETA — BORDE PERFECTO */
   .contenedor-tarjeta {
     position: relative;
     z-index: 100;
@@ -251,7 +236,6 @@
   }
   @keyframes flotar { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
 
-  /* BORDE GIRATORIO */
   .borde-contenedor {
     position: absolute;
     inset: 0;
@@ -330,7 +314,6 @@
 </head>
 <body>
 
-<!-- ✅ SOBRE DE APERTURA -->
 <div class="pantalla-apertura" id="pantallaApertura">
   <div class="sobre" id="sobre">
     <div class="sobre-solapa"></div>
@@ -340,7 +323,6 @@
   <p class="texto-apertura">Toca el sobre para abrirlo ✨<small>Preparando algo especial...</small></p>
 </div>
 
-<!-- ✅ CONTENIDO — OCULTO AL INICIO -->
 <div class="contenido-principal" id="contenidoPrincipal">
   <div class="estrellas-fondo" id="estrellas"></div>
   <div class="corazones-caen" id="corazonesCaen"></div>
@@ -385,7 +367,7 @@
           <p>te encuentre más feliz y más completa.</p>
           <br>
           <p>Brillas con luz propia, Yoyis.</p>
-          <p>Y me siento muy afortunada/o</p>
+          <p>Y me siento muy afortunado</p>
           <p>de poder acompañarte en este camino.</p>
           <br>
           <p>Disfruta tu día como te mereces:</p>
@@ -404,17 +386,21 @@
           tanta felicidad como la que tú das a los demás"<br>
           ✨💝 ¡Felicidades, Yoyis! 💝✨
         </div>
+
       </div>
     </div>
   </div>
 </div>
 
+<!-- 🎵 MÚSICA (sin título visible) -->
+<audio id="audioCumple" preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=amor-tumbado.mp3" type="audio/mpeg">
+
 <script>
-// === 🔔 SONIDO AL ABRIR EL SOBRE ===
 function sonidoAbrirSobre() {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const notas = [523, 659, 784, 1047]; // Do-Mi-Sol-Do 🎵
+    const notas = [523, 659, 784, 1047];
     notas.forEach((freq, i) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -430,7 +416,6 @@ function sonidoAbrirSobre() {
   } catch(e) {}
 }
 
-// === 🔔 SONIDO AL TOCAR CORAZÓN ===
 function sonidoCorazonTocado() {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -447,31 +432,30 @@ function sonidoCorazonTocado() {
   } catch(e) {}
 }
 
-// === ✅ ABRIR SOBRE ===
 const pantallaApertura = document.getElementById('pantallaApertura');
 const sobre = document.getElementById('sobre');
 const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+const audioCumple = document.getElementById('audioCumple');
 let abierto = false;
 
 sobre.addEventListener('click', () => {
   if (abierto) return;
   abierto = true;
+  sonidoAbrirSobre();
+  sobre.classList.add('abierto');
 
-  sonidoAbrirSobre(); // 🔔 Suena al abrir
-
-  sobre.classList.add('abierto'); // Solapa se abre
-
-  // Ocultar pantalla y mostrar contenido
   setTimeout(() => {
     pantallaApertura.classList.add('oculta');
     contenidoPrincipal.classList.add('visible');
-    iniciarTodo(); // Carga todo después de abrir
+    // 🎵 La música suena al abrir el sobre, sin mostrar título
+    audioCumple.play().catch(err => {
+      alert('Asegúrate de tener conexión a internet para escuchar la música ✅');
+    });
+    iniciarTodo();
   }, 600);
 });
 
-// === ✅ INICIAR TODO DESPUÉS DE ABRIR (MÁXIMO RENDIMIENTO) ===
 function iniciarTodo() {
-  // ESTRELLAS
   const cajaEstrellas = document.getElementById('estrellas');
   for (let i = 0; i < 50; i++) {
     const e = document.createElement('div');
@@ -482,7 +466,6 @@ function iniciarTodo() {
     cajaEstrellas.appendChild(e);
   }
 
-  // CORAZONES INTERACTIVOS
   const frases = ['Te quiero', 'Te adoro', 'Mi mejor amiga'];
   const corazonesEmoji = ['❤️','💕','💖','💗','💓','💝'];
   const cajaCorazones = document.getElementById('corazonesCaen');
@@ -513,7 +496,6 @@ function iniciarTodo() {
   setInterval(crearCorazon, 1400);
   for (let i = 0; i < 6; i++) setTimeout(crearCorazon, i * 500);
 
-  // GLOBOS
   const emojisGlobo = ['🎈','🎀','🎁','🎉'];
   const cajaGlobos = document.getElementById('globos');
   for (let i = 0; i < 6; i++) {
@@ -526,7 +508,6 @@ function iniciarTodo() {
     cajaGlobos.appendChild(g);
   }
 
-  // 5 PARTÍCULAS CON RETRASO
   const emojisParticula = ['🌸','🎂','🌷','✨','⭐','🌼','🎁','💫'];
   const cajaParticulas = document.getElementById('particulas');
   const MAX_PARTICULAS = 5;
@@ -545,7 +526,6 @@ function iniciarTodo() {
   for (let i = 0; i < MAX_PARTICULAS; i++) setTimeout(crearParticula, i * 800);
   setInterval(crearParticula, RETRASO_GENERACION);
 
-  // DESTELLOS
   const cajaDestellos = document.getElementById('destellos');
   function crearDestello() {
     const d = document.createElement('div');
