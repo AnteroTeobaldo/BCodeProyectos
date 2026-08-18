@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Feliz Cumpleaños Soledad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* RESET GENERAL */
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins', Arial, sans-serif; background:#1b1310; }
+
+/* LAS PAGINAS ESTAN OCULTAS POR DEFECTO, SOLO LA ACTIVA SE MUESTRA */
+/* IMPORTANTE: EL DISPLAY SE CONTROLA SOLO CON ESTAS DOS REGLAS DE CLASE */
+/* PARA QUE NINGUNA PAGINA QUEDE SIEMPRE ENCIMA DE LAS DEMAS */
+.page { position:fixed; inset:0; width:100%; height:100%; overflow:hidden; display:none; z-index:1; }
+.page.active { display:block; z-index:10; }
+.page.active.flex-page { display:flex; }
+
+/* PAGINA 1: CAJA DE REGALO */
+#page-gift {
+  background: radial-gradient(circle at 50% 30%, #3a1620, #1b0a10 70%);
+}
+.gift-scene {
+  width:100%; height:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:34px;
+  position:relative;
+  z-index:5;
+}
+.gift-title {
+  font-family:'Great Vibes', cursive;
+  font-size:clamp(2.3rem, 9vw, 4rem);
+  color:#ffe9d2;
+  text-align:center;
+  text-shadow:0 0 18px rgba(255,150,90,0.55), 0 0 40px rgba(255,80,60,0.35);
+  animation: titleGlow 2.4s ease-in-out infinite alternate;
+  padding:0 20px;
+}
+@keyframes titleGlow {
+  from { text-shadow:0 0 12px rgba(255,150,90,0.4), 0 0 28px rgba(255,80,60,0.25); }
+  to   { text-shadow:0 0 22px rgba(255,180,110,0.75), 0 0 46px rgba(255,90,60,0.5); }
+}
+
+.gift-box { position:relative; width:220px; height:220px; cursor:pointer; perspective:900px; }
+.box-base {
+  position:absolute; left:10px; right:10px; bottom:10px; height:130px;
+  background:linear-gradient(135deg,#e23a34,#a01916);
+  border-radius:10px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55), inset 0 -10px 20px rgba(0,0,0,0.25);
+}
+.box-lid {
+  position:absolute; left:0; right:0; top:60px; height:56px;
+  background:linear-gradient(135deg,#f0473f,#b3211d);
+  border-radius:10px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.4), inset 0 4px 10px rgba(255,255,255,0.25);
+  transform-origin: 50% 100%;
+  transition: transform 0.9s cubic-bezier(.5,-0.4,.4,1.4), opacity 0.6s ease 0.3s;
+  z-index:6;
+}
+.box-ribbon-v {
+  position:absolute; left:50%; top:0; bottom:10px; width:26px; margin-left:-13px;
+  background:linear-gradient(90deg,#f4c46a,#d9a441,#f4c46a);
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.25);
+  z-index:4;
+}
+.box-ribbon-h {
+  position:absolute; left:10px; right:10px; top:60px; height:26px; margin-top:15px;
+  background:linear-gradient(180deg,#f4c46a,#d9a441,#f4c46a);
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.25);
+  z-index:7;
+}
+.box-bow {
+  position:absolute; left:50%; top:36px; width:90px; height:60px; margin-left:-45px;
+  z-index:8;
+}
+.box-bow div {
+  position:absolute; width:42px; height:42px;
+  background:linear-gradient(135deg,#ffd98a,#d9a441);
+  border-radius:50% 50% 50% 4px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+.box-bow div:nth-child(1){ left:2px; top:6px; transform:rotate(-25deg); }
+.box-bow div:nth-child(2){ right:2px; top:6px; transform:rotate(25deg) scaleX(-1); }
+.box-bow div:nth-child(3){
+  left:50%; top:14px; width:22px; height:22px; margin-left:-11px;
+  border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff0c9, #d9a441);
+}
+.gift-box:hover .box-lid { transform: translateY(-4px); }
+
+.gift-box.opening .box-lid {
+  transform: rotate(-115deg) translate(-40px,-90px);
+  opacity:0;
+}
+.gift-box.opening .box-bow { transform: translateY(-140px) rotate(35deg) scale(0.6); opacity:0; transition: all 0.8s ease-out; }
+.gift-box.opening .box-ribbon-v,
+.gift-box.opening .box-ribbon-h { opacity:0; transition: opacity 0.5s ease 0.2s; }
+.gift-box.opening .box-base { transform: scale(1.05); box-shadow:0 0 70px 20px rgba(255,170,90,0.65); transition: all 0.6s ease; }
+
+.gift-hint {
+  color:rgba(255,235,220,0.85);
+  font-size:1rem;
+  letter-spacing:0.04em;
+  text-align:center;
+  animation: hintPulse 1.8s ease-in-out infinite;
+}
+@keyframes hintPulse { 0%,100%{opacity:0.55;} 50%{opacity:1;} }
+
+#burstLayer {
+  position:absolute; inset:0; pointer-events:none; z-index:20;
+}
+.burst-spark {
+  position:absolute; width:8px; height:8px; border-radius:50%;
+  background:#ffcf7a;
+  opacity:0;
+}
+
+/* PAGINA 2: TORTA */
+#page-cake { background:#1b1310; }
+canvas#c { display:block; width:100%; height:100%; }
+
+/* ROSA: SOLO SE MUESTRA DENTRO DE LA CARTA */
+.letter-rose-wrap .rose{position:relative;width:100%;height:100%;transform-origin:bottom;animation:roseGrow 2.4s cubic-bezier(.4,0,.2,1) forwards,roseSway 7s ease-in-out infinite 2.6s;clip-path:inset(100% 0 0 0)}
+@keyframes roseGrow{0%{clip-path:inset(100% 0 0 0);opacity:0}60%{opacity:1}100%{clip-path:inset(0);opacity:1}}
+@keyframes roseSway{0%,100%{transform:rotate(0)}50%{transform:rotate(3deg)}}
+.letter-rose-wrap .rose .petals{position:relative;width:100%;height:45%;transform-origin:bottom center}
+.letter-rose-wrap .rose .petals>div{position:absolute;background:#d52d58;width:34%;height:38%}
+.letter-rose-wrap .rose .petals>div:nth-child(1){border-radius:8px;left:33%;top:18%;background:#d52d58;z-index:3;box-shadow:0 0 14px rgba(245,148,184,.6)}
+.letter-rose-wrap .rose .petals>div:nth-child(2),.letter-rose-wrap .rose .petals>div:nth-child(4){background:#b81b43;left:22%;border-radius:0 30px 0 30px;transform-origin:bottom right}
+.letter-rose-wrap .rose .petals>div:nth-child(3),.letter-rose-wrap .rose .petals>div:nth-child(5){background:#b81b43;left:44%;border-radius:30px 0 30px 0;transform-origin:bottom left}
+.letter-rose-wrap .rose .petals>div:nth-child(2){top:20%;transform:rotate(-22deg);z-index:5}.letter-rose-wrap .rose .petals>div:nth-child(3){top:20%;transform:rotate(22deg);z-index:5}.letter-rose-wrap .rose .petals>div:nth-child(4){top:22%;transform:rotate(-13deg);z-index:4}.letter-rose-wrap .rose .petals>div:nth-child(5){top:22%;transform:rotate(13deg);z-index:4}
+.letter-rose-wrap .rose .calyx{position:absolute;top:20%;left:47%;z-index:15}.letter-rose-wrap .rose .calyx>div{position:absolute;width:12%;height:26%;background:linear-gradient(to top,#054c05,#228b22);transform-origin:bottom center;clip-path:polygon(50% 0%,100% 70%,75% 100%,25% 100%,0% 70%)}
+.letter-rose-wrap .rose .calyx>div:nth-child(1){transform:rotate(-55deg);left:-24px}.letter-rose-wrap .rose .calyx>div:nth-child(2){transform:rotate(-18deg);left:-12px}.letter-rose-wrap .rose .calyx>div:nth-child(3){transform:rotate(18deg);left:2px}.letter-rose-wrap .rose .calyx>div:nth-child(4){transform:rotate(55deg);left:12px}
+.letter-rose-wrap .rose .stem{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:5%;height:60%;background:#054c05;border-radius:0 0 30px 30px}.letter-rose-wrap .rose .leaf1{position:absolute;width:22%;height:22%;border-radius:5px 40px 20px 40px;background:#054c05;transform:rotate(-30deg);bottom:34%;left:26%}.letter-rose-wrap .rose .leaf2{position:absolute;width:22%;height:22%;border-radius:40px 0 40px 20px;background:#054c05;transform:rotate(30deg);bottom:40%;left:52%}
+
+/* LLAMA CSS REALISTA */
+#flame {
+  position:absolute; left:0; top:0; width:26px; height:44px;
+  transform:translate(-50%,-100%);
+  transform-origin:bottom center;
+  cursor:pointer; z-index:60; pointer-events:auto;
+}
+#flame .flame-outer {
+  position:absolute; inset:0;
+  border-radius:50% 50% 50% 50% / 62% 62% 38% 38%;
+  background:radial-gradient(circle at 50% 78%, #fff6c0 0%, #ffe066 18%, #ffb238 42%, #ff7a1f 68%, #e0350f 100%);
+  box-shadow:0 0 16px 6px rgba(255,140,30,0.6), 0 0 34px 14px rgba(255,70,20,0.32);
+  animation: flameFlicker 0.85s ease-in-out infinite alternate;
+}
+#flame .flame-core {
+  position:absolute; left:50%; bottom:6%; width:38%; height:48%; margin-left:-19%;
+  border-radius:50%;
+  background:radial-gradient(circle, #ffffff 0%, #fff3b0 55%, rgba(255,200,80,0) 100%);
+  animation: flameFlicker 0.6s ease-in-out infinite alternate-reverse;
+}
+@keyframes flameFlicker {
+  0% { transform:scaleY(1) scaleX(1) rotate(-3deg); }
+  50%{ transform:scaleY(1.1) scaleX(0.92) rotate(3deg); }
+  100%{ transform:scaleY(0.94) scaleX(1.06) rotate(-2deg); }
+}
+#flame.out { animation:flameOut 0.5s ease forwards; }
+@keyframes flameOut { to { opacity:0; transform:translate(-50%,-100%) scale(0.2); } }
+
+#cakeHint {
+  position:absolute; left:50%; bottom:16%; transform:translateX(-50%);
+  color:#ffe9d2; font-size:0.95rem; text-align:center; letter-spacing:0.02em;
+  background:rgba(20,12,10,0.4); padding:8px 18px; border-radius:999px;
+  z-index:40; white-space:nowrap; animation:hintPulse 1.8s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.cake-ui { position:absolute; left:0; right:0; bottom:5%; display:flex; justify-content:center; gap:10px; z-index:40; flex-wrap:wrap; padding:0 10px; }
+.btn {
+  font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:600; color:#fff8f0;
+  background:linear-gradient(180deg,#c8322a,#9c1f1f); border:1px solid rgba(255,255,255,.18);
+  padding:10px 18px; border-radius:999px; cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.4);
+}
+.btn.secondary { background:linear-gradient(180deg,#3a2c25,#241a15); }
+
+#letterIcon {
+  position:absolute; left:50%; bottom:16%; transform:translate(-50%,20px) scale(0.7);
+  padding:13px 30px; border-radius:999px; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px;
+  color:#fff8f0; background:linear-gradient(180deg,#e6a23c,#b9781f); border:none;
+  box-shadow:0 10px 26px rgba(0,0,0,0.5); cursor:pointer; z-index:70;
+  opacity:0; pointer-events:none;
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.4,1.6,.4,1);
+}
+#letterIcon.show { opacity:1; pointer-events:auto; transform:translate(-50%,0) scale(1); }
+
+
+.smoke-container{position:absolute;left:0;top:0;width:1px;height:1px;z-index:59;pointer-events:none}.smoke-puff{position:absolute;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle,rgba(230,230,230,.65),rgba(130,130,130,.22) 55%,transparent 72%);filter:blur(2px);animation:smokeRise 1.7s ease-out forwards}@keyframes smokeRise{0%{opacity:.15;transform:translate(0,0) scale(.45)}25%{opacity:.6}100%{opacity:0;transform:translate(var(--sx),-90px) scale(2.2)}}
+
+/* CELEBRACION: FUEGOS ARTIFICIALES, GLOBOS, CONFETI */
+#fxCanvas { position:absolute; inset:0; z-index:55; pointer-events:none; }
+
+.celebration-text {
+  position:absolute; left:50%; top:14%; transform:translateX(-50%);
+  font-family:'Great Vibes', cursive; font-size:clamp(2.4rem,9vw,4.2rem); color:#fff3d6;
+  text-shadow:0 0 20px rgba(255,170,90,0.7), 0 0 40px rgba(255,90,50,0.4);
+  opacity:0; z-index:65; text-align:center; pointer-events:none;
+  animation: celebFade 1.2s ease forwards;
+}
+@keyframes celebFade { from{opacity:0; transform:translate(-50%,20px);} to{opacity:1; transform:translate(-50%,0);} }
+
+.balloon {
+  position:absolute; bottom:-160px; width:52px; height:64px; border-radius:50% 50% 50% 50% / 58% 58% 42% 42%;
+  z-index:56; pointer-events:none;
+}
+.balloon::after {
+  content:''; position:absolute; left:50%; top:100%; width:1px; height:80px;
+  background:rgba(255,255,255,0.5);
+}
+.balloon::before {
+  content:''; position:absolute; left:38%; top:14%; width:24%; height:16%; border-radius:50%;
+  background:rgba(255,255,255,0.4);
+}
+
+/* PAGINA 3: CARTA SORPRESA */
+#page-letter {
+  background: radial-gradient(circle at 50% 20%, #3a1620, #17090d 75%);
+  align-items:center; justify-content:center; padding:20px;
+}
+.letter-paper {
+  position:relative; width:min(92vw,560px); max-height:88vh; overflow-y:auto;
+  background:linear-gradient(180deg,#fffdf6,#f6ecd4);
+  border-radius:14px; padding:32px 26px 26px;
+  box-shadow:0 30px 70px rgba(0,0,0,0.55);
+  text-align:center;
+}
+.letter-rose-wrap { width:130px; height:190px; margin:0 auto 6px; }
+.letter-title {
+  font-family:'Great Vibes', cursive; font-size:2.4rem; color:#8c0003; margin-bottom:6px;
+  opacity:0; animation: letterFadeIn 0.8s ease forwards 0.5s;
+}
+.letter-msg {
+  font-size:0.98rem; line-height:1.55; color:#3a2417; margin-bottom:16px;
+  opacity:0; animation: letterFadeIn 0.8s ease forwards;
+}
+.letter-msg:nth-of-type(1){ animation-delay:0.9s; }
+.letter-msg:nth-of-type(2){ animation-delay:1.5s; }
+.letter-msg:nth-of-type(3){ animation-delay:2.1s; }
+.letter-signature {
+  font-family:'Great Vibes', cursive; font-size:1.6rem; color:#9c1f1f; margin-top:6px;
+  opacity:0; animation: letterFadeIn 0.8s ease forwards 2.6s;
+}
+@keyframes letterFadeIn { from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:translateY(0);} }
+#backBtn {
+  margin-top:18px; font-family:'Poppins',sans-serif; font-weight:600; font-size:13px;
+  color:#fff8f0; background:linear-gradient(180deg,#c8322a,#9c1f1f); border:none;
+  padding:11px 22px; border-radius:999px; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.3);
+}
+
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop preload="auto" src="https://xenophobic-green-si0jqrfdxr.edgeone.app/RIO%20ROMA.mp3"></audio>
+
+<!-- PAGINA 1: REGALO -->
+<section id="page-gift" class="page flex-page active">
+  <div class="gift-scene">
+    <h1 class="gift-title">Feliz Cumpleaños Soledad</h1>
+    <div class="gift-box" id="giftBox">
+      <div class="box-ribbon-v"></div>
+      <div class="box-base"></div>
+      <div class="box-ribbon-h"></div>
+      <div class="box-lid"></div>
+      <div class="box-bow"><div></div><div></div><div></div></div>
+    </div>
+    <p class="gift-hint">Toca la caja para abrir tu regalo</p>
+  </div>
+  <div id="burstLayer"></div>
+</section>
+
+<!-- PAGINA 2: TORTA -->
+<section id="page-cake" class="page">
+  <canvas id="c"></canvas>
+
+
+  <div id="flame"><div class="flame-outer"></div><div class="flame-core"></div></div>
+  <div id="cakeHint">Pide un deseo y sopla la vela (toca la vela para soplar)</div>
+
+  <canvas id="fxCanvas"></canvas>
+  <button id="letterIcon" title="Abrir carta">Para ti 💌</button>
+
+  <div class="cake-ui">
+    <button class="btn" id="rotBtn">↻ Girar 180°</button>
+    <button class="btn secondary" id="resetBtn">⤾ Reiniciar vista</button>
+  </div>
+</section>
+
+<!-- PAGINA 3: CARTA -->
+<section id="page-letter" class="page flex-page">
+  <div class="letter-paper">
+    <div class="letter-rose-wrap">
+      <div class="rose">
+        <div class="petals"><div></div><div></div><div></div><div></div><div></div></div>
+        <div class="calyx"><div></div><div></div><div></div><div></div></div>
+        <div class="stem"></div>
+        <div class="leaf1"></div>
+        <div class="leaf2"></div>
+      </div>
+    </div>
+    <div class="letter-title">Feliz Cumpleaños</div>
+    <p class="letter-msg">Soledad, que este nuevo año de vida te traiga tantas sonrisas como las que tú regalas cada día. Ojalá se cumplan todos los deseos que pediste al soplar la vela.</p>
+    <p class="letter-msg">Gracias por ser una persona tan especial. Que la vida te siga llenando de momentos bonitos, de gente que te quiere y de motivos para celebrar.</p>
+    <p class="letter-msg">Con todo el cariño, esperamos que este pequeño detalle te haya sacado una sonrisa. ¡Feliz cumpleaños, que lo disfrutes muchísimo!</p>
+    <div class="letter-signature">Atentamente, Armando</div>
+    <button id="backBtn">Cerrar carta</button>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+
+/* AUDIO: MUSICA DE FONDO, SE ACTIVA AL ABRIR LA CAJA */
+const bgMusic = document.getElementById('bgMusic');
+let audioCtx = null;
+function getAudioCtx(){
+  if(!audioCtx){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    audioCtx = new AC();
+  }
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+/* SONIDOS SINTETIZADOS PARA SOPLAR Y FUEGOS ARTIFICIALES */
+function playWhoosh(){
+  const ctx = getAudioCtx();
+  const t = ctx.currentTime;
+  const bufferSize = ctx.sampleRate*0.5;
+  const buffer = ctx.createBuffer(1,bufferSize,ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0;i<bufferSize;i++){ data[i]=(Math.random()*2-1)*(1-i/bufferSize); }
+  const noise = ctx.createBufferSource();
+  noise.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type='lowpass';
+  filter.frequency.setValueAtTime(1800,t);
+  filter.frequency.exponentialRampToValueAtTime(120,t+0.5);
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.4,t);
+  g.gain.exponentialRampToValueAtTime(0.001,t+0.5);
+  noise.connect(filter); filter.connect(g); g.connect(ctx.destination);
+  noise.start(t);
+}
+function playPop(){
+  const ctx = getAudioCtx();
+  const t = ctx.currentTime;
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type='sine';
+  o.frequency.setValueAtTime(700+Math.random()*400,t);
+  o.frequency.exponentialRampToValueAtTime(70,t+0.32);
+  g.gain.setValueAtTime(0.3,t);
+  g.gain.exponentialRampToValueAtTime(0.001,t+0.35);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(t); o.stop(t+0.35);
+  const bufferSize = ctx.sampleRate*0.18;
+  const buffer = ctx.createBuffer(1,bufferSize,ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i=0;i<bufferSize;i++){ data[i]=(Math.random()*2-1)*(1-i/bufferSize); }
+  const noise = ctx.createBufferSource();
+  noise.buffer = buffer;
+  const ng = ctx.createGain(); ng.gain.value=0.22;
+  noise.connect(ng); ng.connect(ctx.destination);
+  noise.start(t);
+}
+
+/* NAVEGACION ENTRE PAGINAS */
+const pageGift = document.getElementById('page-gift');
+const pageCake = document.getElementById('page-cake');
+const pageLetter = document.getElementById('page-letter');
+
+function showPage(el){
+  [pageGift,pageCake,pageLetter].forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ABRIR LA CAJA DE REGALO */
+const giftBox = document.getElementById('giftBox');
+const burstLayer = document.getElementById('burstLayer');
+let boxOpened = false;
+
+function spawnBurstSparks(){
+  for(let i=0;i<26;i++){
+    const s = document.createElement('div');
+    s.className='burst-spark';
+    const angle = Math.random()*Math.PI*2;
+    const dist = 90+Math.random()*180;
+    const dx = Math.cos(angle)*dist;
+    const dy = Math.sin(angle)*dist;
+    s.style.left='50%'; s.style.top='40%';
+    s.style.background = Math.random()<0.5 ? '#ffcf7a' : '#ff6a4a';
+    burstLayer.appendChild(s);
+    s.animate([
+      { transform:'translate(0,0) scale(1)', opacity:1 },
+      { transform:`translate(${dx}px,${dy}px) scale(0.2)`, opacity:0 }
+    ], { duration: 700+Math.random()*400, easing:'ease-out' });
+    setTimeout(()=>s.remove(), 1200);
+  }
+}
+
+function openGift(){
+  if(boxOpened) return;
+  boxOpened = true;
+  getAudioCtx();
+  giftBox.classList.add('opening');
+  spawnBurstSparks();
+  playPop();
+  bgMusic.volume = 0.65;
+  bgMusic.currentTime = 0;
+  bgMusic.play().catch(()=>{});
+  setTimeout(()=>{
+    showPage(pageCake);
+    refreshRose(document.getElementById('roseSide').querySelector('.rose'));
+    startCandle();
+  }, 950);
+}
+giftBox.addEventListener('click', openGift);
+giftBox.addEventListener('touchstart', function(e){ e.preventDefault(); openGift(); }, {passive:false});
+
+/* CANVAS DE TEXTURAS 2D AUXILIARES */
+function makeCanvas(w,h){
+  const c = document.createElement('canvas');
+  c.width=w; c.height=h;
+  return { c, ctx:c.getContext('2d') };
+}
+function drawBead(ctx,x,y,r,color,shade){
+  const g = ctx.createRadialGradient(x-r*0.35,y-r*0.4,r*0.1,x,y,r);
+  g.addColorStop(0, shade.hi); g.addColorStop(0.55, color); g.addColorStop(1, shade.lo);
+  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+}
+const RED_SHADE = { hi:'#ff8f83', lo:'#7d0f10' };
+
+function drawFlowerMedallion(ctx,x,y,scale){
+  ctx.save(); ctx.translate(x,y); ctx.scale(scale,scale);
+  for(let i=0;i<5;i++){
+    ctx.save(); ctx.rotate((Math.PI*2/5)*i);
+    ctx.beginPath(); ctx.ellipse(0,-9,5.4,8.4,0,0,Math.PI*2);
+    const g = ctx.createRadialGradient(0,-9,1,0,-9,8.4);
+    g.addColorStop(0,'#ffffff'); g.addColorStop(1,'#e7ddc9');
+    ctx.fillStyle=g; ctx.fill(); ctx.restore();
+  }
+  drawBead(ctx,0,0,4.2,'#d1241f',RED_SHADE);
+  ctx.restore();
+}
+
+function makeBottomSideTexture(){
+  const W=2048,H=1024; const {c,ctx}=makeCanvas(W,H);
+  const base = ctx.createLinearGradient(0,0,0,H);
+  base.addColorStop(0,'#fffdf7'); base.addColorStop(1,'#f3e9d4');
+  ctx.fillStyle=base; ctx.fillRect(0,0,W,H);
+  ctx.globalAlpha=0.05; ctx.strokeStyle='#b89a67';
+  for(let x=0;x<W;x+=6){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.lineWidth=1; ctx.stroke(); }
+  ctx.globalAlpha=1;
+  const ribbonY=H*0.40, ribbonH=H*0.085;
+  const rg = ctx.createLinearGradient(0,ribbonY,0,ribbonY+ribbonH);
+  rg.addColorStop(0,'#b8181a'); rg.addColorStop(0.5,'#e0332c'); rg.addColorStop(1,'#970f11');
+  ctx.fillStyle=rg; ctx.fillRect(0,ribbonY,W,ribbonH);
+  ctx.fillStyle='rgba(255,255,255,.18)'; ctx.fillRect(0,ribbonY,W,ribbonH*0.28);
+  const shellY = ribbonY-14;
+  for(let x=10;x<W;x+=46){
+    const g = ctx.createRadialGradient(x-6,shellY-8,2,x,shellY,20);
+    g.addColorStop(0,'#ffffff'); g.addColorStop(1,'#e9dcc0');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.ellipse(x,shellY,17,13,0,0,Math.PI*2); ctx.fill();
+  }
+  const topLine=H*0.10; const bottomOfSwagArea=ribbonY-22; const nSwag=8; const anchorY=topLine+8;
+  for(let i=0;i<nSwag;i++){
+    const x0=(W/nSwag)*i+(W/nSwag)*0.02; const x1=(W/nSwag)*(i+1)-(W/nSwag)*0.02; const midX=(x0+x1)/2;
+    drawFlowerMedallion(ctx,x0,anchorY,1.0);
+    const dip = bottomOfSwagArea-anchorY; const nBeads=16;
+    for(let b=0;b<=nBeads;b++){
+      const t=b/nBeads; const x=x0+(x1-x0)*t; const y=anchorY+dip*Math.sin(Math.PI*t);
+      drawBead(ctx,x,y,5.4-2.2*Math.abs(0.4),'#d1241f',RED_SHADE);
+    }
+    const dropX=midX; const dropTopY=anchorY+dip*Math.sin(Math.PI*0.5)+4;
+    for(let d=0;d<4;d++){ drawBead(ctx,dropX,dropTopY+d*13,5.2-d*0.7,'#d1241f',RED_SHADE); }
+  }
+  drawFlowerMedallion(ctx,W-2,anchorY,1.0);
+  const tex = new THREE.CanvasTexture(c); tex.wrapS=THREE.RepeatWrapping; tex.anisotropy=8;
+  return tex;
+}
+
+function makeTopSideTexture(){
+  const W=2048,H=760; const {c,ctx}=makeCanvas(W,H);
+  const base = ctx.createLinearGradient(0,0,0,H);
+  base.addColorStop(0,'#fffdf8'); base.addColorStop(1,'#f3e9d4');
+  ctx.fillStyle=base; ctx.fillRect(0,0,W,H);
+  ctx.globalAlpha=0.05; ctx.strokeStyle='#b89a67';
+  for(let x=0;x<W;x+=6){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+  ctx.globalAlpha=1;
+  const nSwag=7; const anchorY=H*0.14; const dipY=H*0.62;
+  for(let i=0;i<nSwag;i++){
+    const x0=(W/nSwag)*i+(W/nSwag)*0.04; const x1=(W/nSwag)*(i+1)-(W/nSwag)*0.04; const midX=(x0+x1)/2;
+    drawFlowerMedallion(ctx,x0,anchorY,0.85);
+    const nBeads=14;
+    for(let b=0;b<=nBeads;b++){
+      const t=b/nBeads; const x=x0+(x1-x0)*t; const y=anchorY+(dipY-anchorY)*Math.sin(Math.PI*t);
+      drawBead(ctx,x,y,4.6,'#d1241f',RED_SHADE);
+    }
+    for(let d=0;d<3;d++){ drawBead(ctx,midX,dipY-6+d*12,4.4-d*0.6,'#d1241f',RED_SHADE); }
+  }
+  drawFlowerMedallion(ctx,W-2,anchorY,0.85);
+  const tex = new THREE.CanvasTexture(c); tex.wrapS=THREE.RepeatWrapping; tex.anisotropy=8;
+  return tex;
+}
+
+function makeCreamCapTexture(){
+  const {c,ctx}=makeCanvas(512,512);
+  const g = ctx.createRadialGradient(256,256,60,256,256,256);
+  g.addColorStop(0,'#fffdf8'); g.addColorStop(1,'#efe1c4');
+  ctx.fillStyle=g; ctx.fillRect(0,0,512,512);
+  return new THREE.CanvasTexture(c);
+}
+
+function drawIcingText(ctx,text,x,y,font){
+  ctx.save(); ctx.font=font; ctx.textAlign='center'; ctx.textBaseline='middle';
+  const HEART_RED='#8c0003';
+  ctx.fillStyle='rgba(40,0,1,0.55)'; ctx.fillText(text,x+3.5,y+6);
+  const grad = ctx.createLinearGradient(x,y-40,x,y+40);
+  grad.addColorStop(0,'#6e0002'); grad.addColorStop(0.45,HEART_RED); grad.addColorStop(1,'#5c0002');
+  ctx.fillStyle=grad; ctx.fillText(text,x,y);
+  ctx.lineWidth=Math.max(2,font.match(/(\d+)px/)[1]*0.018);
+  ctx.strokeStyle='rgba(40,0,1,0.65)'; ctx.strokeText(text,x,y);
+  ctx.save();
+  const off=document.createElement('canvas'); off.width=ctx.canvas.width; off.height=ctx.canvas.height;
+  const octx=off.getContext('2d'); octx.font=font; octx.textAlign='center'; octx.textBaseline='middle';
+  octx.fillStyle=HEART_RED; octx.fillText(text,x,y);
+  octx.globalCompositeOperation='source-atop';
+  const sheen = octx.createLinearGradient(x,y-46,x,y+30);
+  sheen.addColorStop(0,'rgba(255,150,120,0.35)'); sheen.addColorStop(0.28,'rgba(255,90,70,0.18)');
+  sheen.addColorStop(0.55,'rgba(255,60,50,0)'); sheen.addColorStop(1,'rgba(255,60,50,0)');
+  octx.fillStyle=sheen; octx.fillRect(0,0,off.width,off.height);
+  ctx.drawImage(off,0,0); ctx.restore(); ctx.restore();
+}
+
+function makeTopPlaqueTexture(line1,line2){
+  const S=1600; const {c,ctx}=makeCanvas(S,S);
+  const cx=S/2, cy=S/2, R=S*0.485;
+  ctx.save(); ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.clip();
+  const bg = ctx.createRadialGradient(cx,cy-R*0.2,R*0.15,cx,cy,R);
+  bg.addColorStop(0,'#fffefb'); bg.addColorStop(1,'#f3e7cd');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,S,S);
+  ctx.globalAlpha=0.045; ctx.strokeStyle='#b89a67';
+  for(let y=0;y<S;y+=6){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(S,y); ctx.stroke(); }
+  ctx.globalAlpha=1; ctx.restore();
+  const ropeR=R*0.975; const beads=220;
+  for(let i=0;i<beads;i++){
+    const a=(i/beads)*Math.PI*2; const wob=Math.sin(a*40)*6; const rr=ropeR+wob;
+    drawBead(ctx,cx+Math.cos(a)*rr,cy+Math.sin(a)*rr,11.5,'#cf2016',RED_SHADE);
+  }
+  const beadR=R*0.895; const nBeads2=130;
+  for(let i=0;i<nBeads2;i++){
+    const a=(i/nBeads2)*Math.PI*2;
+    drawBead(ctx,cx+Math.cos(a)*beadR,cy+Math.sin(a)*beadR,7.5,'#d1241f',RED_SHADE);
+  }
+  drawIcingText(ctx,line1.toUpperCase(),cx,cy-98,'700 88px Arial Black, Arial, sans-serif');
+  drawIcingText(ctx,line2.toUpperCase(),cx,cy+22,'800 132px Arial Black, Arial, sans-serif');
+  ctx.strokeStyle='#8c0003'; ctx.lineWidth=5; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(cx-140,cy+120); ctx.bezierCurveTo(cx-75,cy+90,cx-32,cy+120,cx,cy+120); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx+140,cy+120); ctx.bezierCurveTo(cx+75,cy+90,cx+32,cy+120,cx,cy+120); ctx.stroke();
+  ctx.fillStyle='#8c0003'; ctx.beginPath();
+  const hx=cx, hy=cy+122, hs=13;
+  ctx.moveTo(hx,hy+hs*0.9);
+  ctx.bezierCurveTo(hx-hs*1.4,hy-hs*0.6,hx-hs*0.2,hy-hs*1.5,hx,hy-hs*0.35);
+  ctx.bezierCurveTo(hx+hs*0.2,hy-hs*1.5,hx+hs*1.4,hy-hs*0.6,hx,hy+hs*0.9);
+  ctx.fill();
+  const tex = new THREE.CanvasTexture(c); tex.anisotropy=8;
+  return tex;
+}
+
+function makeStrawberrySkinTexture(){
+  const {c,ctx}=makeCanvas(256,256);
+  const g = ctx.createRadialGradient(90,80,10,128,140,150);
+  g.addColorStop(0,'#ff5b52'); g.addColorStop(0.6,'#e6231f'); g.addColorStop(1,'#9c0f10');
+  ctx.fillStyle=g; ctx.fillRect(0,0,256,256);
+  ctx.fillStyle='#ffe27a';
+  for(let i=0;i<90;i++){
+    const x=Math.random()*256, y=Math.random()*256;
+    ctx.save(); ctx.translate(x,y); ctx.rotate(Math.random()*Math.PI);
+    ctx.beginPath(); ctx.ellipse(0,0,2.6,4.2,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+  }
+  return new THREE.CanvasTexture(c);
+}
+
+function makeRoseTexture(colorMode){
+  const S=512; const {c,ctx}=makeCanvas(S,S);
+  const cx=S/2, cy=S/2, petalCount=16;
+  const isRed = colorMode==='red';
+  const colDark = isRed?'#7a0f14':'#b8425f';
+  const colMid = isRed?'#c31f22':'#e8748f';
+  const colHi = isRed?'#ff7a6f':'#ffc4d2';
+  for(let ring=5; ring>=0; ring--){
+    const rr=60+ring*30; const petals=petalCount-ring; const rot=ring*0.35;
+    for(let i=0;i<petals;i++){
+      const a=(i/petals)*Math.PI*2+rot;
+      const px=cx+Math.cos(a)*rr*0.35, py=cy+Math.sin(a)*rr*0.35;
+      ctx.save(); ctx.translate(px,py); ctx.rotate(a);
+      const grad = ctx.createLinearGradient(-rr*0.32,0,rr*0.42,0);
+      grad.addColorStop(0,colDark); grad.addColorStop(0.55,colMid); grad.addColorStop(1,colHi);
+      ctx.fillStyle=grad; ctx.beginPath(); ctx.ellipse(0,0,rr*0.42,rr*0.30,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+    }
+  }
+  ctx.beginPath(); ctx.fillStyle=isRed?'#5c0a0e':'#8f2c48'; ctx.arc(cx,cy,26,0,Math.PI*2); ctx.fill();
+  return new THREE.CanvasTexture(c);
+}
+
+/* ESCENA THREE.JS */
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+if (renderer.outputEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
+if (renderer.toneMapping !== undefined){ renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; }
+
+const scene = new THREE.Scene();
+
+/* FONDO ESPACIAL */
+(function(){
+  const {c,ctx}=makeCanvas(1024,1024);
+  const g = ctx.createRadialGradient(650,320,60,512,512,900);
+  g.addColorStop(0,'#0e0a1c'); g.addColorStop(0.28,'#08050f'); g.addColorStop(0.6,'#030208'); g.addColorStop(1,'#000000');
+  ctx.fillStyle=g; ctx.fillRect(0,0,1024,1024);
+  function blob(x,y,r,color,alpha){
+    const bg = ctx.createRadialGradient(x,y,0,x,y,r);
+    bg.addColorStop(0,color); bg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.globalAlpha=alpha; ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); ctx.globalAlpha=1;
+  }
+  blob(700,300,320,'#241a3f',0.22); blob(300,650,280,'#3a1a2a',0.14);
+  blob(780,700,240,'#16203f',0.16); blob(200,200,200,'#2a1a3f',0.12);
+  for(let i=0;i<900;i++){
+    const x=Math.random()*1024, y=Math.random()*1024, r=Math.random()*1.4+0.15, b=Math.random()*0.6+0.35;
+    ctx.fillStyle=`rgba(255,255,255,${b})`; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+  }
+  const tex = new THREE.CanvasTexture(c);
+  scene.background = tex;
+})();
+
+(function(){
+  const starGeo = new THREE.BufferGeometry();
+  const N=1400; const positions=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    const r=22+Math.random()*38, theta=Math.random()*Math.PI*2, phi=Math.acos((Math.random()*2)-1);
+    positions[i*3]=r*Math.sin(phi)*Math.cos(theta);
+    positions[i*3+1]=r*Math.cos(phi);
+    positions[i*3+2]=r*Math.sin(phi)*Math.sin(theta);
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  const starMat = new THREE.PointsMaterial({ color:0xffffff, size:0.06, transparent:true, opacity:0.85, sizeAttenuation:true });
+  const stars = new THREE.Points(starGeo, starMat);
+  scene.add(stars);
+  window.__starsField = stars;
+})();
+
+const camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 0.1, 100);
+/* CAMARA MAS ALEJADA PARA QUE LA TORTA SE VEA COMPLETA Y CENTRADA */
+let camDist = 16.5, camPolar = 0.90, camAzim = 0.0;
+const camTarget = new THREE.Vector3(0, 3.15, 0);
+function updateCamera(){
+  const x = camTarget.x + camDist*Math.sin(camPolar)*Math.sin(camAzim);
+  const y = camTarget.y + camDist*Math.cos(camPolar);
+  const z = camTarget.z + camDist*Math.sin(camPolar)*Math.cos(camAzim);
+  camera.position.set(x,y,z);
+  camera.lookAt(camTarget);
+}
+updateCamera();
+
+scene.add(new THREE.AmbientLight(0xfff1de, 0.55));
+const keyLight = new THREE.DirectionalLight(0xffe9c9, 1.15);
+keyLight.position.set(6,10,6); keyLight.castShadow=true;
+keyLight.shadow.mapSize.set(2048,2048);
+keyLight.shadow.camera.left=-8; keyLight.shadow.camera.right=8;
+keyLight.shadow.camera.top=8; keyLight.shadow.camera.bottom=-8;
+keyLight.shadow.bias=-0.0015;
+scene.add(keyLight);
+const fillLight = new THREE.DirectionalLight(0xffcfae, 0.35);
+fillLight.position.set(-7,4,-4); scene.add(fillLight);
+const rimLight = new THREE.PointLight(0xffe6c2, 0.5, 30);
+rimLight.position.set(-3,7,-6); scene.add(rimLight);
+
+(function(){
+  const {c,ctx}=makeCanvas(512,512);
+  const g = ctx.createRadialGradient(256,256,0,256,256,256);
+  g.addColorStop(0,'rgba(0,0,0,0.55)'); g.addColorStop(0.55,'rgba(0,0,0,0.28)'); g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=g; ctx.fillRect(0,0,512,512);
+  const tex = new THREE.CanvasTexture(c);
+  const mat = new THREE.MeshBasicMaterial({ map:tex, transparent:true, depthWrite:false });
+  const shadowBlob = new THREE.Mesh(new THREE.CircleGeometry(4.6,48), mat);
+  shadowBlob.rotation.x = -Math.PI/2; shadowBlob.position.y = -0.35;
+  scene.add(shadowBlob);
+})();
+
+const cakeGroup = new THREE.Group();
+scene.add(cakeGroup);
+
+const materials = {
+  cream: new THREE.MeshStandardMaterial({ color:0xfff8ea, roughness:0.55, metalness:0.02 }),
+  redRope: new THREE.MeshStandardMaterial({ color:0xd1241f, roughness:0.28, metalness:0.1 }),
+  creamRope: new THREE.MeshStandardMaterial({ color:0xfaf1de, roughness:0.45, metalness:0.03 }),
+  gold: new THREE.MeshStandardMaterial({ color:0xd9a441, roughness:0.28, metalness:0.85 }),
+  choco: new THREE.MeshStandardMaterial({ color:0x3a2417, roughness:0.4, metalness:0.15 }),
+  green: new THREE.MeshStandardMaterial({ color:0x2e5b28, roughness:0.5 }),
+  red: new THREE.MeshStandardMaterial({ color:0xcf2016, roughness:0.32, metalness:0.08 })
+};
+
+const BOTTOM_R=3.55, BOTTOM_H=2.35, BOTTOM_Y=BOTTOM_H/2+0.02;
+const bottomSideTex = makeBottomSideTexture();
+const bottomGeo = new THREE.CylinderGeometry(BOTTOM_R, BOTTOM_R*1.015, BOTTOM_H, 96, 1, false);
+const bottomMat = [ new THREE.MeshStandardMaterial({ map:bottomSideTex, roughness:0.55, metalness:0.02 }), materials.cream, materials.cream ];
+const bottomTier = new THREE.Mesh(bottomGeo, bottomMat);
+bottomTier.position.y = BOTTOM_Y; bottomTier.castShadow=true; bottomTier.receiveShadow=true;
+cakeGroup.add(bottomTier);
+
+function ropeRing(radius, tube, y, mat){
+  const g = new THREE.TorusGeometry(radius, tube, 12, 96);
+  const m = new THREE.Mesh(g, mat);
+  m.rotation.x = Math.PI/2; m.position.y = y; m.castShadow = true;
+  cakeGroup.add(m); return m;
+}
+ropeRing(BOTTOM_R+0.02, 0.075, BOTTOM_H+0.02, materials.redRope);
+ropeRing(BOTTOM_R*1.015+0.04, 0.10, 0.06, materials.creamRope);
+
+const TOP_R=2.28, TOP_H=1.85, TOP_Y=BOTTOM_H+TOP_H/2+0.06;
+const topSideTex = makeTopSideTexture();
+const topGeo = new THREE.CylinderGeometry(TOP_R, TOP_R*1.02, TOP_H, 96, 1, false);
+const creamCapTex = makeCreamCapTexture();
+const topMat = [ new THREE.MeshStandardMaterial({ map:topSideTex, roughness:0.55, metalness:0.02 }), new THREE.MeshStandardMaterial({ map:creamCapTex, roughness:0.55 }), materials.cream ];
+const topTier = new THREE.Mesh(topGeo, topMat);
+topTier.position.y = TOP_Y; topTier.castShadow=true; topTier.receiveShadow=true;
+cakeGroup.add(topTier);
+
+ropeRing(TOP_R+0.02, 0.065, TOP_Y+TOP_H/2+0.01, materials.redRope);
+ropeRing(TOP_R*1.02+0.03, 0.08, TOP_Y-TOP_H/2-0.02, materials.creamRope);
+
+const plaqueTex = makeTopPlaqueTexture('Feliz Cumpleaños', 'Soledad');
+const plaqueGeo = new THREE.CircleGeometry(TOP_R-0.05, 96);
+const plaqueMat = new THREE.MeshStandardMaterial({ map:plaqueTex, roughness:0.5, metalness:0.02 });
+const plaque = new THREE.Mesh(plaqueGeo, plaqueMat);
+plaque.rotation.x = -Math.PI/2; plaque.position.y = TOP_Y+TOP_H/2+0.015; plaque.receiveShadow = true;
+cakeGroup.add(plaque);
+
+function shellCollar(radius,y,count,scale,mat){
+  for(let i=0;i<count;i++){
+    const a=(i/count)*Math.PI*2;
+    const g = new THREE.SphereGeometry(0.16*scale,10,8);
+    g.scale(1.3,0.85,0.95);
+    const m = new THREE.Mesh(g, mat || materials.cream);
+    m.position.set(Math.cos(a)*radius,y,Math.sin(a)*radius);
+    m.rotation.y = -a; m.castShadow = true;
+    cakeGroup.add(m);
+  }
+}
+shellCollar(BOTTOM_R*1.03, 0.14, 46, 1.15, materials.cream);
+shellCollar(TOP_R*1.03, TOP_Y-TOP_H/2+0.02, 40, 0.85, materials.red);
+
+/* CHISPAS DE CHOCOLATE DE COLORES SOBRE LA TORTA */
+const SPRINKLE_COLORS = [0xff3b6b,0xffd23f,0x3fc7ff,0x7dff5c,0xff8a1f,0xc06bff,0xffffff,0xff5b52];
+function scatterSprinkles(radiusInner, radiusOuter, y, count){
+  for(let i=0;i<count;i++){
+    const a = Math.random()*Math.PI*2;
+    const r = radiusInner + Math.random()*(radiusOuter-radiusInner);
+    const color = SPRINKLE_COLORS[Math.floor(Math.random()*SPRINKLE_COLORS.length)];
+    const mat = new THREE.MeshStandardMaterial({ color, roughness:0.35, metalness:0.05 });
+    const geo = new THREE.CylinderGeometry(0.018,0.018,0.10,8);
+    const m = new THREE.Mesh(geo, mat);
+    m.position.set(Math.cos(a)*r, y+0.01, Math.sin(a)*r);
+    m.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI);
+    cakeGroup.add(m);
+  }
+}
+scatterSprinkles(0.2, TOP_R-0.15, TOP_Y+TOP_H/2+0.02, 140);
+scatterSprinkles(0.2, BOTTOM_R-0.2, BOTTOM_H+0.03, 60);
+
+/* CHIPS DE CHOCOLATE OSCURO DE VERDAD, MEZCLADOS CON LAS CHISPAS DE COLORES */
+function scatterChocoChips(radiusInner, radiusOuter, y, count){
+  const chipMat = new THREE.MeshStandardMaterial({ color:0x2a170e, roughness:0.35, metalness:0.15 });
+  for(let i=0;i<count;i++){
+    const a = Math.random()*Math.PI*2;
+    const r = radiusInner + Math.random()*(radiusOuter-radiusInner);
+    const geo = new THREE.ConeGeometry(0.045,0.06,7);
+    const m = new THREE.Mesh(geo, chipMat);
+    m.position.set(Math.cos(a)*r, y+0.02, Math.sin(a)*r);
+    m.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI);
+    cakeGroup.add(m);
+  }
+}
+scatterChocoChips(0.2, TOP_R-0.15, TOP_Y+TOP_H/2+0.02, 90);
+scatterChocoChips(0.2, BOTTOM_R-0.2, BOTTOM_H+0.03, 70);
+
+/* ROSAS SOBRE LA TORTA (GEOMETRIA 3D ORIGINAL) */
+function makeRose3D(colorMode,size){
+  const tex = makeRoseTexture(colorMode);
+  const mat = new THREE.MeshStandardMaterial({ map:tex, transparent:true, roughness:0.55, metalness:0.02, side:THREE.DoubleSide, alphaTest:0.05 });
+  const group = new THREE.Group();
+  for(let i=0;i<3;i++){
+    const g = new THREE.PlaneGeometry(size,size);
+    const m = new THREE.Mesh(g, mat);
+    m.rotation.y = (Math.PI/3)*i; m.rotation.x = -0.15; m.castShadow = true;
+    group.add(m);
+  }
+  for(let i=0;i<2;i++){
+    const leaf = new THREE.Mesh(new THREE.SphereGeometry(size*0.28,8,8), materials.green);
+    leaf.scale.set(1,0.25,1.6);
+    leaf.position.set((i?1:-1)*size*0.32, -size*0.28, -size*0.1);
+    leaf.rotation.z = (i?1:-1)*0.5;
+    group.add(leaf);
+  }
+  return group;
+}
+function placeRoseOnCylinder(rose,radius,y,angleDeg,tiltOut){
+  const a = angleDeg*Math.PI/180;
+  rose.position.set(Math.cos(a)*radius,y,Math.sin(a)*radius);
+  rose.rotation.y = -a+Math.PI/2;
+  rose.rotation.x = tiltOut||0;
+  cakeGroup.add(rose);
+}
+[{a:28,c:'red'},{a:55,c:'pink'},{a:130,c:'red'},{a:150,c:'pink'},{a:205,c:'red'},{a:300,c:'red'},{a:322,c:'pink'}].forEach(s=>{
+  const rose = makeRose3D(s.c, 0.85+Math.random()*0.12);
+  placeRoseOnCylinder(rose, BOTTOM_R*1.06, 0.55+Math.random()*0.25, s.a, 0.35);
+});
+[{a:40,c:'red'},{a:150,c:'pink'},{a:205,c:'red'},{a:320,c:'pink'}].forEach(s=>{
+  const rose = makeRose3D(s.c, 0.62);
+  placeRoseOnCylinder(rose, TOP_R*1.08, TOP_Y-TOP_H/2+0.35, s.a, 0.35);
+});
+
+/* FRUTAS Y CHOCOLATE */
+const strawberrySkin = makeStrawberrySkinTexture();
+const strawMat = new THREE.MeshStandardMaterial({ map:strawberrySkin, roughness:0.42 });
+function makeStrawberry(scale){
+  const grp = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.34,20,16), strawMat);
+  body.scale.set(1,1.35,1); body.castShadow = true; grp.add(body);
+  const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.22,0.16,8), materials.green);
+  leaf.position.y = 0.46; leaf.rotation.x = Math.PI; grp.add(leaf);
+  grp.scale.setScalar(scale); return grp;
+}
+function makeChocoChunk(){
+  const g = new THREE.BoxGeometry(0.34,0.24,0.18);
+  const m = new THREE.Mesh(g, materials.choco); m.castShadow = true; return m;
+}
+const topCenterY = TOP_Y+TOP_H/2+0.02;
+const EDGE_R = TOP_R-0.35;
+const clusterBase = -Math.PI/2;
+const strawberryWhole = makeStrawberry(1.05);
+strawberryWhole.position.set(EDGE_R*Math.cos(clusterBase+0.55), topCenterY+0.28, EDGE_R*Math.sin(clusterBase+0.55));
+strawberryWhole.rotation.z = -0.35;
+cakeGroup.add(strawberryWhole);
+const strawberrySide = makeStrawberry(0.95);
+strawberrySide.position.set(EDGE_R*Math.cos(clusterBase+0.78), topCenterY+0.24, EDGE_R*Math.sin(clusterBase+0.78));
+strawberrySide.rotation.z = 0.5;
+cakeGroup.add(strawberrySide);
+const chocoAngle = clusterBase-0.42;
+const choco1 = makeChocoChunk();
+choco1.position.set(EDGE_R*Math.cos(chocoAngle), topCenterY+0.18, EDGE_R*Math.sin(chocoAngle));
+choco1.rotation.set(0.2,0.6,0.15);
+cakeGroup.add(choco1);
+
+/* CANDELABRO Y VELA (LA LLAMA VISUAL AHORA ES CSS, ESTA LUZ SOLO ILUMINA) */
+const candleGroup = new THREE.Group();
+const candleAngle = clusterBase;
+candleGroup.position.set(EDGE_R*0.98*Math.cos(candleAngle), topCenterY, EDGE_R*0.98*Math.sin(candleAngle));
+cakeGroup.add(candleGroup);
+
+const holderBase = new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.2,0.09,24), materials.gold);
+holderBase.position.y = 0.045; holderBase.castShadow = true; candleGroup.add(holderBase);
+const holderStem = new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.07,0.14,16), materials.gold);
+holderStem.position.y = 0.135; candleGroup.add(holderStem);
+const holderCup = new THREE.Mesh(new THREE.CylinderGeometry(0.1,0.06,0.08,20), materials.gold);
+holderCup.position.y = 0.22; candleGroup.add(holderCup);
+const holderRing = new THREE.Mesh(new THREE.TorusGeometry(0.115,0.018,8,24), materials.gold);
+holderRing.rotation.x = Math.PI/2; holderRing.position.y = 0.09; candleGroup.add(holderRing);
+
+const candleMat = new THREE.MeshStandardMaterial({ color:0xb8281f, roughness:0.4, metalness:0.05 });
+const candleH = 0.95;
+const candle = new THREE.Mesh(new THREE.CylinderGeometry(0.085,0.085,candleH,24), candleMat);
+candle.position.y = 0.26+candleH/2; candle.castShadow = true; candleGroup.add(candle);
+
+const wick = new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.09,8), new THREE.MeshStandardMaterial({color:0x1a1108}));
+wick.position.y = 0.26+candleH+0.02; candleGroup.add(wick);
+
+const flameAnchor = new THREE.Object3D();
+flameAnchor.position.y = 0.26+candleH+0.09;
+candleGroup.add(flameAnchor);
+
+const flameLight = new THREE.PointLight(0xffa233, 1.6, 6, 2);
+flameLight.position.y = 0.16;
+flameAnchor.add(flameLight);
+
+/* PUNTO DE ANCLAJE PROYECTADO PARA LA LLAMA CSS */
+const flameEl = document.getElementById('flame');
+const flameWorldPos = new THREE.Vector3();
+let candleLit = true;
+
+function updateFlameScreenPosition(){
+  flameAnchor.getWorldPosition(flameWorldPos);
+  const p = flameWorldPos.clone().project(camera);
+  const sx = (p.x*0.5+0.5)*window.innerWidth;
+  const sy = (-p.y*0.5+0.5)*window.innerHeight;
+  flameEl.style.left = sx+'px';
+  flameEl.style.top = sy+'px';
+}
+
+/* CONTROLES: SOLO BOTONES, SIN ARRASTRAR NI ZOOM CON EL RATON */
+let autoRotate = false;
+let spinTarget = null;
+function easeInOutCubic(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
+
+function spin180(){
+  const from = cakeGroup.rotation.y;
+  spinTarget = { from, to: from+Math.PI, start:performance.now(), dur:1600 };
+}
+document.getElementById('rotBtn').addEventListener('click', ()=>{ autoRotate=false; spin180(); });
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  autoRotate = false;
+  camDist=16.5; camPolar=0.90; camAzim=0.0;
+  spinTarget = { from: cakeGroup.rotation.y, to:0, start:performance.now(), dur:900 };
+  updateCamera();
+});
+
+window.addEventListener('resize', ()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+/* LOGICA DE SOPLAR LA VELA */
+const cakeHint = document.getElementById('cakeHint');
+function startCandle(){
+  candleLit = true;
+  flameEl.classList.remove('out');
+  flameEl.style.opacity = '1';
+  flameLight.intensity = 1.6;
+  cakeHint.textContent = 'Pide un deseo y sopla la vela (toca la vela para soplar)';
+}
+
+flameEl.addEventListener('click', blowOutCandle);
+flameEl.addEventListener('touchstart', function(e){ e.preventDefault(); blowOutCandle(); }, {passive:false});
+
+function blowOutCandle(){
+  if(!candleLit) return;
+  candleLit = false;
+  getAudioCtx();
+  flameEl.classList.add('out');
+  playWhoosh();
+  cakeHint.style.display = 'none';
+  setTimeout(startCelebration, 500);
+}
+
+/* CELEBRACION: FUEGOS ARTIFICIALES + GLOBOS + CONFETI + GIRO DE TORTA */
+const fxCanvas = document.getElementById('fxCanvas');
+const fxCtx = fxCanvas.getContext('2d');
+function resizeFx(){ fxCanvas.width = window.innerWidth; fxCanvas.height = window.innerHeight; }
+resizeFx();
+window.addEventListener('resize', resizeFx);
+
+let fxParticles = [];
+const FX_COLORS = ['#ff5b52','#ffd23f','#3fc7ff','#7dff5c','#ff8a1f','#c06bff','#ffffff','#ff3b8f'];
+
+function burstFirework(x,y){
+  const count = 42;
+  for(let i=0;i<count;i++){
+    const angle = (i/count)*Math.PI*2;
+    const speed = 2.4+Math.random()*2.4;
+    fxParticles.push({
+      x, y, vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed,
+      life: 1, color: FX_COLORS[Math.floor(Math.random()*FX_COLORS.length)], size: 2.4+Math.random()*1.8
+    });
+  }
+  playPop();
+}
+
+let fxRunning = false;
+function fxLoop(){
+  if(!fxRunning) return;
+  fxCtx.clearRect(0,0,fxCanvas.width,fxCanvas.height);
+  fxParticles.forEach(p=>{
+    p.vy += 0.045;
+    p.x += p.vx; p.y += p.vy; p.life -= 0.014;
+    fxCtx.globalAlpha = Math.max(p.life,0);
+    fxCtx.fillStyle = p.color;
+    fxCtx.beginPath();
+    fxCtx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    fxCtx.fill();
+  });
+  fxCtx.globalAlpha = 1;
+  fxParticles = fxParticles.filter(p=>p.life>0);
+  requestAnimationFrame(fxLoop);
+}
+
+const activeBalloons = [];
+function spawnBalloon(){
+  const b = document.createElement('div');
+  b.className = 'balloon';
+  const colors = ['#ff5b6a','#ffd23f','#3fc7ff','#7dff5c','#c06bff','#ff8a1f'];
+  const color = colors[Math.floor(Math.random()*colors.length)];
+  b.style.background = `radial-gradient(circle at 35% 30%, ${color}, ${color}dd 60%, #00000055)`;
+  b.style.left = (5+Math.random()*90)+'vw';
+  const dur = 6+Math.random()*4;
+  document.getElementById('page-cake').appendChild(b);
+  const anim = b.animate([
+    { transform:'translate(0,0) rotate(0deg)' },
+    { transform:`translate(${(Math.random()*80-40)}px,-60vh) rotate(${Math.random()*14-7}deg)` },
+    { transform:`translate(${(Math.random()*140-70)}px,-135vh) rotate(${Math.random()*14-7}deg)` }
+  ], { duration: dur*1000, easing:'ease-in-out' });
+  anim.onfinish = ()=> b.remove();
+}
+
+function spawnConfettiPiece(){
+  const s = document.createElement('div');
+  const colors = ['#ff5b52','#ffd23f','#3fc7ff','#7dff5c','#ff8a1f','#c06bff'];
+  s.style.position='absolute';
+  s.style.left = Math.random()*100+'vw';
+  s.style.top = '-20px';
+  s.style.width = '8px'; s.style.height='14px';
+  s.style.background = colors[Math.floor(Math.random()*colors.length)];
+  s.style.zIndex = 57;
+  document.getElementById('page-cake').appendChild(s);
+  const dur = 3+Math.random()*2.5;
+  const anim = s.animate([
+    { transform:'translateY(0) rotate(0deg)', opacity:1 },
+    { transform:`translateY(110vh) rotate(${Math.random()*720}deg)`, opacity:0.9 }
+  ], { duration: dur*1000, easing:'linear' });
+  anim.onfinish = ()=> s.remove();
+}
+
+const letterIcon = document.getElementById('letterIcon');
+
+function startCelebration(){
+  fxRunning = true;
+  fxLoop();
+  spin180();
+
+  const text = document.createElement('div');
+  text.className = 'celebration-text';
+  text.textContent = '¡Feliz Cumpleaños!';
+  document.getElementById('page-cake').appendChild(text);
+
+  let burstCount = 0;
+  const burstInterval = setInterval(()=>{
+    burstFirework(80+Math.random()*(window.innerWidth-160), 80+Math.random()*(window.innerHeight*0.45));
+    burstCount++;
+    if(burstCount>=8) clearInterval(burstInterval);
+  }, 420);
+
+  let balloonCount = 0;
+  const balloonInterval = setInterval(()=>{
+    spawnBalloon();
+    balloonCount++;
+    if(balloonCount>=14) clearInterval(balloonInterval);
+  }, 260);
+
+  let confettiCount = 0;
+  const confettiInterval = setInterval(()=>{
+    spawnConfettiPiece();
+    confettiCount++;
+    if(confettiCount>=60) clearInterval(confettiInterval);
+  }, 60);
+
+  setTimeout(()=>{ letterIcon.classList.add('show'); }, 2600);
+}
+
+/* NAVEGACION A LA CARTA */
+letterIcon.addEventListener('click', ()=>{
+  showPage(pageLetter);
+  const roseEl = document.querySelector('#page-letter .rose');
+  refreshRose(roseEl);
+});
+document.getElementById('backBtn').addEventListener('click', ()=>{ showPage(pageCake); });
+
+/* LOOP PRINCIPAL DE ANIMACION */
+const clock = new THREE.Clock();
+function animate(){
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  if(spinTarget){
+    const el = performance.now()-spinTarget.start;
+    const p = Math.min(1, el/spinTarget.dur);
+    cakeGroup.rotation.y = spinTarget.from + (spinTarget.to-spinTarget.from)*easeInOutCubic(p);
+    if(p>=1) spinTarget = null;
+  } else if(autoRotate){
+    cakeGroup.rotation.y += 0.0055;
+  }
+
+  cakeGroup.position.y = Math.sin(t*0.55)*0.18;
+
+  if(candleLit){
+    const flicker = 1.4+Math.sin(t*9)*0.25+Math.sin(t*17)*0.12;
+    flameLight.intensity = Math.max(0.8, flicker);
+  } else {
+    flameLight.intensity += (0-flameLight.intensity)*0.08;
+  }
+
+  if(window.__starsField){
+    window.__starsField.rotation.y += 0.00025;
+    window.__starsField.rotation.x += 0.00007;
+  }
+
+  if(pageCake.classList.contains('active')) updateFlameScreenPosition();
+
+  renderer.render(scene, camera);
+}
+animate();
+
+})();
+</script>
+</body>
+</html>
